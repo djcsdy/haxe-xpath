@@ -38,6 +38,7 @@
 			<arg value="-f"/><arg value="dcxml"/>
 			<arg value="-f"/><arg value="xpath"/>
 		</exec>
+		<zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
 	</target>
 	
 	<target name="haxelib">
@@ -48,6 +49,7 @@
 			</fileset>
 		</copy>
 		<copy file="dcxml-haxelib.xml" tofile="build/haxelib/dcxml/haxelib.xml"/>
+		<copy file="dcxml-readme.txt" tofile="build/haxelib/dcxml/readme.txt"/>
 		<zip basedir="build/haxelib/dcxml" destfile="dcxml.zip"/>
 
 		<mkdir dir="build/haxelib/xpath"/>
@@ -57,6 +59,7 @@
 			</fileset>
 		</copy>
 		<copy file="xpath-haxelib.xml" tofile="build/haxelib/xpath/haxelib.xml"/>
+		<copy file="xpath-readme.txt" tofile="build/haxelib/xpath/readme.txt"/>
 		<zip basedir="build/haxelib/xpath" destfile="xpath.zip"/>
 	</target>
 	
