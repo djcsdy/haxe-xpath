@@ -1,0 +1,5 @@
+<project name="dcxml" url="http://code.google.com/p/haxe-xpath/" license="Public">
+	<user name="djc"/>
+	<description>Alternative XML implementation for haXe</description>
+	<version name="0.0.1">Initial alpha release</version>
+</project>

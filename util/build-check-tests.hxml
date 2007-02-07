@@ -1,0 +1,3 @@
+-cp util
+-main CheckTests
+-neko build/test/CheckTests.n

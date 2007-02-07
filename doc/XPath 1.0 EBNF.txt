@@ -1,0 +1,148 @@
+CONTAINERS
+
+XPath			= BeginXPath Expression EndXPath
+
+Expression		= BeginExpression Operand ( Operator Operand )*
+			  EndExpression
+
+Operand			= Path | Group | Literal | Number | FunctionCall
+			| VariableReference | UnaryOperand
+
+UnaryOperand		= NegationOperator NegationOperator* ( UnaryPath | Group
+			| Literal | Number | FunctionCall | VariableReference )
+
+Path			= BeginPath
+			  ( StepDelimiter
+			  | ( StepDelimiter UnaryStep | Step )
+			    ( StepDelimiter UnaryStep )*
+			  ) EndPath
+
+UnaryPath		= BeginPath
+			  ( StepDelimiter
+			  | StepDelimiter? UnaryStep ( StepDelimiter UnaryStep )*
+			  ) EndPath
+
+StepDelimiter		= SingleStepDelimiter | DeepStepDelimiter
+
+Step			= Axis NodeTest Predicate*
+			| AbbreviatedStep
+
+UnaryStep		= Axis NodeTest Predicate*
+			| AbbreviatedStep
+			
+FilterExpression	= BeginExpression NegationOperator* FilterOperand
+			  EndExpression
+
+FilterOperand		= Group | Literal | Number | FunctionCall
+			| VariableReference
+
+NodeTest		= NameTest | TypeTest | PITypeTest
+
+Predicate		= BeginPredicate Expression EndPredicate
+
+Group			= BeginGroup Expression EndGroup
+
+FunctionCall		= BeginFunctionCall FunctionArguments? EndFunctionCall
+
+FunctionArguments	= Expression ( ArgumentDelimiter Expression )*
+
+
+
+
+TOKENS
+
+BeginXPath		= ^ S
+
+EndXPath		= $
+
+BeginExpression		= ''
+
+Operator		= ( "and" | "mod" | "div" | "or" | "!=" | "<=" | ">="
+			  | "=" | "|" | "+" | "-" | "<" | ">" | "*"
+			  ) S
+
+EndExpression		= ''
+
+BeginPath		= ''
+
+EndPath			= ''
+
+Literal			= ( '"' [^"]* '"' S
+			  | "'" [^']* "'" ) S
+
+Number			= ( [0-9]+ ( "." [0-9]* )?
+			  | "." [0-9]+ ) S
+
+VariableReference	= "$" NCName ( ":" NCName )? S
+
+BeginPath		= ''
+
+SingleStepDelimiter	= '/'
+
+DeepStepDelimiter	= '//'
+
+EndPath			= ''
+
+AbbreviatedStep		= ( '.' | '..' ) S
+
+Axis			= ( ( "ancestor" | "ancestor-or-self" | "attribute"
+			    | "child" | "descendant" | "descendant-or-self"
+			    | "following" | "following-sibling" | "namespace"
+			    | "parent" | "preceding" | "preceding-sibling"
+			    | "self"
+			    ) S "::"
+			  | "@"? ) S
+
+NameTest		= ( "*" | NCName ( ":" ( "*" | NCName ) )? ) S
+
+TypeTest		= ( "comment" | "text" | "node" ) S "(" S ")" S
+
+PITypeTest		= "processing-instruction" S "(" S
+			  ('"' [^"]* '"' | "'" [^']* "'") S ")" S
+
+BeginPredicate		= '[' S
+
+EndPredicate		= ']' S
+
+BeginGroup		= '(' S
+
+EndGroup		= ')' S
+
+BeginFunctionCall	= NCName ( ':' NCName )? S '(' S
+
+EndFunctionCall		= ')' S
+
+ArgumentDelimiter	= ',' S
+
+
+
+
+NOTES
+
+* S indicates optional whitespace, and is implemented inline as if it were a string
+  expression rather than as a distinct token. Whitespace should always be discarded
+  by the lexer, never preserved.
+* Whitespace is preferred after, rather than before, terminal tokens for performance
+  reasons.
+* NCName is defined per XML spec, and is implemented inline as if it were a string
+  expression rather than as a distinct token.
+* DeepStepDelimiter is equivalent to '/descendant-or-self::node()/'.
+* AbbreviatedStep equivalence is as follows:
+  '.' S		= 'self::node()'
+  '..' S	= 'parent::node()'.
+* The result of lexing is a sequence of tokens.
+* When lexing, always select the longest possible container or token.
+
+
+
+XPATH EXTENSIONS
+
+Path			= BeginPath
+			  ( StepDelimiter
+			  | StepDelimiter? Step ( StepDelimiter Step )*
+			  ) EndPath
+
+UnaryPath		= BeginPath
+			  ( StepDelimiter
+			  | ( StepDelimiter Step | UnaryStep ) ( StepDelimiter Step )*
+			  ) EndPath

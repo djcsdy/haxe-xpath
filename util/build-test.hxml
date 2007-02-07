@@ -1,0 +1,25 @@
+-cp src
+-cp build/test
+-main TestMain
+-neko build/test/test-neko.n
+--override
+
+--next
+
+-cp src
+-cp build/test
+-main TestMain
+-swf-version 9
+-swf-header 800:600:25:ffffff
+-swf build/test/test-fl9.swf
+--override
+
+--next
+
+-cp src
+-cp build/test
+-main TestMain
+-swf-version 8
+-swf-header 800:600:25:ffffff
+-swf build/test/test-fl8.swf
+--override
