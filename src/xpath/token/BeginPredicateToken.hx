@@ -14,23 +14,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
-package xpath.tokenizer.token;
-import xpath.tokenizer.token.FixedStringTokenizer;
-import xpath.token.EndPredicateToken;
+package xpath.token;
+import xpath.token.Token;
 
 
-class EndPredicateTokenizer extends FixedStringTokenizer {
+class BeginPredicateToken extends Token {
 	
-	private static var instance:EndPredicateTokenizer;
-	
-	
-	public static function getInstance () :EndPredicateTokenizer {
-		if (instance == null) instance = new EndPredicateTokenizer();
-		return instance;
-	}
-	
-	private function new () {
-		super(EndPredicateToken, "]");
+	public function new () {
 	}
 	
 }
