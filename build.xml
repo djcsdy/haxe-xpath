@@ -42,6 +42,7 @@
 	</target>
 	
 	<target name="haxelib">
+		<deltree dir="build/haxelib/dcxml"/>
 		<mkdir dir="build/haxelib/dcxml"/>
 		<copy todir="build/haxelib/dcxml">
 			<fileset dir="src">
@@ -52,10 +53,11 @@
 		<copy file="dcxml-readme.txt" tofile="build/haxelib/dcxml/readme.txt"/>
 		<zip basedir="build/haxelib/dcxml" destfile="dcxml.zip"/>
 
+		<deltree dir="build/haxelib/xpath"/>
 		<mkdir dir="build/haxelib/xpath"/>
-		<copy todir="build/haxelib">
+		<copy todir="build/haxelib/xpath">
 			<fileset dir="src">
-				<include name="**/*"/>
+				<include name="xpath/**/*"/>
 			</fileset>
 		</copy>
 		<copy file="xpath-haxelib.xml" tofile="build/haxelib/xpath/haxelib.xml"/>
