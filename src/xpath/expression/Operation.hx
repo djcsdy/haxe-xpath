@@ -16,7 +16,7 @@
 
 package xpath.expression;
 import xpath.expression.Expression;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.context.Context;
 import xpath.token.OperatorToken;
 import xpath.type.XPathValue;
@@ -74,7 +74,7 @@ class Operation extends Expression {
 			} else if (operator == Union) {
 				return leftValue.union(rightValue);
 			} else {
-				throw new XPathInternalException();
+				throw new XPathError();
 			}
 		}
 	}

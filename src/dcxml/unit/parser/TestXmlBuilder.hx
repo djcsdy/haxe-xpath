@@ -17,7 +17,7 @@
 package dcxml.unit.parser;
 import haxe.unit.TestCase;
 import dcxml.Xml;
-import dcxml.XmlInternalException;
+import dcxml.XmlError;
 import dcxml.parser.XmlBuilder;
 
 
@@ -155,7 +155,7 @@ class TestXmlBuilder extends TestCase {
 		var caught:Bool = false;
 		try {
 			builder.startElement("fgsg", new Hash<String>());
-		} catch (e:XmlInternalException) {
+		} catch (e:XmlError) {
 			caught = true;
 		}
 		assertTrue(caught);
@@ -163,7 +163,7 @@ class TestXmlBuilder extends TestCase {
 		caught = false;
 		try {
 			builder.characters("pfosgjs");
-		} catch (e:XmlInternalException) {
+		} catch (e:XmlError) {
 			caught = true;
 		}
 		assertTrue(caught);
@@ -171,7 +171,7 @@ class TestXmlBuilder extends TestCase {
 		caught = false;
 		try {
 			builder.comment("sgkjh");
-		} catch (e:XmlInternalException) {
+		} catch (e:XmlError) {
 			caught = true;
 		}
 		assertTrue(caught);
@@ -179,7 +179,7 @@ class TestXmlBuilder extends TestCase {
 		caught = false;
 		try {
 			builder.processingInstruction("rgsjog", "jp;fp");
-		} catch (e:XmlInternalException) {
+		} catch (e:XmlError) {
 			caught = true;
 		}
 		assertTrue(caught);

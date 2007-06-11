@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.parser.OperandParser;
 import xpath.expression.Operation;
@@ -56,7 +56,7 @@ class ExpressionParser implements Parser {
 		
 		workingState = OperandParser.getInstance().parse(workingState);
 		if (workingState.result == null) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		output.push(cast(workingState.result, Expression));
 		
@@ -68,7 +68,7 @@ class ExpressionParser implements Parser {
 
 			workingState = OperandParser.getInstance().parse(workingState);
 			if (workingState.result == null) {
-				throw new XPathInternalException("Invalid token stream");
+				throw new XPathError("Invalid token stream");
 			}
 			var newOperand:Expression = cast(workingState.result, Expression);
 			
@@ -97,11 +97,11 @@ class ExpressionParser implements Parser {
 		operatorStack = null;
 		
 		if (output.length != 1) {
-			throw new XPathInternalException();
+			throw new XPathError();
 		}
 		
 		if (!Std.is(workingState.tokens[workingState.pos], EndExpressionToken)) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 
 		workingState.result = output[0];

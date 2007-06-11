@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.parser.PathParser;
 import xpath.parser.GroupParser;

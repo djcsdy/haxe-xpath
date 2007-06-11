@@ -1,4 +1,4 @@
-/* dcxml by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -14,20 +14,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
-package dcxml;
+package xpath.unit;
+import haxe.unit.TestCase;
 
 
-class XmlInternalException {
-	
-	public var message(default, null):String;
-	
-	
-	public function new (message:String) {
-		this.message = message;
-	}
-	
-	public function toString () :String {
-		return "XmlInternalException: " + message;
-	}
-	
+class TestXPathError extends TestCase {
 }

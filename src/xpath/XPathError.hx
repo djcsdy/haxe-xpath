@@ -14,9 +14,27 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
-package xpath.unit;
-import haxe.unit.TestCase;
+package xpath;
 
 
-class TestXPathInternalException extends TestCase {
+/** Class implementing errors which occur as a result of a bug in the XPath implementation.
+ * Assuming that the XPath implementation is correct, this error should never be thrown.
+ * User code should not attempt to catch this error. */
+class XPathError {
+	
+	private var message:String;
+	
+	
+	public function new (?message:String) {
+		this.message = message;
+	}
+	
+	public function toString () :String {
+		if (message == null) {
+			return "XPathError";
+		} else {
+			return "XPathError: " + message;
+		}
+	}
+	
 }

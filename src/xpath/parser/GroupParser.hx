@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.parser.ExpressionParser;
 import xpath.token.BeginGroupToken;
@@ -48,11 +48,11 @@ class GroupParser implements Parser {
 		++workingState.pos;
 		workingState = ExpressionParser.getInstance().parse(workingState);
 		if (workingState.result == null) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		
 		if (!Std.is(state.tokens[workingState.pos], EndGroupToken)) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		
 		++workingState.pos;

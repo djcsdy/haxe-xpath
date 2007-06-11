@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.parser.ExpressionParser;
 import xpath.token.Token;
@@ -117,7 +117,7 @@ class StepParser implements Parser {
 			workingState = ExpressionParser.getInstance().parse(workingState);
 			var predicateExpression:Expression = cast(workingState.result, Expression);
 			if (!Std.is(workingState.tokens[workingState.pos], EndPredicateToken)) {
-				throw new XPathInternalException();
+				throw new XPathError();
 			}
 			++workingState.pos;
 

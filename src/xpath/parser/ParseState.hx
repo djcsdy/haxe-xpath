@@ -15,7 +15,7 @@
 
 
 package xpath.parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.token.Token;
 import xpath.expression.Expression;
 
@@ -31,7 +31,7 @@ class ParseState {
 	
 	public function new (tokens:Array<Token>) {
 		if (tokens == null) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		this.tokens = tokens;
 		pos = 0;

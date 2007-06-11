@@ -17,7 +17,7 @@
 package xpath;
 import dcxml.Xml;
 import xpath.XPathParseException;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.XPathEvaluationException;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizeState;
@@ -111,7 +111,7 @@ class XPath {
 		try {
 			this.expression = cast(parseState.result, Expression);
 		} catch (e:String) {
-			throw new XPathInternalException();
+			throw new XPathError();
 		}
 	}
 	

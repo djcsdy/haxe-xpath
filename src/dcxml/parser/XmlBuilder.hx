@@ -17,7 +17,7 @@
 package dcxml.parser;
 import dcxml.Xml;
 import dcxml.XmlException;
-import dcxml.XmlInternalException;
+import dcxml.XmlError;
 
 
 /** Event handler for XmlParser which builds a tree of Xml objects. */
@@ -39,7 +39,7 @@ class XmlBuilder implements XmlHandler {
 		if (node == null) {
 			node = Xml.createDocument();
 		} else {
-			throw new XmlInternalException("Unexpected startDocument event");
+			throw new XmlError("Unexpected startDocument event");
 		}
 	}
 	
@@ -48,14 +48,14 @@ class XmlBuilder implements XmlHandler {
 		if (nodeStack.length == 0 && !done) {
 			done = true;
 		} else {
-			throw new XmlInternalException("Unexpected endDocument event");
+			throw new XmlError("Unexpected endDocument event");
 		}
 	}
 	
 	/** Receive notification of the beginning of an element. */
 	public function startElement (name:String, attributes:Hash<String>) :Void {
 		if (node == null || done) {
-			throw new XmlInternalException("Unexpected startElement event");
+			throw new XmlError("Unexpected startElement event");
 		} else {
 			nodeStack.push(node);
 			var tmpNode:Xml = Xml.createElement(name, attributes);
@@ -67,7 +67,7 @@ class XmlBuilder implements XmlHandler {
 	/** Receive notification of the end of an element. */
 	public function endElement (name:String) :Void {
 		if (node == null || node.type != Element) {
-			throw new XmlInternalException("Unexpected endElement event");
+			throw new XmlError("Unexpected endElement event");
 		} else if (node.name != name) {
 			throw new XmlException("Invalid XML markup");
 		} else {
@@ -78,7 +78,7 @@ class XmlBuilder implements XmlHandler {
 	/** Receive notification of character data. */
 	public function characters (data:String) :Void {
 		if (node == null) {
-			throw new XmlInternalException("Unexpected characters event");
+			throw new XmlError("Unexpected characters event");
 		} else {
 			node.addChild(Xml.createText(data));
 		}
@@ -87,7 +87,7 @@ class XmlBuilder implements XmlHandler {
 	/** Receive notification of a processing instruction. */
 	public function processingInstruction (target:String, data:String) :Void {
 		if (node == null) {
-			throw new XmlInternalException("Unexpected processingInstruction event");
+			throw new XmlError("Unexpected processingInstruction event");
 		} else {
 			node.addChild(Xml.createProcessingInstruction(target, data));
 		}
@@ -96,7 +96,7 @@ class XmlBuilder implements XmlHandler {
 	/** Receive notification of a comment. */
 	public function comment (data:String) :Void {
 		if (node == null || node.type != Element) {
-			throw new XmlInternalException("Unexpected comment event");
+			throw new XmlError("Unexpected comment event");
 		} else {
 			// TODO
 		}

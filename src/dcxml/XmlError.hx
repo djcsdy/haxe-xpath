@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+/* dcxml by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -14,27 +14,20 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
-package xpath;
+package dcxml;
 
 
-/** Class implementing exceptions which occur as a result of a bug in the XPath implementation.
- * Assuming that the XPath implementation is correct, this exception should never be thrown.
- * User code should not attempt to catch this exception. */
-class XPathInternalException {
+class XmlError {
 	
-	private var message:String;
+	public var message(default, null):String;
 	
 	
-	public function new (?message:String) {
+	public function new (message:String) {
 		this.message = message;
 	}
 	
 	public function toString () :String {
-		if (message == null) {
-			return "XPathInternalException";
-		} else {
-			return "XPathInternalException: " + message;
-		}
+		return "XmlError: " + message;
 	}
 	
 }

@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.parser.StepParser;
 import xpath.token.BeginPathToken;
@@ -66,7 +66,7 @@ class PathParser implements Parser {
 		}
 		
 		if (!Std.is(workingState.tokens[workingState.pos], EndPathToken)) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		++workingState.pos;
 		

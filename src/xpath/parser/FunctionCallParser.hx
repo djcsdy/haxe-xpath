@@ -16,7 +16,7 @@
 
 package xpath.parser;
 import xpath.parser.Parser;
-import xpath.XPathInternalException;
+import xpath.XPathError;
 import xpath.parser.ParseState;
 import xpath.token.BeginFunctionCallToken;
 import xpath.token.ArgumentDelimiterToken;
@@ -65,7 +65,7 @@ class FunctionCallParser implements Parser {
 		}
 		
 		if (!Std.is(workingState.tokens[workingState.pos], EndFunctionCallToken)) {
-			throw new XPathInternalException("Invalid token stream");
+			throw new XPathError("Invalid token stream");
 		}
 		++workingState.pos;
 		
