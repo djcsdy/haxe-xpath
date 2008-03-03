@@ -1,33 +1,7 @@
 <project name="haXe XPath" basedir="." default="all">
 	
-	<target name="all" depends="test,doc,haxelib"/>
+	<target name="all" depends="doc,haxelib"/>
 
-	<target name="test" depends="build-test">
-		<exec executable="neko" failonerror="true">
-			<arg file="build/test/test-neko.n"/>
-		</exec>
-	</target>
-
-	<target name="build-test" depends="check-tests">
-		<mkdir dir="build/test"/>
-		<exec executable="haxe" failonerror="true">
-			<arg file="util/build-test.hxml"/>
-		</exec>
-	</target>
-	
-	<target name="check-tests" depends="build-check-tests">
-		<exec executable="neko" failonerror="true">
-			<arg file="build/test/CheckTests.n"/>
-		</exec>
-	</target>
-	
-	<target name="build-check-tests">
-		<mkdir dir="build/test"/>
-		<exec executable="haxe" failonerror="true">
-			<arg file="util/build-check-tests.hxml"/>
-		</exec>
-	</target>
-	
 	<target name="doc">
 		<mkdir dir="build/doc"/>
 		<exec executable="haxe" failonerror="true">
@@ -35,24 +9,12 @@
 		</exec>
 		<exec executable="haxedoc" dir="doc" failonerror="true">
 			<arg value="../build/doc/doc.xml"/>
-			<arg value="-f"/><arg value="dcxml"/>
 			<arg value="-f"/><arg value="xpath"/>
 		</exec>
 		<zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
 	</target>
 	
 	<target name="haxelib">
-		<deltree dir="build/haxelib/dcxml"/>
-		<mkdir dir="build/haxelib/dcxml"/>
-		<copy todir="build/haxelib/dcxml">
-			<fileset dir="src">
-				<include name="dcxml/**/*"/>
-			</fileset>
-		</copy>
-		<copy file="dcxml-haxelib.xml" tofile="build/haxelib/dcxml/haxelib.xml"/>
-		<copy file="dcxml-readme.txt" tofile="build/haxelib/dcxml/readme.txt"/>
-		<zip basedir="build/haxelib/dcxml" destfile="dcxml.zip"/>
-
 		<deltree dir="build/haxelib/xpath"/>
 		<mkdir dir="build/haxelib/xpath"/>
 		<copy todir="build/haxelib/xpath">
