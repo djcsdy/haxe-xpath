@@ -2,6 +2,5 @@
 	<user name="djc"/>
     <user name="zjnue"/>
 	<description>Implementation of XPath for haXe</description>
-	<version name="0.0.1">Initial alpha release</version>
-	<depends name="dcxml"/>
+	<version name="0.2.0">Rewritten version with wrapper-based support for any XML class</version>
 </project>
