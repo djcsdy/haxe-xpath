@@ -55,7 +55,9 @@ class RootStepTest extends TestCase {
 	private var j :Xml;
 	private var k :Xml;
 	private var l :Xml;
-	private var m :Xml;		
+	private var m :Xml;
+	
+	
 	public function new () {
 		super();
 		
@@ -90,7 +92,8 @@ class RootStepTest extends TestCase {
 		c.addChild(j);
 		e.addChild(f);
 		e.addChild(g);
-		h.addChild(i);		k.addChild(l);
+		h.addChild(i);
+		k.addChild(l);
 	}
 	
 	function testRootStep () {
