@@ -144,7 +144,7 @@ class NodeSetLibraryTest extends TestCase {
 			Xml.createElement("foo")
 		);
 		var context = new FakeContext(contextNode);
-		var result = NodeSetLibrary.name(context, []);
+		var result = NodeSetLibrary.nodeName(context, []);
 		assertTrue(Std.is(result, XPathString));
 		assertEquals("foo", result.getString());
 		
@@ -156,7 +156,7 @@ class NodeSetLibraryTest extends TestCase {
 		var xPathB:XPathXml = XPathHxXml.wrapNode(b);
 		var xPathC:XPathXml = XPathHxXml.wrapNode(c);
 		var nodeSet = new XPathNodeSet([xPathC, xPathB]);
-		var result = NodeSetLibrary.name(context, [
+		var result = NodeSetLibrary.nodeName(context, [
 			cast(nodeSet, XPathValue)
 		]);
 		assertTrue(Std.is(result, XPathString));
@@ -165,7 +165,7 @@ class NodeSetLibraryTest extends TestCase {
 		nodeSet = new XPathNodeSet([]);
 		var caught = false;
 		try {
-			NodeSetLibrary.name(context, [
+			NodeSetLibrary.nodeName(context, [
 				cast(nodeSet, XPathValue)
 			]);
 		} catch (exception:EvaluationException) {

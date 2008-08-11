@@ -50,7 +50,7 @@ class CoreEnvironment extends BaseEnvironment {
 		functions.set("position", NodeSetLibrary.position);
 		functions.set("count", NodeSetLibrary.count);
 		functions.set("local-name", NodeSetLibrary.localName);
-		functions.set("name", NodeSetLibrary.name);
+		functions.set("name", NodeSetLibrary.nodeName);
 		
 		functions.set("string", StringLibrary.string);
 		functions.set("concat", StringLibrary.concat);

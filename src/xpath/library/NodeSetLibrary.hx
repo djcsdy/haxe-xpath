@@ -121,7 +121,7 @@ class NodeSetLibrary {
 	 * exactly as local-name(). Throws [EvaluationException] if
 	 * parameters.length != 1, or if the parameter is not a
 	 * node set. */
-	public static function name (
+	public static function nodeName (
 		context:Context, parameters:Array<XPathValue>
 	) {
 		// FIXME
