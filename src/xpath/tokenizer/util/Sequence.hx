@@ -1,4 +1,4 @@
-/* haXe XPath
+/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
