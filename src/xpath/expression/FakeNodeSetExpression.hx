@@ -17,6 +17,7 @@
 package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathNodeSet;
+import xpath.value.XPathValue;
 import xpath.xml.XPathXml;
 
 
@@ -30,7 +31,7 @@ class FakeNodeSetExpression implements Expression {
 		else this.value = value;
 	}
 	
-	public function evaluate (context:Context) {
+	public function evaluate (context:Context) :XPathValue {
 		return new XPathNodeSet(value);
 	}
 	

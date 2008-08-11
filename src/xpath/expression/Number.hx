@@ -17,6 +17,7 @@
 package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathNumber;
+import xpath.value.XPathValue;
 
 
 class Number implements Expression {
@@ -28,7 +29,7 @@ class Number implements Expression {
 		this.value = value;
 	}
 	
-	public function evaluate (context:Context) {
+	public function evaluate (context:Context) :XPathValue {
 		return new XPathNumber(value);
 	}
 	

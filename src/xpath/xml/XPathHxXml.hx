@@ -54,13 +54,13 @@ class XPathHxXml extends XPathXml {
 				}
 				hxXml = flashToHxXml(flashXml);
 				
-				#else true
+				#else
 				if (hxXml.parent != null) {
-					var textStart;
+					var textStart = null;
 					for (sibling in hxXml.parent) {
 						if (isTextNode(sibling)) {
 							if (textStart == null) textStart = sibling;
-							if (sibling === hxXml) break;
+							if (sibling == hxXml) break;
 						} else {
 							textStart = null;
 						}
@@ -95,7 +95,7 @@ class XPathHxXml extends XPathXml {
 	
 	/** Gets this node's parent, or [null] if this node has no
 	 * parent. */
-	override public function getParent () {
+	override public function getParent () :XPathXml {
 		return if (attributeName == null) {
 			if (hxXml.parent == null) null;
 			else fastWrapNode(hxXml.parent);
@@ -103,7 +103,7 @@ class XPathHxXml extends XPathXml {
 	}
 	
 	/** Gets the type of the wrapped XML node. */
-	override public function getType () {
+	override public function getType () :XmlNodeType {
 		return if (attributeName == null) {
 			switch (hxXml.nodeType) {
 				case Xml.CData: XmlNodeType.Text;
@@ -133,7 +133,7 @@ class XPathHxXml extends XPathXml {
 	 * <li>for [ProcessingInstruction] nodes, the text contents of the
 	 *  processing instruction.</li>
 	 * <li>for all other nodes, [null].</li></ul> */
-	override public function getValue () {
+	override public function getValue () :String {
 		return if (attributeName == null) {
 			switch (hxXml.nodeType) {
 				case Xml.CData: getTextNodeValue();
@@ -146,16 +146,16 @@ class XPathHxXml extends XPathXml {
 	
 	/** Tests if this [XPathXml] represents the same node as the
 	 * [operand]. */
-	override public function is (operand:XPathXml) {
+	override public function is (operand:XPathXml) :Bool {
 		return (
 			Std.is(operand, XPathHxXml) &&
-			hxXml === cast(operand, XPathHxXml).hxXml &&
+			hxXml == cast(operand, XPathHxXml).hxXml &&
 			attributeName == cast(operand, XPathHxXml).attributeName
 		);
 	}
 	
 	/** Gets an iterator over this node's attributes. */
-	override public function getAttributeIterator () {
+	override public function getAttributeIterator () :Iterator<XPathXml> {
 		if (hxXml == null || hxXml.nodeType != Xml.Element) {
 			return new List<XPathXml>().iterator();
 		}
@@ -177,14 +177,14 @@ class XPathHxXml extends XPathXml {
 	}
 	
 	/** Gets an iterator over this node's children. */
-	override public function getChildIterator () {
+	override public function getChildIterator () :Iterator<XPathXml> {
 		if (hxXml == null) return new List<XPathXml>().iterator();
 		if (!isContainerNode(hxXml)) {
 			return new List<XPathXml>().iterator();
 		}
 		
 		var iterator = hxXml.iterator();
-		var nextNode;
+		var nextNode = null;
 		var inText = false;
 		
 		var hasNext = function () {
@@ -223,7 +223,7 @@ class XPathHxXml extends XPathXml {
 	
 	/** Gets an iterator over nodes following this node in document
 	 * order. */
-	override public function getFollowingIterator () {
+	override public function getFollowingIterator () :Iterator<XPathXml> {
 		if (hxXml == null) return new List<XPathXml>().iterator();
 		
 		var nextNode = hxXml;
@@ -232,12 +232,12 @@ class XPathHxXml extends XPathXml {
 		#if flash8
 		var flashToHxXml:Dynamic->Xml = untyped Xml.convert;
 		
-		#else true
+		#else
 		var iterators = new List<Iterator<Xml>>();
 		if (isContainerNode(hxXml)) iterators.add(hxXml.iterator());
 		while (nextNode.parent != null) {
 			var iterator = nextNode.parent.iterator();
-			while (iterator.next() !== nextNode) {}
+			while (iterator.next() != nextNode) {}
 			iterators.add(iterator);
 			nextNode = nextNode.parent;
 		}
@@ -251,7 +251,7 @@ class XPathHxXml extends XPathXml {
 			else fastWrapNode(nextNode);
 			
 			#if flash8
-			var flashXml = untyped nextNode.__x;
+			var flashXml:Dynamic = untyped nextNode.__x;
 			#end
 			
 			if (inText) {
@@ -265,7 +265,7 @@ class XPathHxXml extends XPathXml {
 						nextNode = flashToHxXml(flashXml.nextSibling);
 					}
 					
-					#else true
+					#else
 					if (iterators.first().hasNext()) {
 						nextNode = iterators.first().next();
 					} else {
@@ -287,7 +287,7 @@ class XPathHxXml extends XPathXml {
 					}
 				}
 				
-				#else true
+				#else
 				if (iterators.length > 0 && iterators.first().hasNext()) {
 					nextNode = iterators.first().next();
 					inText = isTextNode(nextNode);
@@ -305,7 +305,7 @@ class XPathHxXml extends XPathXml {
 					inText = isTextNode(nextNode);
 				}
 				
-				#else true
+				#else
 				while (iterators.length > 0 && !iterators.first().hasNext()) {
 					iterators.pop();
 				}
@@ -334,7 +334,7 @@ class XPathHxXml extends XPathXml {
 	
 	/** Gets an iterator over siblings of this node which follow it in
 	 * document order. */
-	override public function getFollowingSiblingIterator () {
+	override public function getFollowingSiblingIterator () :Iterator<XPathXml> {
 		if (hxXml == null) return new List<XPathXml>().iterator();
 		if (hxXml.parent == null) return new List<XPathXml>().iterator();
 		
@@ -344,9 +344,9 @@ class XPathHxXml extends XPathXml {
 		#if flash8
 		var flashToHxXml:Dynamic->Xml = untyped Xml.convert;
 		
-		#else true
+		#else
 		var iterator = hxXml.parent.iterator();
-		while (iterator.next() !== hxXml) {}
+		while (iterator.next() != hxXml) {}
 		#end
 		
 		var hasNext = function () {
@@ -366,7 +366,7 @@ class XPathHxXml extends XPathXml {
 						inText = isTextNode(nextNode);
 					}
 					
-					#else true
+					#else
 					if (iterator.hasNext()) {
 						nextNode = iterator.next();
 						inText = isTextNode(nextNode);
@@ -386,7 +386,7 @@ class XPathHxXml extends XPathXml {
 					inText = isTextNode(nextNode);
 				}
 				
-				#else true
+				#else
 				if (iterator.hasNext()) {
 					nextNode = iterator.next();
 					inText = isTextNode(nextNode);
@@ -407,7 +407,7 @@ class XPathHxXml extends XPathXml {
 	
 	/** Gets an iterator over the XML namespaces which are in scope
 	 * for this node. */
-	override public function getNamespaceIterator () {
+	override public function getNamespaceIterator () :Iterator<XPathXml> {
 		return new List<XPathXml>().iterator();
 	}
 	
@@ -418,7 +418,7 @@ class XPathHxXml extends XPathXml {
 		if (hxXml == null) return new List<XPathXml>().iterator();
 		var flashToHxXml:Dynamic->Xml = untyped Xml.convert;
 		var flashXml:Dynamic = untyped hxXml.__x;
-		var nextNode:Xml;
+		var nextNode:Xml = null;
 		
 		var hasNext = function () {
 			return nextNode != null;
@@ -447,7 +447,7 @@ class XPathHxXml extends XPathXml {
 		};
 		next();
 		
-		#else true
+		#else
 		var stack = new List<XPathXml>();
 		if (hxXml == null) return stack.iterator();
 		
@@ -461,14 +461,14 @@ class XPathHxXml extends XPathXml {
 					stack.push(fastWrapNode(parent));
 					var inText = false;
 					for (sibling in parent) {
-						if (sibling === pivot) break;
-						if (isContainerNode(sibling) && sibling !== pivot) {
+						if (sibling == pivot) break;
+						if (isContainerNode(sibling)) {
 							var wrappedContainer = fastWrapNode(sibling);
 							stack.push(wrappedContainer);
 							for (
-								wrappedChild in
-								wrappedContainer.getChildIterator()
-							) stack.push(wrappedChild);
+								wrappedDescendant in
+								wrappedContainer.getDescendantIterator()
+							) stack.push(wrappedDescendant);
 							inText = false;
 						} else if (!inText || !isTextNode(sibling)) {
 							stack.push(fastWrapNode(sibling));
@@ -493,7 +493,7 @@ class XPathHxXml extends XPathXml {
 	
 	/** Gets an iterator over siblings of this node which precede it
 	 * in document order. */
-	override public function getPrecedingSiblingIterator () {
+	override public function getPrecedingSiblingIterator () :Iterator<XPathXml> {
 		#if flash8
 		if (hxXml == null) return new List<XPathXml>().iterator();
 		var flashToHxXml:Dynamic->Xml = untyped Xml.convert;
@@ -522,12 +522,12 @@ class XPathHxXml extends XPathXml {
 			next: next
 		};
 		
-		#else true
+		#else
 		var stack = new List<XPathXml>();
 		if (hxXml != null && hxXml.parent != null) {
 			var inText = false;
 			for (sibling in hxXml.parent) {
-				if (sibling === hxXml) break;
+				if (sibling == hxXml) break;
 				else if (!inText || !isTextNode(sibling)) {
 					stack.push(fastWrapNode(sibling));
 					inText = isTextNode(sibling);
@@ -539,7 +539,7 @@ class XPathHxXml extends XPathXml {
 	}
 	
 	/** Returns the wrapped XML node. */
-	public function getWrappedXml () {
+	public function getWrappedXml () :Xml {
 		if (hxXml == null) throw new XPathException(
 			"Can't unwrap attribute node into haXe Xml"
 		); else return hxXml;
@@ -559,14 +559,14 @@ class XPathHxXml extends XPathXml {
 			flashXml = flashXml.nextSibling;
 		}
 		
-		#else true
+		#else
 		var siblings;
 		var parentHxXml = hxXml.parent;
 		if (parentHxXml == null) siblings = [hxXml].iterator();
 		else siblings = parentHxXml.iterator();
 		
 		var sibling = siblings.next();
-		while (sibling !== hxXml) sibling = siblings.next();
+		while (sibling != hxXml) sibling = siblings.next();
 		
 		while (sibling != null) {
 			if (sibling.nodeType == Xml.CData) {
@@ -587,7 +587,7 @@ class XPathHxXml extends XPathXml {
 	 * faster than the publicly accessible function wrapNode, but
 	 * returns incorrect results when wrapping CData or PCData nodes
 	 * that are not the first in a series. */
-	static function fastWrapNode (hxXml:Xml) {
+	static function fastWrapNode (hxXml:Xml) :XPathHxXml {
 		var node = new XPathHxXml();
 		node.hxXml = hxXml;
 		return node;
@@ -620,14 +620,14 @@ class XPathHxXml extends XPathXml {
 	static function refDecode (ref:String) {
 		if (ref.charAt(0) == "#") {
 			if (ref.charAt(1) == "x") {
-				return Std.chr(Std.parseInt("0" + ref.substr(1)));
+				return String.fromCharCode(Std.parseInt("0" + ref.substr(1)));
 			} else {
 				#if flash8
 				var i=1;
 				while (ref.charAt(i) == "0" && i < (ref.length-1)) ++i;
-				return Std.chr(Std.parseInt(ref.substr(i)));
-				#else true
-				return Std.chr(Std.parseInt(ref.substr(1)));
+				return String.fromCharCode(Std.parseInt(ref.substr(i)));
+				#else
+				return String.fromCharCode(Std.parseInt(ref.substr(1)));
 				#end
 			}
 		} else {

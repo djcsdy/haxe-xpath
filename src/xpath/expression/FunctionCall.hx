@@ -31,7 +31,7 @@ class FunctionCall implements Expression {
 		this.parameters = parameters;
 	}
 	
-	public function evaluate (context:Context) {
+	public function evaluate (context:Context) {	
 		var parameterValues = new Array<XPathValue>();
 		for (parameter in parameters) {
 			parameterValues.push(parameter.evaluate(context));

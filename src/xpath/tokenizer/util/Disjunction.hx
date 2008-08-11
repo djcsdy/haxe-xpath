@@ -52,7 +52,7 @@ class Disjunction implements Tokenizer {
 	 * tokenized by this [Tokenizer]. */
 	public function tokenize (input:TokenizerInput) {
 		var expectedTokens = new List<{tokenName:String, position:Int}>();
-		var output:TokenizerOutput;
+		var output:TokenizerOutput = null;
 		
 		for (tokenizer in tokenizers) {
 			try {

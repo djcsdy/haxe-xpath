@@ -23,7 +23,7 @@ import xpath.value.XPathNumber;
 class NegationTest extends TestCase {
 	
 	function testAll () {
-		for (testValue in [0, 1, 123.456, -789.012, 239585, -239582]) {
+		for (testValue in [0., 1., 123.456, -789.012, 239585., -239582.]) {
 			var number = new Number(testValue);
 			var negation = new Negation(number);
 			var result = negation.evaluate(new FakeContext());

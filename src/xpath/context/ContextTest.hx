@@ -38,7 +38,7 @@ class ContextTest extends TestCase {
 		assertEquals(cast(environment, Environment), context.environment);
 		
 		var called = false;
-		var calledParameters;
+		var calledParameters = null;
 		environment.setFunction(
 			"bar",
 			function (context:Context, parameters:Array<XPathValue>) {

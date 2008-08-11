@@ -17,6 +17,7 @@
 package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathBoolean;
+import xpath.value.XPathValue;
 import xpath.xml.XPathXml;
 
 
@@ -29,7 +30,7 @@ class FakeBooleanExpression implements Expression {
 		this.value = (value == true);
 	}
 	
-	public function evaluate (context:Context) {
+	public function evaluate (context:Context) :XPathValue {
 		return new XPathBoolean(value);
 	}
 	

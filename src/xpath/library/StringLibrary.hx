@@ -156,32 +156,38 @@ class StringLibrary {
 		}
 		
 		var string = parameters[0].getString();
-		var start = Math.round(parameters[1].getFloat());
+		
+		// necessary to remember float values as well as integer values because
+		// some platforms "round" NaN and +/-Infinity to 0
+		var startFloat = parameters[1].getFloat();
+		var start = Math.round(startFloat);
 		
 		if (parameters[2] == null) {
 			if (Math.isNaN(start)) return new XPathString("");
 			else if (start < 1) return new XPathString(string);
 			else return new XPathString(string.substr(start-1));
 		} else {
-			var length = Math.round(parameters[2].getFloat());
+			var lengthFloat = parameters[2].getFloat();
+			var length = Math.round(lengthFloat);
 			
 			// this accounts for some odd cases where start and/or
 			// length are NaN or infinity
-			if (Math.isNaN(start + length)) return new XPathString("");
-			
-			// if the starting index is < 1, the effective length is
-			// shorter
-			if (start < 1) {
-				length += start - 1;
-				start = 1;
-			}
+			if (Math.isNaN(startFloat + lengthFloat)) return new XPathString("");
+			if (!Math.isFinite(startFloat)) return new XPathString("");
 			
 			// String.substr returns an empty string if the specified
 			// length is infinite, so we need to explicitly handle
 			// that case here
-			if (Math.isFinite(length)) {
+			if (Math.isFinite(lengthFloat)) {
+				// if the starting index is < 1, the effective length is
+				// shorter
+				if (start < 1) {
+					length += start - 1;
+					start = 1;
+				}
+				
 				return new XPathString(string.substr(start-1, length));
-			} else if (length > 0) {
+			} else if (lengthFloat > 0) {
 				return new XPathString(string.substr(start-1));
 			} else {
 				return new XPathString("");

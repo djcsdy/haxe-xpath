@@ -17,6 +17,7 @@
 package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathNodeSet;
+import xpath.value.XPathValue;
 import xpath.xml.XPathXml;
 
 
@@ -31,14 +32,14 @@ class PathStep implements Expression {
 		this.nextStep = nextStep;
 	}
 	
-	public function evaluate (context:Context) :XPathNodeSet {
+	public function evaluate (context:Context) :XPathValue {
 		if (nextStep == null) {
 			return new XPathNodeSet(step(context));
 		} else {
 			var me = this;
 			var index = 0;
 			var selected = Lambda.array(step(context));
-			var nextNode;
+			var nextNode = null;
 			var nextStepNodes = new List<XPathXml>().iterator();
 			var hasNext = function () {
 				return nextNode != null;
@@ -50,7 +51,7 @@ class PathStep implements Expression {
 						selected[index], index+1, selected.length,
 						context.environment
 					);
-					var nextStepResult = me.nextStep.evaluate(nextStepContext);
+					var nextStepResult = cast(me.nextStep.evaluate(nextStepContext), XPathNodeSet);
 					nextStepNodes = nextStepResult.getNodes().iterator();
 					++index;
 				}

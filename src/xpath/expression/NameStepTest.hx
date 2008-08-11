@@ -28,7 +28,7 @@ class NameStepTest extends TestCase {
 		var plainXmlElement = Xml.createElement("foo");
 		plainXmlElement.set("foo", "bar");
 		var element:XPathXml = XPathHxXml.wrapNode(plainXmlElement);
-		var attribute:XPathXml;
+		var attribute:XPathXml = null;
 		for (candAttribute in element.getAttributeIterator()) {
 			attribute = candAttribute;
 		}

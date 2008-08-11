@@ -218,7 +218,7 @@ class XPathHxXmlTest extends TestCase {
 		var text1 = Xml.createPCData("123&#94;456&#x3c;78");
 		#if flash8
 		var text2 = Xml.createPCData("abcdefg");
-		#else true
+		#else
 		var text2 = Xml.createCData("abcdefg");
 		#end
 		var text3 = Xml.createPCData("poiuytr");
@@ -226,7 +226,7 @@ class XPathHxXmlTest extends TestCase {
 		#if flash8
 		var text5 = Xml.createPCData("';;&amp;amp;llk&amp;gt;jf");
 		var text6 = Xml.createPCData("vnsjd");
-		#else true
+		#else
 		var text5 = Xml.createCData("';;&amp;llk&gt;jf");
 		var text6 = Xml.createCData("vnsjd");
 		#end
@@ -234,7 +234,7 @@ class XPathHxXmlTest extends TestCase {
 		var text7 = Xml.createPCData("9876");
 		#if flash8
 		var text8 = Xml.createPCData("8347");
-		#else true
+		#else
 		var text8 = Xml.createCData("8347");
 		#end
 		element.addChild(text1);
@@ -334,7 +334,7 @@ class XPathHxXmlTest extends TestCase {
 			iterable.iterator(), iterable.iterator()
 		]) {
 			var count = 0;
-			var nameTaken;
+			var nameTaken = null;
 			for (attr in iterator) {
 				++count;
 				assertEquals(Attribute, attr.getType());

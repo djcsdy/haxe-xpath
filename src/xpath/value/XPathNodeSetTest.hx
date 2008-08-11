@@ -210,7 +210,7 @@ class XPathNodeSetTest extends TestCase {
 			xPathNodeSet.getFloat() > 3.14158 &&
 			xPathNodeSet.getFloat() < 3.14160
 		);
-		#else true
+		#else
 		assertEquals(3.14159, xPathNodeSet.getFloat());
 		#end
 		
@@ -221,7 +221,7 @@ class XPathNodeSetTest extends TestCase {
 			xPathNodeSet.getFloat() > 3.14158 &&
 			xPathNodeSet.getFloat() < 3.14160
 		);
-		#else true
+		#else
 		assertEquals(3.14159, xPathNodeSet.getFloat());
 		#end
 		
@@ -235,7 +235,7 @@ class XPathNodeSetTest extends TestCase {
 			xPathNodeSet.getFloat() > 12.344 &&
 			xPathNodeSet.getFloat() < 12.346
 		);
-		#else true
+		#else
 		assertEquals(12.345, xPathNodeSet.getFloat());
 		#end
 	}

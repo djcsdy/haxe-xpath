@@ -191,10 +191,15 @@ class XPathValue {
 		if (negative) return -Std.parseFloat(trimmed);
 		else return Std.parseFloat(trimmed);
 		
-		#else true
+		#else
 		var rx = ~/^\s*((-)\s*)?([0-9]+(\.[0-9]*)?|\.[0-9]+)\s*$/;
 		if (rx.match(string)) {
-			return Std.parseFloat(rx.matched(2) + rx.matched(3));
+			var signString;
+			if (rx.matched(2) == "" || rx.matched(2) == null) {
+				return Std.parseFloat(rx.matched(3));
+			} else {
+				return -Std.parseFloat(rx.matched(3));
+			}
 		} else {
 			return Math.NaN;
 		}

@@ -46,7 +46,7 @@ class TokenizerInput {
 	 * passed onto the next stage of tokenization. If it is
 	 * ommitted, tokenization is deemed to be completed. */
 	public function getOutput (result:Array<Token>, ?characterLength:Int) {
-		var nextInput;
+		var nextInput = null;
 		if (characterLength == null) {
 			characterLength = query.length - position;
 		} else {

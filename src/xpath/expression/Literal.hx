@@ -17,6 +17,7 @@
 package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathString;
+import xpath.value.XPathValue;
 
 
 class Literal implements Expression {
@@ -29,7 +30,7 @@ class Literal implements Expression {
 	}
 	
 	
-	public function evaluate (context:Context) {
+	public function evaluate (context:Context) :XPathValue {
 		return new XPathString(value);
 	}
 	

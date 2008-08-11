@@ -53,7 +53,7 @@ class BaseEnvironment implements Environment {
 	
 	/** Returns a reference to the function with the specified
      * name. */
-	public function getFunction (name:String) {
+	public function getFunction (name:String):XPathFunction {
 		var f = functions.get(name);
 		if (f == null) throw new EvaluationException(
 			"evaluated a function which is not defined"

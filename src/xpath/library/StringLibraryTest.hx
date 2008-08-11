@@ -335,7 +335,7 @@ class StringLibraryTest extends TestCase {
 		
 		result = StringLibrary.substring(context, [
 			cast(new XPathString("12345"), XPathValue),
-			new XPathNumber(0/0), new XPathNumber(3)
+			new XPathNumber(Math.NaN), new XPathNumber(3)
 		]);
 		assertEquals("", result.getString());
 		

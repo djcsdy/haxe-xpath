@@ -66,7 +66,7 @@ class AxisTokenizer extends TokenTokenizer {
 	override public function tokenize (input:TokenizerInput) {
 		var pos = input.position;
 		
-		var axis;
+		var axis = null;
 		for (axisName in axisNames) {
 			if (input.query.substr(pos, axisName.length) == axisName) {
 				pos += axisName.length;

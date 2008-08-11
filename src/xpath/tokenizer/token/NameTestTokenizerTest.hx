@@ -42,7 +42,7 @@ class NameTestTokenizerTest extends TestCase {
 	function testBad () {
 		for (garbage in [
 			" dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
-			Std.chr(127) + "ghfsgk"
+			String.fromCharCode(127) + "ghfsgk"
 		]) {
 			var input = new TokenizerInput(garbage);
 			
