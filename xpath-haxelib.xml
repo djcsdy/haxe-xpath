@@ -1,6 +1,7 @@
 <project name="xpath" url="http://code.google.com/p/haxe-xpath/" license="Public">
-	<user name="djc"/>
-    <user name="zjnue"/>
-	<description>Implementation of XPath for haXe</description>
-	<version name="0.2.0">Rewritten version with wrapper-based support for any XML class</version>
+  <user name="djc"/>
+  <user name="zjnue"/>
+  <user name="niel"/>
+  <description>Implementation of XPath for haXe</description>
+  <version name="0.2.0">Rewritten version with wrapper-based support for any XML class</version>
 </project>
