@@ -1,0 +1,4 @@
+haXe XPath was written by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+
+with thanks to the following contributors:
+Niel Drummond <niel.drummond@grumpytoad.org> (haXe 2.0 compatibility)

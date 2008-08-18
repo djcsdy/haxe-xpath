@@ -3,5 +3,5 @@
   <user name="zjnue"/>
   <user name="niel"/>
   <description>Implementation of XPath for haXe</description>
-  <version name="0.2.0">Rewritten version with wrapper-based support for any XML class</version>
+  <version name="0.3.0">Rewritten version with wrapper-based support for any XML class</version>
 </project>
