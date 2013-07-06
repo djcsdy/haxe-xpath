@@ -1,4 +1,4 @@
-﻿<project name="Haxe XPath" basedir="." default="all">
+<project name="Haxe XPath" basedir="." default="all">
 	
 	<target name="all" depends="doc,haxelib"/>
 
