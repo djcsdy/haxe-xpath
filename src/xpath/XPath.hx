@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -32,7 +32,7 @@ import xpath.xml.XPathXml;
  * 
  * This library may be extended to work with any set of XML classes
  * by extending [xpath.xml.XPathXml] to wrap your preferred
- * implementation. A wrapper for the standard haXe [Xml] class is
+ * implementation. A wrapper for the standard Haxe [Xml] class is
  * provided in [xpath.xml.XPathHxXml]. To wrap an existing [Xml]
  * object for use with XPath: [
  * var xpathXml = XPathHxXml.wrapNode(xml);]

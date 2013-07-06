@@ -1,7 +1,7 @@
-<html>
+﻿<html>
 
 <head>
-<title>haXe XPath 0.3.0 Documentation</title>
+<title>Haxe XPath 0.3.0 Documentation</title>
 
 <script type="text/javascript">
 <!--
@@ -111,7 +111,7 @@ dt {
 <body>
 
 <div class="document">
-<div class="title">haXe XPath Documentation</div>
+<div class="title">Haxe XPath Documentation</div>
 
 <data/>
 

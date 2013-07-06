@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -28,7 +28,7 @@ import xpath.value.XPathNodeSet;
 import xpath.xml.XPathHxXml;
 
 
-/** Convenience class wrapping XPath for the standard haXe [Xml]
+/** Convenience class wrapping XPath for the standard Haxe [Xml]
  * class. */
 class XPathHx {
 	

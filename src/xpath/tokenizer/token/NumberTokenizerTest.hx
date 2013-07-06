@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -15,7 +15,7 @@
 
 
 package xpath.tokenizer.token;
-import haxe.unit.TestCase;
+import Haxe.unit.TestCase;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.token.NumberTokenizer;
@@ -28,7 +28,7 @@ class NumberTokenizerTest extends TestCase {
 	function testGood () {
 		for (number in ["5", "537895", ".3489", "38598."]) {
 			for (whitespace in ["", " ", "    "]) {
-				for (garbage in ["", "djgsogj", "!$()�*"]) {
+				for (garbage in ["", "djgsogj", "!$()ï¿½*"]) {
 					var input = new TokenizerInput(number + whitespace + garbage);
 					var output = NumberTokenizer.getInstance().tokenize(input);
 					
@@ -42,7 +42,7 @@ class NumberTokenizerTest extends TestCase {
 	}
 	
 	function testBad () {
-		for (garbage in ["", ".", ".sfjgs0", "sgj3.", "(�*%)"]) {
+		for (garbage in ["", ".", ".sfjgs0", "sgj3.", "(ï¿½*%)"]) {
 			var input = new TokenizerInput(garbage);
 			
 			var caught = false;

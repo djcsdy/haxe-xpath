@@ -1,32 +1,32 @@
-<project name="haXe XPath" basedir="." default="all">
+﻿<project name="Haxe XPath" basedir="." default="all">
 	
-	<target name="all" depends="doc,haxelib"/>
+	<target name="all" depends="doc,Haxelib"/>
 
 	<target name="doc">
 		<mkdir dir="build/doc"/>
-		<exec executable="haxe" failonerror="true">
+		<exec executable="Haxe" failonerror="true">
 			<arg file="util/build-doc.hxml"/>
 		</exec>
-		<exec executable="haxedoc" dir="doc" failonerror="true">
+		<exec executable="Haxedoc" dir="doc" failonerror="true">
 			<arg value="../build/doc/doc.xml"/>
 			<arg value="-f"/><arg value="xpath"/>
 		</exec>
-		<zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
+		<zip basedir="doc" destfile="Haxe-xpath-doc.zip"/>
 	</target>
 	
-	<target name="haxelib">
-		<delete dir="build/haxelib/xpath"/>
-		<mkdir dir="build/haxelib/xpath"/>
-		<copy todir="build/haxelib/xpath">
+	<target name="Haxelib">
+		<delete dir="build/Haxelib/xpath"/>
+		<mkdir dir="build/Haxelib/xpath"/>
+		<copy todir="build/Haxelib/xpath">
 			<fileset dir="src">
 				<include name="xpath/**/*"/>
 			</fileset>
 		</copy>
-		<copy file="haxelib.xml" tofile="build/haxelib/xpath/haxelib.xml"/>
-		<copy file="README.txt" tofile="build/haxelib/xpath/README.txt"/>
-                <copy file="LICENCE.txt" tofile="build/haxelib/xpath/LICENCE.txt"/>
-                <copy file="AUTHORS.txt" tofile="build/haxelib/xpath/AUTHORS.txt"/>
-		<zip basedir="build/haxelib/xpath" destfile="xpath.zip"/>
+		<copy file="Haxelib.xml" tofile="build/Haxelib/xpath/Haxelib.xml"/>
+		<copy file="README.txt" tofile="build/Haxelib/xpath/README.txt"/>
+                <copy file="LICENCE.txt" tofile="build/Haxelib/xpath/LICENCE.txt"/>
+                <copy file="AUTHORS.txt" tofile="build/Haxelib/xpath/AUTHORS.txt"/>
+		<zip basedir="build/Haxelib/xpath" destfile="xpath.zip"/>
 	</target>
 	
 </project>

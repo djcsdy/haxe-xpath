@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -15,7 +15,7 @@
 
 
 package xpath.xml;
-import haxe.unit.TestCase;
+import Haxe.unit.TestCase;
 import xpath.xml.XPathHxXml;
 import xpath.xml.XPathXml;
 import xpath.xml.XmlNodeType;
@@ -503,7 +503,7 @@ class XPathHxXmlTest extends TestCase {
 			xmlNode.getAxisIterator(Axis.Namespace),
 			iterable.iterator(), iterable.iterator()
 		]) {
-			// namespaces not supported by haXe Xml
+			// namespaces not supported by Haxe Xml
 			assertFalse(iterator.hasNext());
 		}
 	}

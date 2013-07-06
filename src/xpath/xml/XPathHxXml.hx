@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -18,7 +18,7 @@ import xpath.XPathException;
 import xpath.XPathError;
 
 
-/** Class wrapping the haXe [Xml] class for XPath. */
+/** Class wrapping the Haxe [Xml] class for XPath. */
 class XPathHxXml extends XPathXml {
 	
 	var hxXml :Xml;
@@ -30,12 +30,12 @@ class XPathHxXml extends XPathXml {
 	function new () {
 	}
 	
-	/** Constructs a new [XPathHxXml] wrapping the specified haXe [Xml]
+	/** Constructs a new [XPathHxXml] wrapping the specified Haxe [Xml]
 	 * node. Throws [XPathException] if [hxXml] is the XML document
 	 * type declaration, which isn't recognised as a node by XPath.
 	 *
 	 * Note that XPath treats sequential [PCData] and [CData] nodes as
-	 * a single [Text] node, whereas haXe XPath treats them as
+	 * a single [Text] node, whereas Haxe XPath treats them as
 	 * seperate nodes. Therefore, wrapping any [PCData] or [CData]
 	 * node which is part of a series will result in an [XPathHxXml]
 	 * representing the series as a whole. */
@@ -76,7 +76,7 @@ class XPathHxXml extends XPathXml {
 	}
 	
 	/** Constructs a new [XPathHxXml] wrapping the specified attribute
-	 * of the specified haXe [Xml] node. Throws [XPathException] if
+	 * of the specified Haxe [Xml] node. Throws [XPathException] if
 	 * the specified attribute does not exist. */
 	public static function wrapAttribute (attributeParent:Xml, attributeName:String) {
 		if (
@@ -541,13 +541,13 @@ class XPathHxXml extends XPathXml {
 	/** Returns the wrapped XML node. */
 	public function getWrappedXml () :Xml {
 		if (hxXml == null) throw new XPathException(
-			"Can't unwrap attribute node into haXe Xml"
+			"Can't unwrap attribute node into Haxe Xml"
 		); else return hxXml;
 	}
 	
 	/* Helper function to return the value of a Text node. This is
 	 * needed because XPath treats a sequence of CData and/or PCData
-	 * sections as a single node, whereas haXe Xml treats them as
+	 * sections as a single node, whereas Haxe Xml treats them as
 	 * seperate nodes. */ 
 	function getTextNodeValue () {
 		var result = "";
@@ -583,7 +583,7 @@ class XPathHxXml extends XPathXml {
 		return result;
 	}
 	
-	/* Helper function for wrapping haXe Xml nodes. This function is
+	/* Helper function for wrapping Haxe Xml nodes. This function is
 	 * faster than the publicly accessible function wrapNode, but
 	 * returns incorrect results when wrapping CData or PCData nodes
 	 * that are not the first in a series. */
@@ -642,7 +642,7 @@ class XPathHxXml extends XPathXml {
 		}
 	}
 	
-	/* Helper function to test if a given haXe Xml node is text. */
+	/* Helper function to test if a given Haxe Xml node is text. */
 	static function isTextNode (hxXml:Xml) {
 		return (
 			hxXml.nodeType == Xml.CData ||
@@ -650,7 +650,7 @@ class XPathHxXml extends XPathXml {
 		);
 	}
 	
-	/* Helper function to test if a given haXe Xml node is a document
+	/* Helper function to test if a given Haxe Xml node is a document
 	 * root or element node. */
 	static function isContainerNode (hxXml:Xml) {
 		return (
@@ -659,7 +659,7 @@ class XPathHxXml extends XPathXml {
 		);
 	}
 	
-	/* Helper function to test if a given haXe Xml node has
+	/* Helper function to test if a given Haxe Xml node has
 	 * children. */
 	static function hasChildNodes (hxXml:Xml) {
 		return (

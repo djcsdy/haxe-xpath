@@ -1,7 +1,7 @@
-<project name="xpath" url="http://code.google.com/p/haxe-xpath/" license="Public">
+﻿<project name="xpath" url="http://code.google.com/p/Haxe-xpath/" license="Public">
   <user name="djc"/>
   <user name="zjnue"/>
   <user name="niel"/>
-  <description>Implementation of XPath for haXe</description>
-  <version name="0.3.0">Support haXe 2.0, for JavaScript, Flash 8, Flash 9 and Neko targets</version>
+  <description>Implementation of XPath for Haxe</description>
+  <version name="0.3.0">Support Haxe 2.0, for JavaScript, Flash 8, Flash 9 and Neko targets</version>
 </project>

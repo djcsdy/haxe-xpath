@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -15,7 +15,7 @@
 
 
 package xpath.expression;
-import haxe.unit.TestCase;
+import Haxe.unit.TestCase;
 import xpath.context.FakeContext;
 import xpath.value.XPathString;
 
@@ -24,7 +24,7 @@ class LiteralTest extends TestCase {
 	
 	function testAll () {
 		for (testString in [
-			"", "dsagsg", "893*()*£()'jxN*"+'"'+"jdakfdj'"
+			"", "dsagsg", "893*()*Â£()'jxN*"+'"'+"jdakfdj'"
 		]) {
 			var literal = new Literal(testString);
 			var context = new FakeContext();

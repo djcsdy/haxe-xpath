@@ -1,4 +1,4 @@
-/* haXe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
+﻿/* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
@@ -15,7 +15,7 @@
 
 
 package xpath.tokenizer.token;
-import haxe.unit.TestCase;
+import Haxe.unit.TestCase;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.token.PINameTestTokenizer;
@@ -27,7 +27,7 @@ class PINameTestTokenizerTest extends TestCase {
 	
 	function testGood () {
 		for (whitespace in ["", " ", "   "]) {
-			for (garbage in ["", "mgrsij4", ":fgs�%98385"]) {
+			for (garbage in ["", "mgrsij4", ":fgsï¿½%98385"]) {
 				var input = new TokenizerInput(
 					"processing-instruction" + whitespace + "(" + whitespace +
 					")" + whitespace + garbage
@@ -40,7 +40,7 @@ class PINameTestTokenizerTest extends TestCase {
 				assertEquals(null, cast(output.result[0], PINameTestToken).name);
 				
 				for (quote in ["'", '"']) {
-					for (name in ["", "dfsjhg", "(�&UJFIONE�"]) {
+					for (name in ["", "dfsjhg", "(ï¿½&UJFIONEï¿½"]) {
 						var input = new TokenizerInput(
 							"processing-instruction" + whitespace + "(" + whitespace +
 							quote + name + quote + whitespace + ")" + whitespace
