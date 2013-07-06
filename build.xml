@@ -23,7 +23,7 @@
 			</fileset>
 		</copy>
 		<copy file="haxelib.xml" tofile="build/haxelib/xpath/haxelib.xml"/>
-		<copy file="README.txt" tofile="build/haxelib/xpath/README.txt"/>
+		<copy file="README.md" tofile="build/haxelib/xpath/README.md"/>
 		<copy file="LICENCE.txt" tofile="build/haxelib/xpath/LICENCE.txt"/>
 		<copy file="AUTHORS.txt" tofile="build/haxelib/xpath/AUTHORS.txt"/>
 		<zip basedir="build/haxelib/xpath" destfile="xpath.zip"/>
