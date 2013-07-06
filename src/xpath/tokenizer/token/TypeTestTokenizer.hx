@@ -29,7 +29,7 @@ class TypeTestTokenizer extends TokenTokenizer {
 	static var instance :TypeTestTokenizer;
 	
 	var typeNames :Array<String>;
-	var typeTestNameToTypeTest :Hash<NodeCategory>;
+	var typeTestNameToTypeTest :Map<String, NodeCategory>;
 	
 	
 	/** Gets the instance of [TypeTestTokenizer]. */
@@ -39,7 +39,7 @@ class TypeTestTokenizer extends TokenTokenizer {
 	}
 	
 	function new () {
-		typeTestNameToTypeTest = new Hash<NodeCategory>();
+		typeTestNameToTypeTest = new Map<String, NodeCategory>();
 		typeTestNameToTypeTest.set("comment", Comment);
 		typeTestNameToTypeTest.set("text", Text);
 		typeTestNameToTypeTest.set("node", Node);

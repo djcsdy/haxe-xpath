@@ -36,13 +36,13 @@ import xpath.EvaluationException;
  * BaseEnvironment, see the source code for [CoreEnvironment]. */
 class BaseEnvironment implements Environment {
 	
-	var functions :Hash<XPathFunction>;
-	var variables :Hash<XPathValue>;
+	var functions :Map<String, XPathFunction>;
+	var variables :Map<String, XPathValue>;
 	
 	
 	function new () {
-		functions = new Hash<XPathFunction>();
-		variables = new Hash<XPathValue>();
+		functions = new Map<String, XPathFunction>();
+		variables = new Map<String, XPathValue>();
 	}
 	
 	/** Tests if a function with the specified name is provided by

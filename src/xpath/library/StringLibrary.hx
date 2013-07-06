@@ -275,7 +275,7 @@ class StringLibrary {
 		var fromChars = parameters[1].getString();
 		var toChars = parameters[2].getString();
 		
-		var translations = new Hash<String>();
+		var translations = new Map<String, String>();
 		var i = fromChars.length;
 		while (i > 0) {
 			--i;

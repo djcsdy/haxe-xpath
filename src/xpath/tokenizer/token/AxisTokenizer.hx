@@ -27,7 +27,7 @@ class AxisTokenizer extends TokenTokenizer {
 
 	static var instance :AxisTokenizer;
 	var axisNames :Array<String>;
-	var axisNameToAxis :Hash<Axis>;
+	var axisNameToAxis :Map<String, Axis>;
 	
 
 	/** Gets the instance of [AxisTokenizer]. */
@@ -37,7 +37,7 @@ class AxisTokenizer extends TokenTokenizer {
 	}
 	
 	function new () {
-		axisNameToAxis = new Hash<Axis>();
+		axisNameToAxis = new Map<String, Axis>();
 		axisNameToAxis.set("ancestor", Ancestor);
 		axisNameToAxis.set("ancestor-or-self", AncestorOrSelf);
 		axisNameToAxis.set("attribute", Attribute);

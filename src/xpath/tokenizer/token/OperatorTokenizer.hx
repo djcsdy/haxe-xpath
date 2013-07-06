@@ -29,7 +29,7 @@ class OperatorTokenizer extends TokenTokenizer {
 	static var instance :OperatorTokenizer;
 	
 	var operatorSymbols :Array<String>;
-	var operatorSymbolToOperator :Hash<Operator>;
+	var operatorSymbolToOperator :Map<String, Operator>;
 	
 	
 	public static function getInstance () {
@@ -39,7 +39,7 @@ class OperatorTokenizer extends TokenTokenizer {
 	
 	/** Gets the instance of [OperatorTokenizer]. */
 	function new () {
-		operatorSymbolToOperator = new Hash<Operator>();
+		operatorSymbolToOperator = new Map<String, Operator>();
 		operatorSymbolToOperator.set("and", And);
 		operatorSymbolToOperator.set("mod", Modulo);
 		operatorSymbolToOperator.set("div", Divide);

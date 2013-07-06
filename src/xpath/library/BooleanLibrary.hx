@@ -56,7 +56,7 @@ class BooleanLibrary {
 	/** true() function from the XPath core function library. The
 	 * query must pass no parameters. Throws [EvaluationException] if
 	 * [parameters.length != 0]. */
-	public static function true (
+	public static function getTrue (
 		context:Context, parameters:Array<XPathValue>
 	) {
 		if (parameters.length != 0) {
@@ -68,7 +68,7 @@ class BooleanLibrary {
 	/** false() function from the XPath core function library. The
 	 * query must pass no parameters. Throws [EvaluationException] if
 	 * [parameters.length != 0]. */
-	public static function false (
+	public static function getFalse (
 		context:Context, parameters:Array<XPathValue>
 	) {
 		if (parameters.length != 0) {

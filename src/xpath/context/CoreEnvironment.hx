@@ -64,8 +64,8 @@ class CoreEnvironment extends BaseEnvironment {
 		functions.set("translate", StringLibrary.translate);
 		
 		functions.set("boolean", BooleanLibrary.boolean);
-		functions.set("true", BooleanLibrary.true);
-		functions.set("false", BooleanLibrary.false);
+		functions.set("true", BooleanLibrary.getTrue);
+		functions.set("false", BooleanLibrary.getFalse);
 		
 		functions.set("number", NumberLibrary.number);
 		functions.set("sum", NumberLibrary.sum);
