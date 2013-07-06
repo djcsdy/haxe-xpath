@@ -55,12 +55,12 @@ class BooleanLibraryTest extends TestCase {
 	}
 	
 	function testTrue () {
-		assertTrue(BooleanLibrary.true(new FakeContext(), []).getBool());
+		assertTrue(BooleanLibrary.getTrue(new FakeContext(), []).getBool());
 		
 		var caught = false;
 		try {
 			var xTrue:XPathValue = new XPathBoolean(true);
-			BooleanLibrary.true(new FakeContext(), [ xTrue ]);
+			BooleanLibrary.getTrue(new FakeContext(), [ xTrue ]);
 		} catch (exception:EvaluationException) {
 			caught = true;
 		}
@@ -68,12 +68,12 @@ class BooleanLibraryTest extends TestCase {
 	}
 	
 	function testFalse () {
-		assertFalse(BooleanLibrary.false(new FakeContext(), []).getBool());
+		assertFalse(BooleanLibrary.getFalse(new FakeContext(), []).getBool());
 		
 		var caught = false;
 		try {
 			var xTrue:XPathValue = new XPathBoolean(true);
-			BooleanLibrary.false(new FakeContext(), [ xTrue ]);
+			BooleanLibrary.getFalse(new FakeContext(), [ xTrue ]);
 		} catch (exception:EvaluationException) {
 			caught = true;
 		}
