@@ -15,7 +15,7 @@
 
 
 package xpath.context;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.context.CoreEnvironment;
 
 

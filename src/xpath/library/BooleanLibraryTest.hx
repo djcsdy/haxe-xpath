@@ -15,7 +15,7 @@
 
 
 package xpath.library;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.library.BooleanLibrary;
 import xpath.context.FakeContext;
 import xpath.xml.XPathHxXml;

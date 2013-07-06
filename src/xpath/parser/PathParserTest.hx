@@ -15,7 +15,7 @@
 
 
 package xpath.parser;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.expression.RootStep;
 import xpath.expression.TypeStep;
 import xpath.expression.AxisStep;

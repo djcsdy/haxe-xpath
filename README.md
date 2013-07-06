@@ -11,7 +11,7 @@ following caveats must be considered:
    for the Haxe Xml class is provided in xpath.xml.XPathHxXml.
  * The previous version directly supported dcxml. At present there
    is no support for dcxml in this version. You can still install
-   the old version using Haxelib.
+   the old version using haxelib.
  * Haxe XPath doesn't compile for JavaScript at the moment. This
    will be fixed in the future, although patches are always
    welcome.
@@ -28,4 +28,4 @@ following caveats must be considered:
    therefore behaves as local-name().
 
 Please direct comments, questions, patches and bug reports to
-https://github.com/djcsdy/Haxe-xpath/issues/new
+https://github.com/djcsdy/haxe-xpath/issues/new

@@ -15,7 +15,7 @@
 
 
 package xpath.value;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.value.XPathNodeSet;
 import xpath.value.XPathString;
 import xpath.value.XPathNumber;

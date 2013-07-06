@@ -15,7 +15,7 @@
 
 
 package xpath.library;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.library.NumberLibrary;
 import xpath.context.FakeContext;
 import xpath.value.XPathValue;

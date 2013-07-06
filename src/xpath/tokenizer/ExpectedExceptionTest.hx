@@ -15,7 +15,7 @@
 
 
 package xpath.tokenizer;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.tokenizer.ExpectedException;
 import xpath.tokenizer.TokenizerError;
 

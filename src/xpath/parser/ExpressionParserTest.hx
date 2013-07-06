@@ -15,7 +15,7 @@
 
 
 package xpath.parser;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.expression.Literal;
 import xpath.expression.Number;
 import xpath.expression.Operation;

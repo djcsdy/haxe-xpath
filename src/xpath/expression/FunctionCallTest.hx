@@ -15,7 +15,7 @@
 
 
 package xpath.expression;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.context.Context;
 import xpath.context.FakeContext;
 import xpath.context.DynamicEnvironment;

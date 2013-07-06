@@ -15,7 +15,7 @@
 
 
 package xpath;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.tokenizer.TokenizerException;
 import xpath.value.XPathBoolean;
 import xpath.value.XPathNumber;

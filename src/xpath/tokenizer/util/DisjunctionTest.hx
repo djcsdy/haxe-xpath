@@ -15,7 +15,7 @@
 
 
 package xpath.tokenizer.util;
-import Haxe.unit.TestCase;
+import haxe.unit.TestCase;
 import xpath.tokenizer.util.Disjunction;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
