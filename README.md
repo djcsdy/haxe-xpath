@@ -4,6 +4,7 @@ To get started, See the documentation for the class xpath.XPath.
 
 haXe XPath is presently very much in an alpha state and so the
 following caveats must be considered:
+
  * This version has "potential" support for any XML class.
    Support can be provided by providing a wrapper for the desired
    XML class that extends xpath.xml.XPathXml. At present, a wrapper
@@ -26,5 +27,5 @@ following caveats must be considered:
  * XML namespaces are not supported, yet. The name() function
    therefore behaves as local-name().
 
-Comments, questions and patches are all very welcome by personal
-mail to mail@danielcassidy.me.uk.
+Please direct comments, questions, patches and bug reports to
+https://github.com/djcsdy/haxe-xpath/issues/new
