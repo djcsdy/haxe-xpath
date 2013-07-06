@@ -8,7 +8,7 @@ following caveats must be considered:
  * This version has “potential” support for any XML class.
    Support can be provided by providing a wrapper for the desired
    XML class that extends `xpath.xml.XPathXml`. At present, a wrapper
-   for the Haxe Xml class is provided in x`path.xml.XPathHxXml`.
+   for the Haxe Xml class is provided in `xpath.xml.XPathHxXml`.
  * The previous version directly supported dcxml. At present there
    is no support for dcxml in this version. You can still install
    the old version using haxelib.
