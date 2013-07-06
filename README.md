@@ -1,6 +1,6 @@
 
 Haxe XPath aims to be a complete implementation of XPath for Haxe.
-To get started, See the documentation for the class xpath.XPath.
+To get started, See the documentation for the class `xpath.XPath`.
 
 Haxe XPath is presently very much in an alpha state and so the
 following caveats must be considered:
