@@ -15,7 +15,6 @@
 
 
 package xpath.tokenizer;
-import Xml;
 
 
 /** [Token]s are used to unambiguously represent any XPath query. */

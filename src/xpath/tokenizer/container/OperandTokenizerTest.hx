@@ -18,8 +18,6 @@ package xpath.tokenizer.container;
 import xpath.tokenizer.container.ContainerTokenizerTestBase;
 import xpath.tokenizer.container.OperandTokenizer;
 import xpath.tokenizer.Token;
-import xpath.Operator;
-import xpath.Axis;
 
 
 class OperandTokenizerTest extends ContainerTokenizerTestBase {

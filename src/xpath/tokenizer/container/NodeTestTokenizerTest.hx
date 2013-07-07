@@ -18,7 +18,6 @@ package xpath.tokenizer.container;
 import xpath.tokenizer.container.ContainerTokenizerTestBase;
 import xpath.tokenizer.container.NodeTestTokenizer;
 import xpath.tokenizer.Token;
-import xpath.NodeCategory;
 
 
 class NodeTestTokenizerTest extends ContainerTokenizerTestBase {

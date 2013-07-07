@@ -16,7 +16,6 @@
 
 package xpath.tokenizer;
 import haxe.unit.TestCase;
-import xpath.tokenizer.Tokenizer;
 
 
 class TokenizerTest extends TestCase {

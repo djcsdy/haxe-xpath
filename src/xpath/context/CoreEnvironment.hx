@@ -15,7 +15,6 @@
 
 
 package xpath.context;
-import xpath.value.XPathValue;
 import xpath.library.BooleanLibrary;
 import xpath.library.NumberLibrary;
 import xpath.library.StringLibrary;

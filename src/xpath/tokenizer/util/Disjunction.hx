@@ -20,7 +20,6 @@ import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.TokenizerOutput;
 import xpath.tokenizer.ExpectedException;
 import xpath.tokenizer.TokenizerError;
-import xpath.tokenizer.Token;
 
 
 /** [Tokenizer] which tokenizes a string in a manner corresponding to

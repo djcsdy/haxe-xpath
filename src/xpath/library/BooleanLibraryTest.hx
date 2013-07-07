@@ -18,7 +18,6 @@ package xpath.library;
 import haxe.unit.TestCase;
 import xpath.library.BooleanLibrary;
 import xpath.context.FakeContext;
-import xpath.xml.XPathHxXml;
 import xpath.value.XPathBoolean;
 import xpath.value.XPathValue;
 import xpath.EvaluationException;

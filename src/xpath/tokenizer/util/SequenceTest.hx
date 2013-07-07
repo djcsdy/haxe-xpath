@@ -19,7 +19,6 @@ import haxe.unit.TestCase;
 import xpath.tokenizer.util.Sequence;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
-import xpath.tokenizer.TokenizerOutput;
 import xpath.tokenizer.ExpectedException;
 import xpath.tokenizer.FakeAnyCharTokenizer;
 import xpath.tokenizer.FakeNeverTokenizer;

@@ -16,7 +16,6 @@
 
 package xpath;
 import haxe.unit.TestCase;
-import xpath.XPathError;
 
 
 class XPathErrorTest extends TestCase {

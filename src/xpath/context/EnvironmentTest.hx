@@ -16,7 +16,6 @@
 
 package xpath.context;
 import haxe.unit.TestCase;
-import xpath.context.Environment;
 
 
 class EnvironmentTest extends TestCase {

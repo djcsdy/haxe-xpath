@@ -15,16 +15,7 @@
 
 
 package xpath;
-import xpath.expression.Expression;
-import xpath.context.Context;
 import xpath.context.Environment;
-import xpath.context.CoreEnvironment;
-import xpath.context.UnionEnvironment;
-import xpath.tokenizer.TokenizerInput;
-import xpath.tokenizer.container.XPathTokenizer;
-import xpath.parser.ParserInput;
-import xpath.parser.XPathParser;
-import xpath.value.XPathNodeSet;
 import xpath.xml.XPathHxXml;
 
 

@@ -16,7 +16,6 @@
 
 package xpath.context;
 import xpath.value.XPathValue;
-import xpath.XPathFunction;
 
 
 /** An Environment provides a set of function definitions and

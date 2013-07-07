@@ -22,7 +22,6 @@ import xpath.tokenizer.util.Disjunction;
 import xpath.tokenizer.util.Optional;
 import xpath.tokenizer.util.Repetition;
 import xpath.tokenizer.container.StepDelimitersTokenizer;
-import xpath.tokenizer.container.StepTokenizer;
 import xpath.tokenizer.container.UnaryStepTokenizer;
 import xpath.tokenizer.token.BeginPathTokenizer;
 import xpath.tokenizer.token.EndPathTokenizer;

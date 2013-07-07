@@ -17,8 +17,6 @@
 package xpath.expression;
 import xpath.expression.PathStep;
 import xpath.context.Context;
-import xpath.tokenizer.Token;
-import xpath.value.XPathString;
 import xpath.xml.XPathXml;
 import xpath.Axis;
 

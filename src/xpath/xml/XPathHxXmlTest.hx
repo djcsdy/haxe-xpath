@@ -18,7 +18,6 @@ package xpath.xml;
 import haxe.unit.TestCase;
 import xpath.xml.XPathHxXml;
 import xpath.xml.XPathXml;
-import xpath.xml.XmlNodeType;
 import xpath.XPathException;
 import xpath.Axis;
 

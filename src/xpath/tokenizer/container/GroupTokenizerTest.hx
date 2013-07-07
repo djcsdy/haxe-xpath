@@ -16,10 +16,8 @@
 
 package xpath.tokenizer.container;
 import xpath.tokenizer.container.ContainerTokenizerTestBase;
-import xpath.tokenizer.container.ExpressionTokenizerTest;
 import xpath.tokenizer.container.GroupTokenizer;
 import xpath.tokenizer.Token;
-import xpath.Operator;
 
 
 class GroupTokenizerTest extends ContainerTokenizerTestBase {

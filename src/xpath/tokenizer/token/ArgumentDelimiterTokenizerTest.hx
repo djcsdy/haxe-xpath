@@ -17,7 +17,6 @@
 package xpath.tokenizer.token;
 import haxe.unit.TestCase;
 import xpath.tokenizer.token.ArgumentDelimiterTokenizer;
-import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.Token;
 import xpath.tokenizer.ExpectedException;

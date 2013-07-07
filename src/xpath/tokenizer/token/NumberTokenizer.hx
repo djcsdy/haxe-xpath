@@ -16,7 +16,6 @@
 
 package xpath.tokenizer.token;
 import xpath.tokenizer.token.TokenTokenizer;
-import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.Token;
 import xpath.tokenizer.ExpectedException;

@@ -17,12 +17,9 @@
 package xpath.tokenizer.container;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
-import xpath.tokenizer.util.Sequence;
-import xpath.tokenizer.util.Repetition;
 import xpath.tokenizer.util.Disjunction;
 import xpath.tokenizer.container.GroupTokenizer;
 import xpath.tokenizer.container.FunctionCallTokenizer;
-import xpath.tokenizer.token.NegationOperatorTokenizer;
 import xpath.tokenizer.token.LiteralTokenizer;
 import xpath.tokenizer.token.NumberTokenizer;
 import xpath.tokenizer.token.VariableReferenceTokenizer;

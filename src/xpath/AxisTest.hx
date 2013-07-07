@@ -16,7 +16,6 @@
 
 package xpath;
 import haxe.unit.TestCase;
-import xpath.Axis;
 
 
 class AxisTest extends TestCase {

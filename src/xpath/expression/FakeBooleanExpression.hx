@@ -18,7 +18,6 @@ package xpath.expression;
 import xpath.context.Context;
 import xpath.value.XPathBoolean;
 import xpath.value.XPathValue;
-import xpath.xml.XPathXml;
 
 
 class FakeBooleanExpression implements Expression {

@@ -19,12 +19,9 @@ import haxe.unit.TestCase;
 import xpath.tokenizer.util.Disjunction;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
-import xpath.tokenizer.TokenizerOutput;
 import xpath.tokenizer.Token;
 import xpath.tokenizer.ExpectedException;
 import xpath.tokenizer.TokenizerError;
-import xpath.tokenizer.FakeAnyCharTokenizer;
-import xpath.tokenizer.FakeNeverTokenizer;
 
 
 class DisjunctionTest extends TestCase {

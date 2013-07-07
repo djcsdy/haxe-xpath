@@ -16,7 +16,6 @@
 
 package xpath.xml;
 import haxe.unit.TestCase;
-import xpath.xml.XmlNodeType;
 
 
 class XmlNodeTypeTest extends TestCase {

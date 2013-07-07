@@ -16,7 +16,6 @@
 
 package xpath;
 import haxe.unit.TestCase;
-import xpath.NodeCategory;
 
 
 class NodeCategoryTest extends TestCase {

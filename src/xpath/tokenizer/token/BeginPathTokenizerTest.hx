@@ -16,7 +16,6 @@
 
 package xpath.tokenizer.token;
 import haxe.unit.TestCase;
-import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.token.BeginPathTokenizer;
 import xpath.tokenizer.Token;

@@ -19,7 +19,6 @@ import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.util.Sequence;
 import xpath.tokenizer.util.Disjunction;
-import xpath.tokenizer.util.Optional;
 import xpath.tokenizer.util.Repetition;
 import xpath.tokenizer.container.StepDelimitersTokenizer;
 import xpath.tokenizer.container.StepTokenizer;

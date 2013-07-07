@@ -16,12 +16,9 @@
 
 package xpath.tokenizer.token;
 import xpath.tokenizer.token.TokenTokenizer;
-import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
 import xpath.tokenizer.Token;
 import xpath.tokenizer.ExpectedException;
-import xpath.Axis;
-import xpath.NodeCategory;
 
 
 /** [Tokenizer] which tokenizes according to the [AbbreviatedStep]

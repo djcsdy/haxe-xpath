@@ -16,7 +16,6 @@
 
 package xpath.value;
 import haxe.unit.TestCase;
-import xpath.value.XPathValue;
 
 
 class XPathValueTest extends TestCase {

@@ -16,7 +16,6 @@
 
 package xpath.context;
 import xpath.value.XPathValue;
-import xpath.XPathFunction;
 
 
 /** Class implementing an environment which may be modified at runtime. */

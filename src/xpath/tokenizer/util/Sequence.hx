@@ -17,7 +17,6 @@
 package xpath.tokenizer.util;
 import xpath.tokenizer.Tokenizer;
 import xpath.tokenizer.TokenizerInput;
-import xpath.tokenizer.TokenizerException;
 
 
 /** Tokenizer which tokenizes according to a sequence of rules, e.g.

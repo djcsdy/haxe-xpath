@@ -16,7 +16,6 @@
 
 package xpath.context;
 import xpath.value.XPathValue;
-import xpath.XPathFunction;
 import xpath.EvaluationException;
 
 
