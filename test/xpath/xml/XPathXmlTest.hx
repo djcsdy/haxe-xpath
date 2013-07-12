@@ -282,7 +282,7 @@ class XPathXmlTest extends TestCase {
 				for (dummy in expectedResult.attributes()) {
 					assertTrue(iterator.hasNext());
 					var wrappedAttribute = iterator.next();
-					assertEquals(Attribute, wrappedAttribute.getType());
+					assertEquals(XmlNodeType.Attribute, wrappedAttribute.getType());
 					var name = wrappedAttribute.getName();
 					assertTrue(expectedResult.exists(name));
 					assertEquals(

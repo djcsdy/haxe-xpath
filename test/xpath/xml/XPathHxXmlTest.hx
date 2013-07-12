@@ -143,7 +143,7 @@ class XPathHxXmlTest extends TestCase {
 		var xml = Xml.createComment("foo");
 		var hxXmlNode = XPathHxXml.wrapNode(xml);
 		assertEquals(xml, hxXmlNode.getWrappedXml());
-		assertEquals(Comment, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Comment, hxXmlNode.getType());
 		
 		xml = Xml.createDocType("bar");
 		caught = false;
@@ -158,18 +158,18 @@ class XPathHxXmlTest extends TestCase {
 		xml = Xml.createDocument();
 		hxXmlNode = XPathHxXml.wrapNode(xml);
 		assertEquals(xml, hxXmlNode.getWrappedXml());
-		assertEquals(Root, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Root, hxXmlNode.getType());
 		
 		xml = Xml.createElement("bat");
 		hxXmlNode = XPathHxXml.wrapNode(xml);
 		assertEquals(xml, hxXmlNode.getWrappedXml());
-		assertEquals(Element, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Element, hxXmlNode.getType());
 		
 		#if !flash8
-		xml = Xml.createProlog("baz");
+		xml = Xml.createProcessingInstruction("baz");
 		hxXmlNode = XPathHxXml.wrapNode(xml);
 		assertEquals(xml, hxXmlNode.getWrappedXml());
-		assertEquals(ProcessingInstruction, hxXmlNode.getType());
+		assertEquals(XmlNodeType.ProcessingInstruction, hxXmlNode.getType());
 		#end
 		
 		xml = Xml.createElement("qzzz");
@@ -177,12 +177,12 @@ class XPathHxXmlTest extends TestCase {
 		xml.set("aruga", "honk");
 		
 		hxXmlNode = XPathHxXml.wrapAttribute(xml, "wrt");
-		assertEquals(Attribute, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Attribute, hxXmlNode.getType());
 		assertEquals("wrt", hxXmlNode.getName());
 		assertEquals("ping", hxXmlNode.getValue());
 		
 		hxXmlNode = XPathHxXml.wrapAttribute(xml, "aruga");
-		assertEquals(Attribute, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Attribute, hxXmlNode.getType());
 		assertEquals("aruga", hxXmlNode.getName());
 		assertEquals("honk", hxXmlNode.getValue());
 		
@@ -255,38 +255,38 @@ class XPathHxXmlTest extends TestCase {
 		var hxXmlNode = XPathHxXml.wrapNode(text1);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text2);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text3);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text4);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text5);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text6);
 		assertEquals(text1, hxXmlNode.getWrappedXml());
 		assertEquals(string1, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(inbetween);
 		assertEquals(inbetween, hxXmlNode.getWrappedXml());
-		assertEquals(Element, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Element, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text7);
 		assertEquals(text7, hxXmlNode.getWrappedXml());
 		assertEquals(string2, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 		hxXmlNode = XPathHxXml.wrapNode(text8);
 		assertEquals(text7, hxXmlNode.getWrappedXml());
 		assertEquals(string2, hxXmlNode.getValue());
-		assertEquals(Text, hxXmlNode.getType());
+		assertEquals(XmlNodeType.Text, hxXmlNode.getType());
 	}
 	
 	function testIs () {
@@ -336,7 +336,7 @@ class XPathHxXmlTest extends TestCase {
 			var nameTaken = null;
 			for (attr in iterator) {
 				++count;
-				assertEquals(Attribute, attr.getType());
+				assertEquals(XmlNodeType.Attribute, attr.getType());
 				var name = attr.getName();
 				assertTrue(name == "foo" || name == "bar");
 				assertTrue(name != nameTaken);
@@ -592,5 +592,5 @@ class XPathHxXmlTest extends TestCase {
 			}
 		}
 	}
-	
+
 }
