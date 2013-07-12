@@ -22,7 +22,7 @@
             <fileset dir="src">
                 <include name="**/*.hx"/>
             </fileset>
-            <fileset file="haxelib.xml"/>
+            <fileset file="haxelib.json"/>
             <fileset file="README.md"/>
             <fileset file="LICENCE.txt"/>
             <fileset file="AUTHORS.txt"/>
