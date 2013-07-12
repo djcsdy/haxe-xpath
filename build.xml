@@ -15,18 +15,17 @@
 	</target>
 	
 	<target name="haxelib">
-		<delete dir="build/haxelib/xpath"/>
-		<mkdir dir="build/haxelib/xpath"/>
-		<copy todir="build/haxelib/xpath">
+		<delete file="xpath.zip"/>
+
+		<zip destfile="xpath.zip">
 			<fileset dir="src">
-				<include name="xpath/**/*"/>
+				<include name="**/*.hx"/>
 			</fileset>
-		</copy>
-		<copy file="haxelib.xml" tofile="build/haxelib/xpath/haxelib.xml"/>
-		<copy file="README.md" tofile="build/haxelib/xpath/README.md"/>
-		<copy file="LICENCE.txt" tofile="build/haxelib/xpath/LICENCE.txt"/>
-		<copy file="AUTHORS.txt" tofile="build/haxelib/xpath/AUTHORS.txt"/>
-		<zip basedir="build/haxelib/xpath" destfile="xpath.zip"/>
+			<fileset file="haxelib.xml"/>
+			<fileset file="README.md"/>
+			<fileset file="LICENCE.txt"/>
+			<fileset file="AUTHORS.txt"/>
+		</zip>
 	</target>
 	
 </project>
