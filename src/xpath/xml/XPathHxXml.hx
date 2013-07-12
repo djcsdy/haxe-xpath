@@ -111,7 +111,7 @@ class XPathHxXml extends XPathXml {
 				case Xml.Document: XmlNodeType.Root;
 				case Xml.Element: XmlNodeType.Element;
 				case Xml.PCData: XmlNodeType.Text;
-				case Xml.Prolog: XmlNodeType.ProcessingInstruction;
+				case Xml.ProcessingInstruction: XmlNodeType.ProcessingInstruction;
 				default: throw new XPathError();
 			}
 		} else XmlNodeType.Attribute;
@@ -138,7 +138,7 @@ class XPathHxXml extends XPathXml {
 			switch (hxXml.nodeType) {
 				case Xml.CData: getTextNodeValue();
 				case Xml.PCData: getTextNodeValue();
-				case Xml.Prolog: hxXml.nodeValue;
+				case Xml.ProcessingInstruction: hxXml.nodeValue;
 				default: null;
 			}
 		} else pcDecode(attributeParent.get(attributeName));
