@@ -17,7 +17,6 @@ following caveats must be considered:
    predicates, or use of the `position()` function that assumes the
    presence of comments will break, although XPath queries written
    in such a way are already badly broken.
- * Lots of unit tests are missing. Patches welcome.
  * XML namespaces are not supported, yet. The `name()` function
    therefore behaves as `local-name()`.
 
