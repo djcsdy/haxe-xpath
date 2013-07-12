@@ -17,8 +17,6 @@ import xpath.tokenizer.util.SequenceTest;
 import xpath.tokenizer.TokenizerExceptionTest;
 import xpath.tokenizer.TokenizerInputTest;
 import xpath.tokenizer.TokenizerOutputTest;
-import xpath.tokenizer.TokenizerTest;
-import xpath.tokenizer.TokenTest;
 import xpath.tokenizer.TokenizerErrorTest;
 import xpath.tokenizer.ExpectedExceptionTest;
 import xpath.tokenizer.token.NegationOperatorTokenizerTest;
@@ -64,9 +62,7 @@ import xpath.expression.LiteralTest;
 import xpath.expression.FunctionCallTest;
 import xpath.expression.FilterStepTest;
 import xpath.expression.AxisStepTest;
-import xpath.context.EnvironmentTest;
 import xpath.context.DynamicEnvironmentTest;
-import xpath.context.CoreEnvironmentTest;
 import xpath.context.ContextTest;
 import xpath.context.BaseEnvironmentTest;
 import haxe.unit.TestRunner;
@@ -77,9 +73,7 @@ class Test {
 
 		runner.add(new BaseEnvironmentTest());
 		runner.add(new ContextTest());
-		runner.add(new CoreEnvironmentTest());
 		runner.add(new DynamicEnvironmentTest());
-		runner.add(new EnvironmentTest());
 		runner.add(new AxisStepTest());
 		runner.add(new FilterStepTest());
 		runner.add(new FunctionCallTest());
@@ -142,8 +136,6 @@ class Test {
 		runner.add(new TokenizerExceptionTest());
 		runner.add(new TokenizerInputTest());
 		runner.add(new TokenizerOutputTest());
-		runner.add(new TokenizerTest());
-		runner.add(new TokenTest());
 
 		#if sys
 		if (runner.run()) {
