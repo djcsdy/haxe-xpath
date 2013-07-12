@@ -24,12 +24,12 @@ import xpath.Axis;
 
 class AxisTokenizerTest extends TestCase {
 	
-	var axes :Hash<Axis>;
+	var axes :Map<String, Axis>;
 	
 	
 	function new () {
 		super();
-		axes = new Hash<Axis>();
+		axes = new Map<String, Axis>();
 		axes.set("ancestor", Ancestor);
 		axes.set("ancestor-or-self", AncestorOrSelf);
 		axes.set("attribute", Attribute);

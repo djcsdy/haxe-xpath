@@ -25,13 +25,13 @@ import xpath.NodeCategory;
 
 class TypeTestTokenizerTest extends TestCase {
 	
-	var types :Hash<NodeCategory>;
+	var types :Map<String, NodeCategory>;
 	
 	
 	public function new () {
 		super();
 		
-		types = new Hash<NodeCategory>();
+		types = new Map<String, NodeCategory>();
 		types.set("comment", Comment);
 		types.set("text", Text);
 		types.set("node", Node);

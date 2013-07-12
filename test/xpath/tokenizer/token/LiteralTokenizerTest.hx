@@ -24,12 +24,12 @@ import xpath.tokenizer.ExpectedException;
 
 class LiteralTokenizerTest extends TestCase {
 	
-	var otherQuotes :Hash<String>;
+	var otherQuotes :Map<String, String>;
 	
 	
 	public function new () {
 		super();
-		otherQuotes = new Hash<String>();
+		otherQuotes = new Map<String, String>();
 		otherQuotes.set("'", '"');
 		otherQuotes.set('"', "'");
 	}

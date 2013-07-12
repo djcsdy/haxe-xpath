@@ -25,12 +25,12 @@ import xpath.Operator;
 
 class OperatorTokenizerTest extends TestCase {
 	
-	var operators :Hash<Operator>;
+	var operators :Map<String, Operator>;
 	
 	
 	public function new () {
 		super();
-		operators = new Hash<Operator>();
+		operators = new Map<String, Operator>();
 		operators.set("and", And);
 		operators.set("mod", Modulo);
 		operators.set("div", Divide);
