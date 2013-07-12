@@ -145,10 +145,14 @@ class Test {
 		runner.add(new TokenizerTest());
 		runner.add(new TokenTest());
 
+		#if sys
 		if (runner.run()) {
 			Sys.exit(0);
 		} else {
 			Sys.exit(1);
 		}
+		#else
+		runner.run();
+		#end
 	}
 }
