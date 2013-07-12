@@ -25,40 +25,38 @@ import xpath.NodeCategory;
 
 
 class DeepStepDelimiterTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (whitespace in ["", " ", "   "]) {
-			for (garbage in ["", "fsgpjg", "/fgjsdf", "///sfgkosg"]) {
-				var input = new TokenizerInput("//" + whitespace + garbage);
-				var output = DeepStepDelimiterTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(4, output.result.length);
-				assertEquals(2 + whitespace.length, output.characterLength);
-				assertTrue(Std.is(output.result[0], StepDelimiterToken));
-				assertTrue(Std.is(output.result[1], AxisToken));
-				assertTrue(Std.is(output.result[2], TypeTestToken));
-				assertTrue(Std.is(output.result[3], StepDelimiterToken));
-				assertEquals(DescendantOrSelf, cast(output.result[1], AxisToken).axis);
-				assertEquals(Node, cast(output.result[2], TypeTestToken).type);
-			}
-		}
-	}
-	
-	function testBad () {
-		for (whitespace in ["", " ", "   "]) {
-			for (garbage in ["", "fsgpjg", "/fgjsdf"]) {
-				var input = new TokenizerInput(whitespace + garbage);
-				
-				var caught = false;
-				try {
-					DeepStepDelimiterTokenizer.getInstance().tokenize(input);
-				} catch (exception:ExpectedException) {
-					caught = true;
-					assertEquals(0, exception.position);
-				}
-				assertTrue(caught);
-			}
-		}
-	}
-	
+    function testGood() {
+        for (whitespace in ["", " ", "   "]) {
+            for (garbage in ["", "fsgpjg", "/fgjsdf", "///sfgkosg"]) {
+                var input = new TokenizerInput("//" + whitespace + garbage);
+                var output = DeepStepDelimiterTokenizer.getInstance().tokenize(input);
+
+                assertEquals(4, output.result.length);
+                assertEquals(2 + whitespace.length, output.characterLength);
+                assertTrue(Std.is(output.result[0], StepDelimiterToken));
+                assertTrue(Std.is(output.result[1], AxisToken));
+                assertTrue(Std.is(output.result[2], TypeTestToken));
+                assertTrue(Std.is(output.result[3], StepDelimiterToken));
+                assertEquals(DescendantOrSelf, cast(output.result[1], AxisToken).axis);
+                assertEquals(Node, cast(output.result[2], TypeTestToken).type);
+            }
+        }
+    }
+
+    function testBad() {
+        for (whitespace in ["", " ", "   "]) {
+            for (garbage in ["", "fsgpjg", "/fgjsdf"]) {
+                var input = new TokenizerInput(whitespace + garbage);
+
+                var caught = false;
+                try {
+                    DeepStepDelimiterTokenizer.getInstance().tokenize(input);
+                } catch (exception:ExpectedException) {
+                    caught = true;
+                    assertEquals(0, exception.position);
+                }
+                assertTrue(caught);
+            }
+        }
+    }
 }

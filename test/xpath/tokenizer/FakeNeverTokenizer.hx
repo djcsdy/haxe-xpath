@@ -22,15 +22,11 @@ import xpath.tokenizer.ExpectedException;
 
 
 class FakeNeverTokenizer implements Tokenizer {
-	
-	public function new () {
-	}
-	
-	public function tokenize (input:TokenizerInput) :TokenizerOutput {
-		throw new ExpectedException([{
-			tokenName: "Never", position: input.position
-		}]);
-		return null;
-	}
-	
+    public function new() {
+    }
+
+    public function tokenize(input:TokenizerInput):TokenizerOutput {
+        throw new ExpectedException([{tokenName: "Never", position: input.position}]);
+        return null;
+    }
 }

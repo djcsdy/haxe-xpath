@@ -22,105 +22,101 @@ import xpath.xml.XPathHxXml;
 
 
 class RootStepTest extends TestCase {
-	
-	/* <a>
-	 *     <b/>
-	 *     <c>
-	 *         <d/>
-	 *         <e foo="123" bar="456">
-	 *             <f/>
-	 *             <g/>
-	 *         </e>
-	 *         <h>
-	 *             <i blib="abc" blob="def" />
-	 *         </h>
-	 *         <j/>
-	 *     </c>
-	 *     <k>
-	 *         <l/>
-	 *     </k>
-	 *     <m/>
-	 * </a>
-	 */
-	private var xml :Xml;
-	private var a :Xml;
-	private var b :Xml;
-	private var c :Xml;
-	private var d :Xml;
-	private var e :Xml;
-	private var f :Xml;
-	private var g :Xml;
-	private var h :Xml;
-	private var i :Xml;
-	private var j :Xml;
-	private var k :Xml;
-	private var l :Xml;
-	private var m :Xml;
-	
-	
-	public function new () {
-		super();
-		
-		xml = Xml.createDocument();
-		a = Xml.createElement("a");
-		b = Xml.createElement("b");
-		c = Xml.createElement("c");
-		d = Xml.createElement("d");
-		e = Xml.createElement("e");
-		f = Xml.createElement("f");
-		g = Xml.createElement("g");
-		h = Xml.createElement("h");
-		i = Xml.createElement("i");
-		j = Xml.createElement("j");
-		k = Xml.createElement("k");
-		l = Xml.createElement("l");
-		m = Xml.createElement("m");
-		
-		e.set("foo", "123");
-		e.set("bar", "456");
-		i.set("blib", "abc");
-		i.set("blob", "def");
-		
-		xml.addChild(a);
-		a.addChild(b);
-		a.addChild(c);
-		a.addChild(k);
-		a.addChild(m);
-		c.addChild(d);
-		c.addChild(e);
-		c.addChild(h);
-		c.addChild(j);
-		e.addChild(f);
-		e.addChild(g);
-		h.addChild(i);
-		k.addChild(l);
-	}
-	
-	function testRootStep () {
-		var rootStep = new RootStep();
-		var result = rootStep.evaluate(new FakeContext(
-			XPathHxXml.wrapNode(xml)
-		));
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
-		
-		result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(e)));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
-		
-		result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(h)));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
-		
-		result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(j)));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
-		
-		result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(g)));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
-	}
-	
+    /* <a>
+     *     <b/>
+     *     <c>
+     *         <d/>
+     *         <e foo="123" bar="456">
+     *             <f/>
+     *             <g/>
+     *         </e>
+     *         <h>
+     *             <i blib="abc" blob="def" />
+     *         </h>
+     *         <j/>
+     *     </c>
+     *     <k>
+     *         <l/>
+     *     </k>
+     *     <m/>
+     * </a>
+     */
+    private var xml:Xml;
+    private var a:Xml;
+    private var b:Xml;
+    private var c:Xml;
+    private var d:Xml;
+    private var e:Xml;
+    private var f:Xml;
+    private var g:Xml;
+    private var h:Xml;
+    private var i:Xml;
+    private var j:Xml;
+    private var k:Xml;
+    private var l:Xml;
+    private var m:Xml;
+
+
+    public function new() {
+        super();
+
+        xml = Xml.createDocument();
+        a = Xml.createElement("a");
+        b = Xml.createElement("b");
+        c = Xml.createElement("c");
+        d = Xml.createElement("d");
+        e = Xml.createElement("e");
+        f = Xml.createElement("f");
+        g = Xml.createElement("g");
+        h = Xml.createElement("h");
+        i = Xml.createElement("i");
+        j = Xml.createElement("j");
+        k = Xml.createElement("k");
+        l = Xml.createElement("l");
+        m = Xml.createElement("m");
+
+        e.set("foo", "123");
+        e.set("bar", "456");
+        i.set("blib", "abc");
+        i.set("blob", "def");
+
+        xml.addChild(a);
+        a.addChild(b);
+        a.addChild(c);
+        a.addChild(k);
+        a.addChild(m);
+        c.addChild(d);
+        c.addChild(e);
+        c.addChild(h);
+        c.addChild(j);
+        e.addChild(f);
+        e.addChild(g);
+        h.addChild(i);
+        k.addChild(l);
+    }
+
+    function testRootStep() {
+        var rootStep = new RootStep();
+        var result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(xml)));
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
+
+        result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(e)));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
+
+        result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(h)));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
+
+        result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(j)));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
+
+        result = rootStep.evaluate(new FakeContext(XPathHxXml.wrapNode(g)));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(xml, cast(nodes[0], XPathHxXml).getWrappedXml());
+    }
 }
 

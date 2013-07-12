@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [EndPredicate]
  * rule. */
 class EndPredicateTokenizer extends FixedStringTokenizer {
-	
-	static var instance :EndPredicateTokenizer;
-	
-	
-	/** Gets the instance of [EndPredicateTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new EndPredicateTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new EndPredicateToken(), "]", "EndPredicate");
-	}
-	
+    static var instance:EndPredicateTokenizer;
+
+
+    /** Gets the instance of [EndPredicateTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new EndPredicateTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new EndPredicateToken(), "]", "EndPredicate");
+    }
 }

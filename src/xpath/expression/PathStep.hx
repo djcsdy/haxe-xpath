@@ -22,55 +22,50 @@ import xpath.xml.XPathXml;
 
 
 class PathStep implements Expression {
-	
-	var step :Context->Iterable<XPathXml>;
-	var nextStep :PathStep;
-	
-	
-	function new (step:Context->Iterable<XPathXml>, ?nextStep:PathStep) {
-		this.step = step;
-		this.nextStep = nextStep;
-	}
-	
-	public function evaluate (context:Context) :XPathValue {
-		if (nextStep == null) {
-			return new XPathNodeSet(step(context));
-		} else {
-			var me = this;
-			var index = 0;
-			var selected = Lambda.array(step(context));
-			var nextNode = null;
-			var nextStepNodes = new List<XPathXml>().iterator();
-			var hasNext = function () {
-				return nextNode != null;
-			};
-			var next = function () {
-				var node = nextNode;
-				while (!nextStepNodes.hasNext() && index < selected.length) {
-					var nextStepContext = new Context(
-						selected[index], index+1, selected.length,
-						context.environment
-					);
-					var nextStepResult = cast(me.nextStep.evaluate(nextStepContext), XPathNodeSet);
-					nextStepNodes = nextStepResult.getNodes().iterator();
-					++index;
-				}
-				if (nextStepNodes.hasNext()) {
-					nextNode = nextStepNodes.next();
-				} else {
-					nextNode = null;
-				}
-				return node;
-			};
-			next();
-			var iterator = function () {
-				return {
-					hasNext: hasNext,
-					next: next
-				};
-			}
-			return new XPathNodeSet({iterator: iterator});
-		}
-	}
-	
+    var step:Context -> Iterable<XPathXml>;
+    var nextStep:PathStep;
+
+
+    function new(step:Context -> Iterable<XPathXml>, ?nextStep:PathStep) {
+        this.step = step;
+        this.nextStep = nextStep;
+    }
+
+    public function evaluate(context:Context):XPathValue {
+        if (nextStep == null) {
+            return new XPathNodeSet(step(context));
+        } else {
+            var me = this;
+            var index = 0;
+            var selected = Lambda.array(step(context));
+            var nextNode = null;
+            var nextStepNodes = new List<XPathXml>().iterator();
+            var hasNext = function() {
+                return nextNode != null;
+            };
+            var next = function() {
+                var node = nextNode;
+                while (!nextStepNodes.hasNext() && index < selected.length) {
+                    var nextStepContext = new Context(selected[index], index + 1, selected.length, context.environment);
+                    var nextStepResult = cast(me.nextStep.evaluate(nextStepContext), XPathNodeSet);
+                    nextStepNodes = nextStepResult.getNodes().iterator();
+                    ++index;
+                }
+                if (nextStepNodes.hasNext()) {
+                    nextNode = nextStepNodes.next();
+                } else {
+                    nextNode = null;
+                }
+                return node;
+            };
+            next();
+            var iterator = function() {
+                return {
+                    hasNext: hasNext,
+                    next: next
+                };
+            }
+            return new XPathNodeSet({iterator: iterator});
+        }
+    }
 }

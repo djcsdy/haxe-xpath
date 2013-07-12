@@ -23,104 +23,93 @@ import xpath.tokenizer.ExpectedException;
 
 /** [Tokenizer] which tokenizes according to the [NameTest] rule. */
 class NameTestTokenizer extends TokenTokenizer {
-	
-	static var instance :NameTestTokenizer;
-	
-	
-	/** Gets the instance of [NameTestTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new NameTestTokenizer();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var pos = input.position;
-		
-		// check for wildcard
-		if (input.query.charAt(pos) == "*") {
-			var result = [ cast(new NameTestToken("*"), Token) ];
-			var characterLength = 1 + countWhitespace(
-				input.query, pos+1
-			);
-			return input.getOutput(result, characterLength);
-		}
-		
-		// check for NCName
-		var charCode = input.query.charCodeAt(pos);
-		if (charCode == null || (
-			(charCode < 65 || charCode > 90) &&
-			(charCode < 97 || charCode > 122) &&
-			charCode < 128 && charCode != 95
-		)) {
-			throw new ExpectedException([{
-				tokenName: "NameTest",
-				position: input.position
-			}]);
-		}
-		do {
-			charCode = input.query.charCodeAt(++pos);
-		} while (
-			(charCode > 47 && charCode < 58) ||
-			(charCode > 64 && charCode < 91) ||
-			(charCode > 96 && charCode < 123) ||
-			charCode > 127 || charCode == 46 ||
-			charCode == 45 || charCode == 95
-		);
-		
-		// check for colon
-		if (charCode != 58) {
-			var characterLength = pos - input.position;
-			var name = input.query.substr(
-				input.position, characterLength
-			);
-			var result = [ cast(new NameTestToken(name), Token) ];
-			characterLength += countWhitespace(input.query, pos);
-			return input.getOutput(result, characterLength);
-		}
-		
-		// check for wildcard
-		if (input.query.charAt(++pos) == "*") {
-			var characterLength = pos - input.position;
-			var name = input.query.substr(
-				input.position, characterLength
-			) + "*";
-			var result = [ cast(new NameTestToken(name), Token) ];
-			characterLength += 1+countWhitespace(input.query, pos+1);
-			return input.getOutput(result, characterLength);
-		}
-		
-		// check for NCName
-		charCode = input.query.charCodeAt(pos);
-		if (charCode == null || (
-			(charCode < 65 || charCode > 90) &&
-			(charCode < 97 || charCode > 122) &&
-			charCode < 128 && charCode != 95
-		)) {
-			throw new ExpectedException([{
-				tokenName: "NameTest",
-				position: input.position
-			}]);
-		}
-		do {
-			charCode = input.query.charCodeAt(++pos);
-		} while (
-			(charCode > 47 && charCode < 58) ||
-			(charCode > 64 && charCode < 91) ||
-			(charCode > 96 && charCode < 123) ||
-			charCode > 127 || charCode == 46 ||
-			charCode == 45 || charCode == 95
-		);
-		
-		var characterLength = pos - input.position;
-		var name = input.query.substr(
-			input.position, characterLength
-		);
-		var result = [ cast(new NameTestToken(name), Token) ];
-		characterLength += countWhitespace(input.query, pos);
-		return input.getOutput(result, characterLength);
-	}
-	
+    static var instance:NameTestTokenizer;
+
+
+    /** Gets the instance of [NameTestTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new NameTestTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var pos = input.position;
+
+        // check for wildcard
+        if (input.query.charAt(pos) == "*") {
+            var result = [ cast(new NameTestToken("*"), Token) ];
+            var characterLength = 1 + countWhitespace(input.query, pos + 1);
+            return input.getOutput(result, characterLength);
+        }
+
+        // check for NCName
+        var charCode = input.query.charCodeAt(pos);
+        if (charCode == null ||
+                ((charCode < 65 || charCode > 90) &&
+                        (charCode < 97 || charCode > 122) &&
+                        charCode < 128 && charCode != 95)) {
+            throw new ExpectedException([{
+                tokenName: "NameTest",
+                position: input.position
+            }]);
+        }
+
+        do {
+            charCode = input.query.charCodeAt(++pos);
+        } while ((charCode > 47 && charCode < 58) ||
+                (charCode > 64 && charCode < 91) ||
+                (charCode > 96 && charCode < 123) ||
+                charCode > 127 || charCode == 46 ||
+                charCode == 45 || charCode == 95);
+
+        // check for colon
+        if (charCode != 58) {
+            var characterLength = pos - input.position;
+            var name = input.query.substr(input.position, characterLength);
+            var result = [ cast(new NameTestToken(name), Token) ];
+            characterLength += countWhitespace(input.query, pos);
+            return input.getOutput(result, characterLength);
+        }
+
+        // check for wildcard
+        if (input.query.charAt(++pos) == "*") {
+            var characterLength = pos - input.position;
+            var name = input.query.substr(input.position, characterLength) + "*";
+            var result = [ cast(new NameTestToken(name), Token) ];
+            characterLength += 1 + countWhitespace(input.query, pos + 1);
+            return input.getOutput(result, characterLength);
+        }
+
+        // check for NCName
+        charCode = input.query.charCodeAt(pos);
+        if (charCode == null ||
+                ((charCode < 65 || charCode > 90) &&
+                        (charCode < 97 || charCode > 122) &&
+                        charCode < 128 && charCode != 95)) {
+            throw new ExpectedException([{
+                tokenName: "NameTest",
+                position: input.position
+            }]);
+        }
+
+        do {
+            charCode = input.query.charCodeAt(++pos);
+        } while ((charCode > 47 && charCode < 58) ||
+                (charCode > 64 && charCode < 91) ||
+                (charCode > 96 && charCode < 123) ||
+                charCode > 127 || charCode == 46 ||
+                charCode == 45 || charCode == 95);
+
+        var characterLength = pos - input.position;
+        var name = input.query.substr(input.position, characterLength);
+        var result = [ cast(new NameTestToken(name), Token) ];
+        characterLength += countWhitespace(input.query, pos);
+        return input.getOutput(result, characterLength);
+    }
 }

@@ -23,51 +23,49 @@ import xpath.xml.XPathHxXml;
 
 
 class NameStepTest extends TestCase {
-	
-	function testNameStep () {
-		var plainXmlElement = Xml.createElement("foo");
-		plainXmlElement.set("foo", "bar");
-		var element:XPathXml = XPathHxXml.wrapNode(plainXmlElement);
-		var attribute:XPathXml = null;
-		for (candAttribute in element.getAttributeIterator()) {
-			attribute = candAttribute;
-		}
-		
-		var nameStep = new NameStep("*");
-		var result = nameStep.evaluate(new FakeContext(element));
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(element, nodes[0]);
-		
-		result = nameStep.evaluate(new FakeContext(attribute));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(attribute, nodes[0]);
-		
-		nameStep = new NameStep("foo");
-		result = nameStep.evaluate(new FakeContext(element));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(element, nodes[0]);
-		
-		result = nameStep.evaluate(new FakeContext(attribute));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(attribute, nodes[0]);
-		
-		plainXmlElement = Xml.createElement("bat");
-		element = XPathHxXml.wrapNode(plainXmlElement);
-		result = nameStep.evaluate(new FakeContext(element));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(0, nodes.length);
-		
-		plainXmlElement.set("bat", "baz");
-		for (candAttribute in element.getAttributeIterator()) {
-			attribute = candAttribute;
-		}
-		result = nameStep.evaluate(new FakeContext(attribute));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(0, nodes.length);
-	}
-	
+    function testNameStep() {
+        var plainXmlElement = Xml.createElement("foo");
+        plainXmlElement.set("foo", "bar");
+        var element:XPathXml = XPathHxXml.wrapNode(plainXmlElement);
+        var attribute:XPathXml = null;
+        for (candAttribute in element.getAttributeIterator()) {
+            attribute = candAttribute;
+        }
+
+        var nameStep = new NameStep("*");
+        var result = nameStep.evaluate(new FakeContext(element));
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(element, nodes[0]);
+
+        result = nameStep.evaluate(new FakeContext(attribute));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(attribute, nodes[0]);
+
+        nameStep = new NameStep("foo");
+        result = nameStep.evaluate(new FakeContext(element));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(element, nodes[0]);
+
+        result = nameStep.evaluate(new FakeContext(attribute));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(attribute, nodes[0]);
+
+        plainXmlElement = Xml.createElement("bat");
+        element = XPathHxXml.wrapNode(plainXmlElement);
+        result = nameStep.evaluate(new FakeContext(element));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(0, nodes.length);
+
+        plainXmlElement.set("bat", "baz");
+        for (candAttribute in element.getAttributeIterator()) {
+            attribute = candAttribute;
+        }
+        result = nameStep.evaluate(new FakeContext(attribute));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(0, nodes.length);
+    }
 }

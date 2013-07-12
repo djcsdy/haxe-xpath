@@ -23,35 +23,33 @@ import xpath.tokenizer.ExpectedException;
 
 
 class EndPredicateTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (whitespace in ["", " ", "    "]) {
-			for (garbage in ["dsklfg", "vsv", "cv.' sd"]) {
-				var input = new TokenizerInput("]" + whitespace + garbage);
-				var output = EndPredicateTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(1 + whitespace.length, output.characterLength);
-				assertTrue(Std.is(output.result[0], EndPredicateToken));
-			}
-		}
-	}
-	
-	function testBad () {
-		for (whitespace in ["", " ", "    "]) {
-			for (garbage in ["", "dsklfg", "vsv", "cv.' sd"]) {
-				var input = new TokenizerInput(whitespace + garbage);
-				
-				var caught = false;
-				try {
-					EndPredicateTokenizer.getInstance().tokenize(input);
-				} catch (exception:ExpectedException) {
-					caught = true;
-					assertEquals(0, exception.position);
-				}
-				assertTrue(caught);
-			}
-		}
-	}
-	
+    function testGood() {
+        for (whitespace in ["", " ", "    "]) {
+            for (garbage in ["dsklfg", "vsv", "cv.' sd"]) {
+                var input = new TokenizerInput("]" + whitespace + garbage);
+                var output = EndPredicateTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(1 + whitespace.length, output.characterLength);
+                assertTrue(Std.is(output.result[0], EndPredicateToken));
+            }
+        }
+    }
+
+    function testBad() {
+        for (whitespace in ["", " ", "    "]) {
+            for (garbage in ["", "dsklfg", "vsv", "cv.' sd"]) {
+                var input = new TokenizerInput(whitespace + garbage);
+
+                var caught = false;
+                try {
+                    EndPredicateTokenizer.getInstance().tokenize(input);
+                } catch (exception:ExpectedException) {
+                    caught = true;
+                    assertEquals(0, exception.position);
+                }
+                assertTrue(caught);
+            }
+        }
+    }
 }

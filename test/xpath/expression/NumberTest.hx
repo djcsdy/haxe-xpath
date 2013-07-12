@@ -21,15 +21,13 @@ import xpath.value.XPathNumber;
 
 
 class NumberTest extends TestCase {
-	
-	function testAll () {
-		for (testValue in [0, 1, 123.456, -789.012, 239585, -239582]) {
-			var number = new Number(testValue);
-			var result = number.evaluate(new FakeContext());
-			assertTrue(Std.is(result, XPathNumber));
-			assertEquals(testValue, result.getFloat());
-		}
-	}
-	
+    function testAll() {
+        for (testValue in [0, 1, 123.456, -789.012, 239585, -239582]) {
+            var number = new Number(testValue);
+            var result = number.evaluate(new FakeContext());
+            assertTrue(Std.is(result, XPathNumber));
+            assertEquals(testValue, result.getFloat());
+        }
+    }
 }
 

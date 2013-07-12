@@ -21,18 +21,19 @@ import xpath.tokenizer.Token;
 
 /** [Tokenizer] which tokenizes according to the [EndPath] rule. */
 class EndPathTokenizer extends FixedStringTokenizer {
-	
-	static var instance :EndPathTokenizer;
-	
-	
-	/** Gets the instance of [EndPathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new EndPathTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new EndPathToken(), "", "EndPath");
-	}
-	
+    static var instance:EndPathTokenizer;
+
+
+    /** Gets the instance of [EndPathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new EndPathTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new EndPathToken(), "", "EndPath");
+    }
 }

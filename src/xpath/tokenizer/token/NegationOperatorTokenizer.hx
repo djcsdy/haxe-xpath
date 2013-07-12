@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [NegationOperator]
  * rule. */
 class NegationOperatorTokenizer extends FixedStringTokenizer {
-	
-	static var instance :NegationOperatorTokenizer;
-	
-	
-	/** Gets the instance of [NegationOperatorTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new NegationOperatorTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new NegationOperatorToken(), "-", "NegationOperator");
-	}
+    static var instance:NegationOperatorTokenizer;
 
+
+    /** Gets the instance of [NegationOperatorTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new NegationOperatorTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new NegationOperatorToken(), "-", "NegationOperator");
+    }
 }

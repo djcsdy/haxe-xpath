@@ -22,33 +22,31 @@ import xpath.tokenizer.TokenizerInput;
 /** Tokenizer which tokenizes according to a sequence of rules, e.g.
  * [A B C].*/
 class Sequence implements Tokenizer {
-	
-	private var tokenizers:Iterable<Tokenizer>;
-	
-	
-	/** Constructs a new [Sequence] that tokenizes according to
-	 * the sequence of rules tokenized by [tokenizers]. */
-	public function new (tokenizers:Iterable<Tokenizer>) {
-		this.tokenizers = tokenizers;
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		var iterator = tokenizers.iterator();
-		var output = iterator.next().tokenize(input);
-		var result = output.result;
-		var characterLength = output.characterLength;
-		while (iterator.hasNext()) {
-			output = iterator.next().tokenize(output.getNextInput());
-			result = result.concat(output.result);
-			characterLength += output.characterLength;
-		}
-		
-		return input.getOutput(result, characterLength);
-	}
-	
+    private var tokenizers:Iterable<Tokenizer>;
+
+
+    /** Constructs a new [Sequence] that tokenizes according to
+     * the sequence of rules tokenized by [tokenizers]. */
+    public function new(tokenizers:Iterable<Tokenizer>) {
+        this.tokenizers = tokenizers;
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        var iterator = tokenizers.iterator();
+        var output = iterator.next().tokenize(input);
+        var result = output.result;
+        var characterLength = output.characterLength;
+        while (iterator.hasNext()) {
+            output = iterator.next().tokenize(output.getNextInput());
+            result = result.concat(output.result);
+            characterLength += output.characterLength;
+        }
+
+        return input.getOutput(result, characterLength);
+    }
 }

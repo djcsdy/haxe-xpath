@@ -26,51 +26,49 @@ import xpath.library.NodeSetLibrary;
  * defined by the XPath specification as the core function library,
  * and no variables. */
 class CoreEnvironment extends BaseEnvironment {
-	
-	static var instance :CoreEnvironment;
-	
-	
-	/** Gets the core environment instance. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new CoreEnvironment();
-			instance.init();
-		}
-		
-		return instance;
-	}
-	
-	function new () {
-		super();
-	}
-	
-	function init () :Void {
-		functions.set("last", NodeSetLibrary.last);
-		functions.set("position", NodeSetLibrary.position);
-		functions.set("count", NodeSetLibrary.count);
-		functions.set("local-name", NodeSetLibrary.localName);
-		functions.set("name", NodeSetLibrary.nodeName);
-		
-		functions.set("string", StringLibrary.string);
-		functions.set("concat", StringLibrary.concat);
-		functions.set("starts-with", StringLibrary.startsWith);
-		functions.set("contains", StringLibrary.contains);
-		functions.set("substring-before", StringLibrary.substringBefore);
-		functions.set("substring-after", StringLibrary.substringAfter);
-		functions.set("substring", StringLibrary.substring);
-		functions.set("string-length", StringLibrary.stringLength);
-		functions.set("normalize-space", StringLibrary.normalizeSpace);
-		functions.set("translate", StringLibrary.translate);
-		
-		functions.set("boolean", BooleanLibrary.boolean);
-		functions.set("true", BooleanLibrary.getTrue);
-		functions.set("false", BooleanLibrary.getFalse);
-		
-		functions.set("number", NumberLibrary.number);
-		functions.set("sum", NumberLibrary.sum);
-		functions.set("floor", NumberLibrary.floor);
-		functions.set("ceiling", NumberLibrary.ceiling);
-		functions.set("round", NumberLibrary.round);
-	}
-	
+    static var instance:CoreEnvironment;
+
+
+    /** Gets the core environment instance. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new CoreEnvironment();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super();
+    }
+
+    function init():Void {
+        functions.set("last", NodeSetLibrary.last);
+        functions.set("position", NodeSetLibrary.position);
+        functions.set("count", NodeSetLibrary.count);
+        functions.set("local-name", NodeSetLibrary.localName);
+        functions.set("name", NodeSetLibrary.nodeName);
+
+        functions.set("string", StringLibrary.string);
+        functions.set("concat", StringLibrary.concat);
+        functions.set("starts-with", StringLibrary.startsWith);
+        functions.set("contains", StringLibrary.contains);
+        functions.set("substring-before", StringLibrary.substringBefore);
+        functions.set("substring-after", StringLibrary.substringAfter);
+        functions.set("substring", StringLibrary.substring);
+        functions.set("string-length", StringLibrary.stringLength);
+        functions.set("normalize-space", StringLibrary.normalizeSpace);
+        functions.set("translate", StringLibrary.translate);
+
+        functions.set("boolean", BooleanLibrary.boolean);
+        functions.set("true", BooleanLibrary.getTrue);
+        functions.set("false", BooleanLibrary.getFalse);
+
+        functions.set("number", NumberLibrary.number);
+        functions.set("sum", NumberLibrary.sum);
+        functions.set("floor", NumberLibrary.floor);
+        functions.set("ceiling", NumberLibrary.ceiling);
+        functions.set("round", NumberLibrary.round);
+    }
 }

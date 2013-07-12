@@ -29,207 +29,204 @@ import xpath.EvaluationException;
 
 
 class NumberLibraryTest extends TestCase {
-	
-	function testSum () {
-		var context = new FakeContext();
-		var caught = false;
-		try {
-			NumberLibrary.sum(context, []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		var nodeSet:XPathValue = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(Xml.createCData("1")), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("2")),
-			XPathHxXml.wrapNode(Xml.createCData("3"))
-		]);
-		var result = NumberLibrary.sum(context, [nodeSet]);
-		assertEquals(6., result.getFloat());
-		
-		var complicatedNode = Xml.createElement("foo");
-		complicatedNode.addChild(Xml.createCData("1"));
-		var complicatedChild = Xml.createElement("bar");
-		complicatedNode.addChild(complicatedChild);
-		complicatedChild.addChild(Xml.createCData("2"));
-		nodeSet = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("3"))
-		]);
-		result = NumberLibrary.sum(context, [nodeSet]);
-		assertEquals(15., result.getFloat());
-		
-		caught = false;
-		try {
-			NumberLibrary.sum(context, [nodeSet, new XPathNodeSet([])]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NumberLibrary.sum(context, [
-				cast(new XPathBoolean(), XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testFloor () {
-		var context = new FakeContext();
-		var value:XPathValue = new XPathBoolean(true);
-		var result = NumberLibrary.floor(context, [value]);
-		assertEquals(1., result.getFloat());
-		
-		value = new XPathBoolean(false);
-		result = NumberLibrary.floor(context, [value]);
-		assertEquals(0., result.getFloat());
-		
-		value = new XPathNumber(12.8);
-		result = NumberLibrary.floor(context, [value]);
-		assertEquals(12., result.getFloat());
-		
-		value = new XPathNumber(14.23);
-		result = NumberLibrary.floor(context, [value]);
-		assertEquals(14., result.getFloat());
-		
-		value = new XPathString("3.14159");
-		result = NumberLibrary.floor(context, [value]);
-		assertEquals(3., result.getFloat());
-		
-		var complicatedNode = Xml.createElement("foo");
-		complicatedNode.addChild(Xml.createCData("1"));
-		var complicatedChild = Xml.createElement("bar");
-		complicatedNode.addChild(complicatedChild);
-		complicatedChild.addChild(Xml.createCData("2.345"));
-		value = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("3598"))
-		]);
-		result = NumberLibrary.floor(context, [value]);
-		assertEquals(12., result.getFloat());
-		
-		var caught = false;
-		try {
-			NumberLibrary.floor(context, []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NumberLibrary.floor(context, [value, new XPathBoolean()]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testCeiling () {
-		var context = new FakeContext();
-		var value:XPathValue = new XPathBoolean(true);
-		var result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(1., result.getFloat());
-		
-		value = new XPathBoolean(false);
-		result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(0., result.getFloat());
-		
-		value = new XPathNumber(12.8);
-		result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(13., result.getFloat());
-		
-		value = new XPathNumber(14.23);
-		result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(15., result.getFloat());
-		
-		value = new XPathString("3.14159");
-		result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(4., result.getFloat());
-		
-		var complicatedNode = Xml.createElement("foo");
-		complicatedNode.addChild(Xml.createCData("1"));
-		var complicatedChild = Xml.createElement("bar");
-		complicatedNode.addChild(complicatedChild);
-		complicatedChild.addChild(Xml.createCData("2.345"));
-		value = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("3598"))
-		]);
-		result = NumberLibrary.ceiling(context, [value]);
-		assertEquals(13., result.getFloat());
-		
-		var caught = false;
-		try {
-			NumberLibrary.ceiling(context, []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NumberLibrary.ceiling(context, [value, new XPathBoolean()]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testRound () {
-		var context = new FakeContext();
-		var value:XPathValue = new XPathBoolean(true);
-		var result = NumberLibrary.round(context, [value]);
-		assertEquals(1., result.getFloat());
-		
-		value = new XPathBoolean(false);
-		result = NumberLibrary.round(context, [value]);
-		assertEquals(0., result.getFloat());
-		
-		value = new XPathNumber(12.8);
-		result = NumberLibrary.round(context, [value]);
-		assertEquals(13., result.getFloat());
-		
-		value = new XPathNumber(14.23);
-		result = NumberLibrary.round(context, [value]);
-		assertEquals(14., result.getFloat());
-		
-		value = new XPathString("3.14159");
-		result = NumberLibrary.round(context, [value]);
-		assertEquals(3., result.getFloat());
-		
-		var complicatedNode = Xml.createElement("foo");
-		complicatedNode.addChild(Xml.createCData("1"));
-		var complicatedChild = Xml.createElement("bar");
-		complicatedNode.addChild(complicatedChild);
-		complicatedChild.addChild(Xml.createCData("2.345"));
-		value = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("3598"))
-		]);
-		result = NumberLibrary.round(context, [value]);
-		assertEquals(12., result.getFloat());
-		
-		var caught = false;
-		try {
-			NumberLibrary.round(context, []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NumberLibrary.round(context, [value, new XPathBoolean()]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+
+    function testSum() {
+        var context = new FakeContext();
+        var caught = false;
+        try {
+            NumberLibrary.sum(context, []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        var nodeSet:XPathValue = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(Xml.createCData("1")), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("2")),
+            XPathHxXml.wrapNode(Xml.createCData("3"))
+        ]);
+        var result = NumberLibrary.sum(context, [nodeSet]);
+        assertEquals(6., result.getFloat());
+
+        var complicatedNode = Xml.createElement("foo");
+        complicatedNode.addChild(Xml.createCData("1"));
+        var complicatedChild = Xml.createElement("bar");
+        complicatedNode.addChild(complicatedChild);
+        complicatedChild.addChild(Xml.createCData("2"));
+        nodeSet = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("3"))
+        ]);
+        result = NumberLibrary.sum(context, [nodeSet]);
+        assertEquals(15., result.getFloat());
+
+        caught = false;
+        try {
+            NumberLibrary.sum(context, [nodeSet, new XPathNodeSet([])]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NumberLibrary.sum(context, [cast(new XPathBoolean(), XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testFloor() {
+        var context = new FakeContext();
+        var value:XPathValue = new XPathBoolean(true);
+        var result = NumberLibrary.floor(context, [value]);
+        assertEquals(1., result.getFloat());
+
+        value = new XPathBoolean(false);
+        result = NumberLibrary.floor(context, [value]);
+        assertEquals(0., result.getFloat());
+
+        value = new XPathNumber(12.8);
+        result = NumberLibrary.floor(context, [value]);
+        assertEquals(12., result.getFloat());
+
+        value = new XPathNumber(14.23);
+        result = NumberLibrary.floor(context, [value]);
+        assertEquals(14., result.getFloat());
+
+        value = new XPathString("3.14159");
+        result = NumberLibrary.floor(context, [value]);
+        assertEquals(3., result.getFloat());
+
+        var complicatedNode = Xml.createElement("foo");
+        complicatedNode.addChild(Xml.createCData("1"));
+        var complicatedChild = Xml.createElement("bar");
+        complicatedNode.addChild(complicatedChild);
+        complicatedChild.addChild(Xml.createCData("2.345"));
+        value = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("3598"))
+        ]);
+        result = NumberLibrary.floor(context, [value]);
+        assertEquals(12., result.getFloat());
+
+        var caught = false;
+        try {
+            NumberLibrary.floor(context, []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NumberLibrary.floor(context, [value, new XPathBoolean()]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testCeiling() {
+        var context = new FakeContext();
+        var value:XPathValue = new XPathBoolean(true);
+        var result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(1., result.getFloat());
+
+        value = new XPathBoolean(false);
+        result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(0., result.getFloat());
+
+        value = new XPathNumber(12.8);
+        result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(13., result.getFloat());
+
+        value = new XPathNumber(14.23);
+        result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(15., result.getFloat());
+
+        value = new XPathString("3.14159");
+        result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(4., result.getFloat());
+
+        var complicatedNode = Xml.createElement("foo");
+        complicatedNode.addChild(Xml.createCData("1"));
+        var complicatedChild = Xml.createElement("bar");
+        complicatedNode.addChild(complicatedChild);
+        complicatedChild.addChild(Xml.createCData("2.345"));
+        value = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("3598"))
+        ]);
+        result = NumberLibrary.ceiling(context, [value]);
+        assertEquals(13., result.getFloat());
+
+        var caught = false;
+        try {
+            NumberLibrary.ceiling(context, []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NumberLibrary.ceiling(context, [value, new XPathBoolean()]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testRound() {
+        var context = new FakeContext();
+        var value:XPathValue = new XPathBoolean(true);
+        var result = NumberLibrary.round(context, [value]);
+        assertEquals(1., result.getFloat());
+
+        value = new XPathBoolean(false);
+        result = NumberLibrary.round(context, [value]);
+        assertEquals(0., result.getFloat());
+
+        value = new XPathNumber(12.8);
+        result = NumberLibrary.round(context, [value]);
+        assertEquals(13., result.getFloat());
+
+        value = new XPathNumber(14.23);
+        result = NumberLibrary.round(context, [value]);
+        assertEquals(14., result.getFloat());
+
+        value = new XPathString("3.14159");
+        result = NumberLibrary.round(context, [value]);
+        assertEquals(3., result.getFloat());
+
+        var complicatedNode = Xml.createElement("foo");
+        complicatedNode.addChild(Xml.createCData("1"));
+        var complicatedChild = Xml.createElement("bar");
+        complicatedNode.addChild(complicatedChild);
+        complicatedChild.addChild(Xml.createCData("2.345"));
+        value = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(complicatedNode), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("3598"))
+        ]);
+        result = NumberLibrary.round(context, [value]);
+        assertEquals(12., result.getFloat());
+
+        var caught = false;
+        try {
+            NumberLibrary.round(context, []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NumberLibrary.round(context, [value, new XPathBoolean()]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

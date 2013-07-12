@@ -15,6 +15,7 @@
 
 
 package xpath.context;
+
 import xpath.value.XPathValue;
 import xpath.EvaluationException;
 
@@ -34,53 +35,52 @@ import xpath.EvaluationException;
  * For an example of an Environment implemented by extending
  * BaseEnvironment, see the source code for [CoreEnvironment]. */
 class BaseEnvironment implements Environment {
-	
-	var functions :Map<String, XPathFunction>;
-	var variables :Map<String, XPathValue>;
-	
-	
-	function new () {
-		functions = new Map<String, XPathFunction>();
-		variables = new Map<String, XPathValue>();
-	}
-	
-	/** Tests if a function with the specified name is provided by
-	 * this environment. */
-	public function existsFunction (name:String) {
-		return functions.get(name) != null;
-	}
-	
-	/** Returns a reference to the function with the specified
-	 * name. */
-	public function getFunction (name:String):XPathFunction {
-		var f = functions.get(name);
-		if (f == null) throw new EvaluationException(
-			"evaluated a function which is not defined"
-		); else return f;
-	}
-	
-	/** Calls a function with the specified parameters and returns the
-	 * result. Throws EvaluationException if the function is not
-	 * defined. */
-	public function callFunction (
-		context:Context, name:String, ?parameters:Array<XPathValue>
-	) {
-		return getFunction(name)(context, parameters);
-	}
-	
-	/** Tests if a variable with the specified name is provided by
-	 * this environment. */
-	public function existsVariable (name:String) {
-		return variables.get(name) != null;
-	}
-	
-	/** Gets the value of the variable with the specified name.
-	 * Throws EvaluationException if the variable is not defined. */
-	public function getVariable (name:String) {
-		var value = variables.get(name);
-		if (value == null) throw new EvaluationException(
-			"evaluated a variable which is not defined"
-		); else return value;
-	}
+    var functions:Map<String, XPathFunction>;
+    var variables:Map<String, XPathValue>;
 
+    function new() {
+        functions = new Map<String, XPathFunction>();
+        variables = new Map<String, XPathValue>();
+    }
+
+    /** Tests if a function with the specified name is provided by
+     * this environment. */
+    public function existsFunction(name:String) {
+        return functions.get(name) != null;
+    }
+
+    /** Returns a reference to the function with the specified
+     * name. */
+    public function getFunction(name:String):XPathFunction {
+        var f = functions.get(name);
+        if (f == null) {
+            throw new EvaluationException("evaluated a function which is not defined");
+        } else {
+            return f;
+        }
+    }
+
+    /** Calls a function with the specified parameters and returns the
+     * result. Throws EvaluationException if the function is not
+     * defined. */
+    public function callFunction(context:Context, name:String, ?parameters:Array<XPathValue>) {
+        return getFunction(name)(context, parameters);
+    }
+
+    /** Tests if a variable with the specified name is provided by
+     * this environment. */
+    public function existsVariable(name:String) {
+        return variables.get(name) != null;
+    }
+
+    /** Gets the value of the variable with the specified name.
+     * Throws EvaluationException if the variable is not defined. */
+    public function getVariable(name:String) {
+        var value = variables.get(name);
+        if (value == null) {
+            throw new EvaluationException("evaluated a variable which is not defined");
+        } else {
+            return value;
+        }
+    }
 }

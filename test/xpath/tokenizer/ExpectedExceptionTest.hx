@@ -21,65 +21,38 @@ import xpath.tokenizer.TokenizerError;
 
 
 class ExpectedExceptionTest extends TestCase {
-	
-	function testEmpty () :Void {
-		var caught = false;
-		try {
-			var expectedException = new ExpectedException([]);
-		} catch (error:TokenizerError) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testToString () :Void {
-		var expectedException = new ExpectedException([{
-			tokenName: "bananas",
-			position: 0
-		}]);
-		assertEquals(
-			"character 0: Expected bananas",
-			expectedException.toString()
-		);
-		
-		expectedException = new ExpectedException([{
-			tokenName: "apples",
-			position: 32
-		}, {
-			tokenName: "oranges",
-			position: 42
-		}]);
-		assertEquals(
-			"character 32: Expected apples, or oranges at character 42",
-			expectedException.toString()
-		);
+    function testEmpty():Void {
+        var caught = false;
+        try {
+            var expectedException = new ExpectedException([]);
+        } catch (error:TokenizerError) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 
-		expectedException = new ExpectedException([{
-			tokenName: "oranges",
-			position: 42
-		}, {
-			tokenName: "apples",
-			position: 32
-		}]);
-		assertEquals(
-			"character 32: Expected apples, or oranges at character 42",
-			expectedException.toString()
-		);
-		
-		expectedException = new ExpectedException([{
-			tokenName: "apples",
-			position: 32
-		}, {
-			tokenName: "oranges",
-			position: 42
-		}, {
-			tokenName: "bananas",
-			position: 32
-		}]);
-		assertEquals(
-			"character 32: Expected apples, or bananas, or oranges " +
-			"at character 42"
-		, expectedException.toString());
-	}
-	
+    function testToString():Void {
+        var expectedException = new ExpectedException([{tokenName: "bananas", position: 0}]);
+        assertEquals("character 0: Expected bananas", expectedException.toString());
+
+        expectedException = new ExpectedException([
+            {tokenName: "apples", position: 32},
+            {tokenName: "oranges", position: 42}
+        ]);
+        assertEquals( "character 32: Expected apples, or oranges at character 42", expectedException.toString());
+
+        expectedException = new ExpectedException([
+            {tokenName: "oranges", position: 42},
+            {tokenName: "apples", position: 32}
+        ]);
+        assertEquals("character 32: Expected apples, or oranges at character 42", expectedException.toString());
+
+        expectedException = new ExpectedException([
+            {tokenName: "apples", position: 32},
+            {tokenName: "oranges", position: 42},
+            {tokenName: "bananas", position: 32}
+        ]);
+        assertEquals("character 32: Expected apples, or bananas, or oranges at character 42",
+                expectedException.toString());
+    }
 }

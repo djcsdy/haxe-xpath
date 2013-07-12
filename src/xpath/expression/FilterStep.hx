@@ -22,25 +22,21 @@ import xpath.EvaluationException;
 
 
 class FilterStep extends PathStep {
-	
-	var expression :Expression;
-	
-	
-	public function new (expression:Expression, ?nextStep:PathStep) {
-		super(filterStep, nextStep);
-		this.expression = expression;
-	}
-	
-	function filterStep (context:Context) :Iterable<XPathXml> {
-		var result = expression.evaluate(context);
-		if (Std.is(result, XPathNodeSet)) {
-			return (cast(result, XPathNodeSet).getNodes());
-		} else {
-			throw new EvaluationException(
-				"Filter expression evaluated to a " + result.typeName +
-				", but a node set was expected"
-			);
-		}
-	}
-	
+    var expression:Expression;
+
+
+    public function new(expression:Expression, ?nextStep:PathStep) {
+        super(filterStep, nextStep);
+        this.expression = expression;
+    }
+
+    function filterStep(context:Context):Iterable<XPathXml> {
+        var result = expression.evaluate(context);
+        if (Std.is(result, XPathNodeSet)) {
+            return (cast(result, XPathNodeSet).getNodes());
+        } else {
+            throw new EvaluationException("Filter expression evaluated to a " +
+                    result.typeName + ", but a node set was expected");
+        }
+    }
 }

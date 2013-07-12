@@ -27,42 +27,39 @@ import xpath.value.XPathValue;
  * <li>the environment, which provides a set of variable and function
  *  definitions. </ul> */
 class Context {
-	
-	/** The context node. */
-	public var node (default, null) :XPathXml;
-	
-	/** The context position. */
-	public var position (default, null) :Int;
-	
-	/** The context size. */
-	public var size (default, null) :Int;
-	
-	/** The environment. */
-	public var environment (default, null) :Environment;
-	
-	
-	/** Constructs a new Context. */
-	public function new (
-		node:XPathXml, position:Int, size:Int, environment:Environment
-	) {
-		this.node = node;
-		this.position = position;
-		this.size = size;
-		this.environment = environment;
-	}
-	
-	/** Calls a function with the specified parameters and returns the
-	 * result. */
-	public function callFunction (
-		name:String, ?parameters:Array<XPathValue>
-	) {
-		if (parameters == null) parameters = new Array<XPathValue>();
-		return environment.callFunction(this, name, parameters);
-	}
-	
-	/** Gets the value of the variable with the specified name. */
-	public function getVariable (name:String) {
-		return environment.getVariable(name);
-	}
-	
+    /** The context node. */
+    public var node (default, null):XPathXml;
+
+    /** The context position. */
+    public var position (default, null):Int;
+
+    /** The context size. */
+    public var size (default, null):Int;
+
+    /** The environment. */
+    public var environment (default, null):Environment;
+
+
+    /** Constructs a new Context. */
+    public function new(node:XPathXml, position:Int, size:Int, environment:Environment) {
+        this.node = node;
+        this.position = position;
+        this.size = size;
+        this.environment = environment;
+    }
+
+    /** Calls a function with the specified parameters and returns the
+     * result. */
+    public function callFunction(name:String, ?parameters:Array<XPathValue>) {
+        if (parameters == null) {
+            parameters = new Array<XPathValue>();
+        }
+
+        return environment.callFunction(this, name, parameters);
+    }
+
+    /** Gets the value of the variable with the specified name. */
+    public function getVariable(name:String) {
+        return environment.getVariable(name);
+    }
 }

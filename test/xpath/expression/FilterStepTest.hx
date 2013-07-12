@@ -24,48 +24,44 @@ import xpath.EvaluationException;
 
 
 class FilterStepTest extends TestCase {
-	
-	function testFilterStep () {
-		var nodeSet = [
-			cast(XPathHxXml.wrapNode(Xml.createElement("a")), XPathXml),
-			XPathHxXml.wrapNode(Xml.createElement("b"))
-		];
-		var filterStep = new FilterStep(
-			new FakeNodeSetExpression(nodeSet)
-		);
-		var result = filterStep.evaluate(new FakeContext());
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(nodeSet.length, nodes.length);
-		for (i in 0...nodes.length) {
-			assertEquals(nodeSet[i], nodes[i]);
-		}
-		
-		var caught = false;
-		try {
-			filterStep = new FilterStep(new Literal("foo"));
-			result = filterStep.evaluate(new FakeContext());
-		} catch (e:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			filterStep = new FilterStep(new Number(123));
-			result = filterStep.evaluate(new FakeContext());
-		} catch (e:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		var caught = false;
-		try {
-			var filterStep = new FilterStep(new FakeBooleanExpression(true));
-			var result = filterStep.evaluate(new FakeContext());
-		} catch (e:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testFilterStep() {
+        var nodeSet = [
+            cast(XPathHxXml.wrapNode(Xml.createElement("a")), XPathXml),
+            XPathHxXml.wrapNode(Xml.createElement("b"))
+        ];
+        var filterStep = new FilterStep(new FakeNodeSetExpression(nodeSet));
+        var result = filterStep.evaluate(new FakeContext());
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(nodeSet.length, nodes.length);
+        for (i in 0...nodes.length) {
+            assertEquals(nodeSet[i], nodes[i]);
+        }
+
+        var caught = false;
+        try {
+            filterStep = new FilterStep(new Literal("foo"));
+            result = filterStep.evaluate(new FakeContext());
+        } catch (e:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            filterStep = new FilterStep(new Number(123));
+            result = filterStep.evaluate(new FakeContext());
+        } catch (e:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        var caught = false;
+        try {
+            var filterStep = new FilterStep(new FakeBooleanExpression(true));
+            var result = filterStep.evaluate(new FakeContext());
+        } catch (e:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

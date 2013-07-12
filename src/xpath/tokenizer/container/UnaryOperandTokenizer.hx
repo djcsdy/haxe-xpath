@@ -32,47 +32,47 @@ import xpath.tokenizer.token.VariableReferenceTokenizer;
 /** [Tokenizer] which tokenizes according to the [UnaryOperand]
  * rule. */
 class UnaryOperandTokenizer implements Tokenizer {
-	
-	static var instance :UnaryOperandTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [UnaryOperandTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new UnaryOperandTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(NegationOperatorTokenizer.getInstance(), Tokenizer),
-			new Repetition([
-				cast(NegationOperatorTokenizer.getInstance(), Tokenizer)
-			]), new Disjunction([
-				cast(UnaryPathTokenizer.getInstance(), Tokenizer),
-				GroupTokenizer.getInstance(),
-				LiteralTokenizer.getInstance(),
-				NumberTokenizer.getInstance(),
-				FunctionCallTokenizer.getInstance(),
-				VariableReferenceTokenizer.getInstance()
-			])
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:UnaryOperandTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [UnaryOperandTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new UnaryOperandTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(NegationOperatorTokenizer.getInstance(), Tokenizer),
+            new Repetition([
+                cast(NegationOperatorTokenizer.getInstance(), Tokenizer)
+            ]),
+            new Disjunction([
+                cast(UnaryPathTokenizer.getInstance(), Tokenizer),
+                GroupTokenizer.getInstance(),
+                LiteralTokenizer.getInstance(),
+                NumberTokenizer.getInstance(),
+                FunctionCallTokenizer.getInstance(),
+                VariableReferenceTokenizer.getInstance()
+            ])
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

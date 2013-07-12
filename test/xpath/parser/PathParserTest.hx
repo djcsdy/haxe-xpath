@@ -25,68 +25,66 @@ import xpath.NodeCategory;
 
 
 class PathParserTest extends TestCase {
-	
-	function testRoot () {
-		var input = new ParserInput([
-			cast(new BeginPathToken(), Token),
-			new StepDelimiterToken(),
-			new EndPathToken()
-		]);
-		var output = PathParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, RootStep));
-		assertEquals(null, Reflect.field(output.result, "nextStep"));
-	}
-	
-	function testSelf () {
-		var input = new ParserInput([
-			cast(new BeginPathToken(), Token),
-			new AxisToken(Axis.Self),
-			new TypeTestToken(NodeCategory.Node),
-			new EndPathToken()
-		]);
-		var output = PathParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, TypeStep));
-		assertEquals(null, Reflect.field(output.result, "nextStep"));
-	}
-	
-	function testRootSelf () {
-		var input = new ParserInput([
-			cast(new BeginPathToken(), Token),
-			new StepDelimiterToken(),
-			new AxisToken(Axis.Self),
-			new TypeTestToken(NodeCategory.Node),
-			new EndPathToken()
-		]);
-		var output = PathParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, RootStep));
-		assertEquals(null, Reflect.field(output.result, "nextStep"));
-	}
-	
-	function testChildChild () {
-		var input = new ParserInput([
-			cast(new BeginPathToken(), Token),
-			new AxisToken(Axis.Child),
-			new TypeTestToken(NodeCategory.Node),
-			new StepDelimiterToken(),
-			new AxisToken(Axis.Child),
-			new TypeTestToken(NodeCategory.Node),
-			new EndPathToken()
-		]);
-		var output = PathParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, AxisStep));
-		assertEquals(Axis.Child, Reflect.field(output.result, "axis"));
-		assertTrue(Std.is(Reflect.field(output.result, "nextStep"), AxisStep));
-		var next = cast(Reflect.field(output.result, "nextStep"), AxisStep);
-		assertEquals(Axis.Child, Reflect.field(next, "axis"));
-		assertEquals(null, Reflect.field(next, "nextStep"));
-	}
-	
+    function testRoot() {
+        var input = new ParserInput([
+            cast(new BeginPathToken(), Token),
+            new StepDelimiterToken(),
+            new EndPathToken()
+        ]);
+        var output = PathParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, RootStep));
+        assertEquals(null, Reflect.field(output.result, "nextStep"));
+    }
+
+    function testSelf() {
+        var input = new ParserInput([
+            cast(new BeginPathToken(), Token),
+            new AxisToken(Axis.Self),
+            new TypeTestToken(NodeCategory.Node),
+            new EndPathToken()
+        ]);
+        var output = PathParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, TypeStep));
+        assertEquals(null, Reflect.field(output.result, "nextStep"));
+    }
+
+    function testRootSelf() {
+        var input = new ParserInput([
+            cast(new BeginPathToken(), Token),
+            new StepDelimiterToken(),
+            new AxisToken(Axis.Self),
+            new TypeTestToken(NodeCategory.Node),
+            new EndPathToken()
+        ]);
+        var output = PathParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, RootStep));
+        assertEquals(null, Reflect.field(output.result, "nextStep"));
+    }
+
+    function testChildChild() {
+        var input = new ParserInput([
+            cast(new BeginPathToken(), Token),
+            new AxisToken(Axis.Child),
+            new TypeTestToken(NodeCategory.Node),
+            new StepDelimiterToken(),
+            new AxisToken(Axis.Child),
+            new TypeTestToken(NodeCategory.Node),
+            new EndPathToken()
+        ]);
+        var output = PathParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, AxisStep));
+        assertEquals(Axis.Child, Reflect.field(output.result, "axis"));
+        assertTrue(Std.is(Reflect.field(output.result, "nextStep"), AxisStep));
+        var next = cast(Reflect.field(output.result, "nextStep"), AxisStep);
+        assertEquals(Axis.Child, Reflect.field(next, "axis"));
+        assertEquals(null, Reflect.field(next, "nextStep"));
+    }
 }

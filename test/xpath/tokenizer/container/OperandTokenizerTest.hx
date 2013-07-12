@@ -21,41 +21,37 @@ import xpath.tokenizer.Token;
 
 
 class OperandTokenizerTest extends ContainerTokenizerTestBase {
-	
-	public function new () {
-		super(OperandTokenizer.getInstance());
-	}
-		
-	private function testNumber () {
-		doGoodTest("123", [cast(new NumberToken(123), Token)]);
-		doGoodTest("123.456", [cast(new NumberToken(123.456), Token)]);
-		doGoodTest(".456", [cast(new NumberToken(0.456), Token)]);
-	}
-	
-	private function testLiteral () {	
-		doGoodTest("''", [ cast(new LiteralToken(""), Token)]);
-		doGoodTest("'sjgsg'", [ cast(new LiteralToken("sjgsg"), Token)]);
-		doGoodTest('""', [ cast(new LiteralToken(""), Token)]);
-		doGoodTest('"sjgsg"', [ cast(new LiteralToken("sjgsg"), Token)]);
-	}
-	
-	private function testGroup () {	
-		doGoodTest("(123+456.789)", [
-			cast(new BeginGroupToken(), Token), new BeginExpressionToken(),
-			new NumberToken(123), new OperatorToken(Plus), new NumberToken(456.789),
-			new EndExpressionToken(), new EndGroupToken()
-		]);
-	}
-	
-	private function testFunction () {	
-		doGoodTest("sgjo()", [
-			cast(new BeginFunctionCallToken("sgjo"), Token), new EndFunctionCallToken()
-		]);
-		doGoodTest("func(/a)", [
-			cast(new BeginFunctionCallToken("func"), Token), new BeginExpressionToken(),
-			new BeginPathToken(), new StepDelimiterToken(), new AxisToken(Child), new NameTestToken("a"),
-			new EndPathToken(), new EndExpressionToken(), new EndFunctionCallToken()
-		]);
-	}
-	
+    public function new() {
+        super(OperandTokenizer.getInstance());
+    }
+
+    private function testNumber() {
+        doGoodTest("123", [cast(new NumberToken(123), Token)]);
+        doGoodTest("123.456", [cast(new NumberToken(123.456), Token)]);
+        doGoodTest(".456", [cast(new NumberToken(0.456), Token)]);
+    }
+
+    private function testLiteral() {
+        doGoodTest("''", [ cast(new LiteralToken(""), Token)]);
+        doGoodTest("'sjgsg'", [ cast(new LiteralToken("sjgsg"), Token)]);
+        doGoodTest('""', [ cast(new LiteralToken(""), Token)]);
+        doGoodTest('"sjgsg"', [ cast(new LiteralToken("sjgsg"), Token)]);
+    }
+
+    private function testGroup() {
+        doGoodTest("(123+456.789)", [
+            cast(new BeginGroupToken(), Token), new BeginExpressionToken(),
+            new NumberToken(123), new OperatorToken(Plus), new NumberToken(456.789),
+            new EndExpressionToken(), new EndGroupToken()
+        ]);
+    }
+
+    private function testFunction() {
+        doGoodTest("sgjo()", [cast(new BeginFunctionCallToken("sgjo"), Token), new EndFunctionCallToken()]);
+        doGoodTest("func(/a)", [
+            cast(new BeginFunctionCallToken("func"), Token), new BeginExpressionToken(),
+            new BeginPathToken(), new StepDelimiterToken(), new AxisToken(Child), new NameTestToken("a"),
+            new EndPathToken(), new EndExpressionToken(), new EndFunctionCallToken()
+        ]);
+    }
 }

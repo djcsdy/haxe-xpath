@@ -25,56 +25,54 @@ import xpath.tokenizer.FakeNeverTokenizer;
 
 
 class SequenceTest extends TestCase {
-	
-	function testAll () {
-		var input = new TokenizerInput("     ");
-		
-		var tokenizer = new Sequence([
-			cast(new FakeAnyCharTokenizer(), Tokenizer),
-			new FakeAnyCharTokenizer()
-		]);
-		var output = tokenizer.tokenize(input);
-		assertEquals(2, output.characterLength);
-		assertEquals(2, output.result.length);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(2, output.characterLength);
-		assertEquals(2, output.result.length);
-		
-		var caught = false;
-		try {
-			output = tokenizer.tokenize(output.getNextInput());
-		} catch (exception:ExpectedException) {
-			caught = true;
-			assertEquals(5, exception.position);
-		}
-		assertTrue(caught);
-		
-		tokenizer = new Sequence([
-			cast(new FakeNeverTokenizer(),  Tokenizer),
-			new FakeAnyCharTokenizer()
-		]);
-		caught = false;
-		try {
-			output = tokenizer.tokenize(input);
-		} catch (exception:ExpectedException) {
-			caught = true;
-			assertEquals(0, exception.position);
-		}
-		assertTrue(caught);
-		
-		tokenizer = new Sequence([
-			cast(new FakeAnyCharTokenizer(), Tokenizer),
-			new FakeNeverTokenizer()
-		]);
-		caught = false;
-		try {
-			output = tokenizer.tokenize(input);
-		} catch (exception:ExpectedException) {
-			caught = true;
-			assertEquals(1, exception.position);
-		}
-		assertTrue(caught);
-	}
-	
+    function testAll() {
+        var input = new TokenizerInput("     ");
+
+        var tokenizer = new Sequence([
+            cast(new FakeAnyCharTokenizer(), Tokenizer),
+            new FakeAnyCharTokenizer()
+        ]);
+        var output = tokenizer.tokenize(input);
+        assertEquals(2, output.characterLength);
+        assertEquals(2, output.result.length);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(2, output.characterLength);
+        assertEquals(2, output.result.length);
+
+        var caught = false;
+        try {
+            output = tokenizer.tokenize(output.getNextInput());
+        } catch (exception:ExpectedException) {
+            caught = true;
+            assertEquals(5, exception.position);
+        }
+        assertTrue(caught);
+
+        tokenizer = new Sequence([
+            cast(new FakeNeverTokenizer(), Tokenizer),
+            new FakeAnyCharTokenizer()
+        ]);
+        caught = false;
+        try {
+            output = tokenizer.tokenize(input);
+        } catch (exception:ExpectedException) {
+            caught = true;
+            assertEquals(0, exception.position);
+        }
+        assertTrue(caught);
+
+        tokenizer = new Sequence([
+            cast(new FakeAnyCharTokenizer(), Tokenizer),
+            new FakeNeverTokenizer()
+        ]);
+        caught = false;
+        try {
+            output = tokenizer.tokenize(input);
+        } catch (exception:ExpectedException) {
+            caught = true;
+            assertEquals(1, exception.position);
+        }
+        assertTrue(caught);
+    }
 }

@@ -23,60 +23,54 @@ import xpath.tokenizer.ExpectedException;
 
 
 class VariableReferenceTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (name in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
-			for (whitespace in ["", " ", "    "]) {
-				for (garbage in ["", "!cxvpsf", "/c./ ,", "(jdfsjfp"]) {
-					var input = new TokenizerInput(
-						"$" + name + whitespace + garbage
-					);
-					var output = VariableReferenceTokenizer.getInstance().tokenize(input);
-					
-					assertEquals(1, output.result.length);
-					assertEquals(1 + name.length + whitespace.length, output.characterLength);
-					assertTrue(Std.is(output.result[0], VariableReferenceToken));
-					assertEquals(name, cast(output.result[0], VariableReferenceToken).name);
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (whitespace in ["", " ", "    "]) {
-			for (garbage in ["", "!cxvpsf", "/c./ ,"]) {
-				for (name in [
-					"ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"
-				]) {
-					var input = new TokenizerInput(name + whitespace + garbage);
-					
-					var caught = false;
-					try {
-						VariableReferenceTokenizer.getInstance().tokenize(input);
-					} catch (exception:ExpectedException) {
-						caught = true;
-						assertEquals(0, exception.position);
-					}
-					assertTrue(caught);
-				}
-			}
-		}
-			
-		for (garbage in [
-			" dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
-			String.fromCharCode(127) + "ghfsgk"
-		]) {
-			var input = new TokenizerInput("$" + garbage);
-			
-			var caught = false;
-			try {
-				VariableReferenceTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				caught = true;
-				assertEquals(0, exception.position);
-			}
-			assertTrue(caught);
-		}
-	}
-	
+    function testGood() {
+        for (name in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
+            for (whitespace in ["", " ", "    "]) {
+                for (garbage in ["", "!cxvpsf", "/c./ ,", "(jdfsjfp"]) {
+                    var input = new TokenizerInput("$" + name + whitespace + garbage);
+                    var output = VariableReferenceTokenizer.getInstance().tokenize(input);
+
+                    assertEquals(1, output.result.length);
+                    assertEquals(1 + name.length + whitespace.length, output.characterLength);
+                    assertTrue(Std.is(output.result[0], VariableReferenceToken));
+                    assertEquals(name, cast(output.result[0], VariableReferenceToken).name);
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (whitespace in ["", " ", "    "]) {
+            for (garbage in ["", "!cxvpsf", "/c./ ,"]) {
+                for (name in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
+                    var input = new TokenizerInput(name + whitespace + garbage);
+
+                    var caught = false;
+                    try {
+                        VariableReferenceTokenizer.getInstance().tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        caught = true;
+                        assertEquals(0, exception.position);
+                    }
+                    assertTrue(caught);
+                }
+            }
+        }
+
+        for (garbage in [
+            " dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
+            String.fromCharCode(127) + "ghfsgk"
+        ]) {
+            var input = new TokenizerInput("$" + garbage);
+
+            var caught = false;
+            try {
+                VariableReferenceTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                caught = true;
+                assertEquals(0, exception.position);
+            }
+            assertTrue(caught);
+        }
+    }
 }

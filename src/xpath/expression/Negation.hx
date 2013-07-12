@@ -21,17 +21,15 @@ import xpath.value.XPathValue;
 
 
 class Negation implements Expression {
-	
-	var operand :Expression;
-	
-	
-	public function new (operand:Expression) {
-		this.operand = operand;
-	}
-	
-	public function evaluate (context:Context) :XPathValue {
-		var operandValue = operand.evaluate(context);
-		return new XPathNumber(-operandValue.getFloat());
-	}
-	
+    var operand:Expression;
+
+
+    public function new(operand:Expression) {
+        this.operand = operand;
+    }
+
+    public function evaluate(context:Context):XPathValue {
+        var operandValue = operand.evaluate(context);
+        return new XPathNumber(-operandValue.getFloat());
+    }
 }

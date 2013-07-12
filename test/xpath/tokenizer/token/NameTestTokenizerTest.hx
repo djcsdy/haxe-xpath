@@ -23,37 +23,35 @@ import xpath.tokenizer.ExpectedException;
 
 
 class NameTestTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (name in ["*", "ajf", "afdj:djbi", "a1nfdjvp", "AJFv:*", "fsd:ADfj", "__fsj:_fdks"]) {
-			for (whitespace in ["", " ", "    "]) {
-				var input = new TokenizerInput(name + whitespace);
-				var output = NameTestTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(name.length + whitespace.length, output.characterLength);
-				assertTrue(Std.is(output.result[0], NameTestToken));
-				assertEquals(name, cast(output.result[0], NameTestToken).name);
-			}
-		}
-	}
-	
-	function testBad () {
-		for (garbage in [
-			" dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
-			String.fromCharCode(127) + "ghfsgk"
-		]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try {
-				NameTestTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				caught = true;
-				assertEquals(0, exception.position);
-			}
-			assertTrue(caught);
-		}
-	}
-	
+    function testGood() {
+        for (name in ["*", "ajf", "afdj:djbi", "a1nfdjvp", "AJFv:*", "fsd:ADfj", "__fsj:_fdks"]) {
+            for (whitespace in ["", " ", "    "]) {
+                var input = new TokenizerInput(name + whitespace);
+                var output = NameTestTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(name.length + whitespace.length, output.characterLength);
+                assertTrue(Std.is(output.result[0], NameTestToken));
+                assertEquals(name, cast(output.result[0], NameTestToken).name);
+            }
+        }
+    }
+
+    function testBad() {
+        for (garbage in [
+            " dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
+            String.fromCharCode(127) + "ghfsgk"
+        ]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                NameTestTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                caught = true;
+                assertEquals(0, exception.position);
+            }
+            assertTrue(caught);
+        }
+    }
 }

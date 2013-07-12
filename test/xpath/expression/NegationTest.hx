@@ -21,22 +21,20 @@ import xpath.value.XPathNumber;
 
 
 class NegationTest extends TestCase {
-	
-	function testAll () {
-		for (testValue in [0., 1., 123.456, -789.012, 239585., -239582.]) {
-			var number = new Number(testValue);
-			var negation = new Negation(number);
-			var result = negation.evaluate(new FakeContext());
-			assertTrue(Std.is(result, XPathNumber));
-			assertEquals(-testValue, result.getFloat());
-			
-			var literal = new Literal(Std.string(testValue));
-			negation = new Negation(literal);
-			result = negation.evaluate(new FakeContext());
-			assertTrue(Std.is(result, XPathNumber));
-			assertEquals(-testValue, result.getFloat());
-		}
-	}
-	
+    function testAll() {
+        for (testValue in [0., 1., 123.456, -789.012, 239585., -239582.]) {
+            var number = new Number(testValue);
+            var negation = new Negation(number);
+            var result = negation.evaluate(new FakeContext());
+            assertTrue(Std.is(result, XPathNumber));
+            assertEquals(-testValue, result.getFloat());
+
+            var literal = new Literal(Std.string(testValue));
+            negation = new Negation(literal);
+            result = negation.evaluate(new FakeContext());
+            assertTrue(Std.is(result, XPathNumber));
+            assertEquals(-testValue, result.getFloat());
+        }
+    }
 }
 

@@ -23,56 +23,50 @@ import xpath.tokenizer.ExpectedException;
 
 
 class FixedStringTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (pre in ["", "   "]) {
-			for (string in ["", "VvMMGD.d/g", "cvm,rglF<D", "/c.vc"]) {
-				for (whitespace in ["", " ", "    "]) {
-					for (garbage in ["dsklfg", "vsv", "cv.' sd"]) {
-						var input = new TokenizerInput(pre + string + whitespace + garbage, pre.length);
-						var output = new AnyFixedStringTokenizer(string).tokenize(input);
-						
-						assertEquals(1, output.result.length);
-						assertEquals(string.length + whitespace.length, output.characterLength);
-						assertTrue(Std.is(output.result[0], AnyFixedStringToken));
-					}
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (string in ["VvMMGD.d/g", "cvm,rglF<D", "/c.vc"]) {
-			for (whitespace in ["", " ", "    "]) {
-				for (garbage in ["", "dsklfg", "vsv", "cv.' sd"]) {
-					var input:TokenizerInput = new TokenizerInput(whitespace + garbage);
-					
-					var caught = false;
-					try {
-						new AnyFixedStringTokenizer(string).tokenize(input);
-					} catch (exception:ExpectedException) {
-						caught = true;
-						assertEquals(0, exception.position);
-					}
-					assertTrue(caught);
-				}
-			}
-		}
-	}
-	
+    function testGood() {
+        for (pre in ["", "   "]) {
+            for (string in ["", "VvMMGD.d/g", "cvm,rglF<D", "/c.vc"]) {
+                for (whitespace in ["", " ", "    "]) {
+                    for (garbage in ["dsklfg", "vsv", "cv.' sd"]) {
+                        var input = new TokenizerInput(pre + string + whitespace + garbage, pre.length);
+                        var output = new AnyFixedStringTokenizer(string).tokenize(input);
+
+                        assertEquals(1, output.result.length);
+                        assertEquals(string.length + whitespace.length, output.characterLength);
+                        assertTrue(Std.is(output.result[0], AnyFixedStringToken));
+                    }
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (string in ["VvMMGD.d/g", "cvm,rglF<D", "/c.vc"]) {
+            for (whitespace in ["", " ", "    "]) {
+                for (garbage in ["", "dsklfg", "vsv", "cv.' sd"]) {
+                    var input:TokenizerInput = new TokenizerInput(whitespace + garbage);
+
+                    var caught = false;
+                    try {
+                        new AnyFixedStringTokenizer(string).tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        caught = true;
+                        assertEquals(0, exception.position);
+                    }
+                    assertTrue(caught);
+                }
+            }
+        }
+    }
 }
 
 private class AnyFixedStringToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 private class AnyFixedStringTokenizer extends FixedStringTokenizer {
-	
-	public function new (string:String) {
-		super(new AnyFixedStringToken(), string, "AnyFixedString");
-	}
-	
+    public function new(string:String) {
+        super(new AnyFixedStringToken(), string, "AnyFixedString");
+    }
 }

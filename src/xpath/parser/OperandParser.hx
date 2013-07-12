@@ -23,51 +23,51 @@ import xpath.expression.VariableReference;
 
 
 class OperandParser implements Parser {
-	
-	static var instance :OperandParser;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new OperandParser();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	public function parse (input:ParserInput) :ParserOutput {
-		if (!input.hasNext()) return null;
-		var token = input.next();
-		
-		if (Std.is(token, NegationOperatorToken)) {
-			var output = parse(input);
-			input = output.getNextInput();
-			var result = new Negation(output.result);
-			return input.getOutput(input.count, result);
-		} else if (Std.is(token, LiteralToken)) {
-			var result = new Literal(cast(token, LiteralToken).value);
-			return input.getOutput(input.count, result);
-		} else if (Std.is(token, NumberToken)) {
-			var result = new Number(cast(token, NumberToken).value);
-			return input.getOutput(input.count, result);
-		} else if (Std.is(token, VariableReferenceToken)) {
-			var result = new VariableReference(
-				cast(token, VariableReferenceToken).name
-			);
-			return input.getOutput(input.count, result);
-		} else {
-			input.restart();
-			var output = PathParser.getInstance().parse(input.descend());
-			if (output == null) {
-				output = GroupParser.getInstance().parse(input.descend());
-			}
-			if (output == null) {
-				output = FunctionCallParser.getInstance().parse(
-					input.descend()
-				);
-			}
-			return output;
-		}
-	}
-		
+    static var instance:OperandParser;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new OperandParser();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    public function parse(input:ParserInput):ParserOutput {
+        if (!input.hasNext()) {
+            return null;
+        }
+
+        var token = input.next();
+
+        if (Std.is(token, NegationOperatorToken)) {
+            var output = parse(input);
+            input = output.getNextInput();
+            var result = new Negation(output.result);
+            return input.getOutput(input.count, result);
+        } else if (Std.is(token, LiteralToken)) {
+            var result = new Literal(cast(token, LiteralToken).value);
+            return input.getOutput(input.count, result);
+        } else if (Std.is(token, NumberToken)) {
+            var result = new Number(cast(token, NumberToken).value);
+            return input.getOutput(input.count, result);
+        } else if (Std.is(token, VariableReferenceToken)) {
+            var result = new VariableReference(cast(token, VariableReferenceToken).name);
+            return input.getOutput(input.count, result);
+        } else {
+            input.restart();
+            var output = PathParser.getInstance().parse(input.descend());
+            if (output == null) {
+                output = GroupParser.getInstance().parse(input.descend());
+            }
+            if (output == null) {
+                output = FunctionCallParser.getInstance().parse(input.descend());
+            }
+            return output;
+        }
+    }
 }

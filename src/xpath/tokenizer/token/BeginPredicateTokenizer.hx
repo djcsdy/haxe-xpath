@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [BeginPredicate]
  * rule. */
 class BeginPredicateTokenizer extends FixedStringTokenizer {
+    static var instance:BeginPredicateTokenizer;
 
-	static var instance :BeginPredicateTokenizer;
-	
-	
-	/** Gets the instance of [BeginPredicateTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new BeginPredicateTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new BeginPredicateToken(), "[", "BeginPredicate");
-	}
-	
+
+    /** Gets the instance of [BeginPredicateTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new BeginPredicateTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new BeginPredicateToken(), "[", "BeginPredicate");
+    }
 }

@@ -19,46 +19,44 @@ package xpath.tokenizer;
 
 /** Class representing the output from tokenization. */
 class TokenizerOutput {
-	
-	/** The [Array] of [Token]s resulting from tokenization. */
-	public var result (default, null) :Array<Token>;
-	
-	/** The number of characters which were tokenized. */
-	public var characterLength (default, null) :Int;
-	
-	var nextInput :TokenizerInput;
-	
-	
-	/** Do not call this constructor directly. Instead, call
-	 * [getOutput] on the [TokenizerInput] that was tokenized.
-	 *
-	 * Constructs a [TokenizerOutput] representing a [result]
-	 * consisting of the specified sequence of tokens.
-	 * [characterLength] specifies the number of characters that were
-	 * successfully tokenized, and [nextInput] provides a
-	 * [TokenizerInput] representing the input for the next stage of
-	 * tokenization. If [nextInput] is [null], tokenization is
-	 * deemed to be complete. */
-	public function new (
-		result:Array<Token>, characterLength:Int,
-		nextInput:TokenizerInput
-	) {
-		this.result = result;
-		this.characterLength = characterLength;
-		this.nextInput = nextInput;
-	}
-	
-	/** Returns true if tokenization was completed. */
-	public function isComplete () :Bool {
-		return nextInput == null;
-	}
-	
-	/** Gets the [TokenizerInput] to be passed to the next stage of
-	 * tokenization. Throws [TokenizerException] if tokenization is
-	 * already complete. */
-	public function getNextInput () {
-		if (nextInput != null) return nextInput;
-		else throw new TokenizerException("Unexpected end of query");
-	}
-	
+    /** The [Array] of [Token]s resulting from tokenization. */
+    public var result (default, null):Array<Token>;
+
+    /** The number of characters which were tokenized. */
+    public var characterLength (default, null):Int;
+
+    var nextInput:TokenizerInput;
+
+
+    /** Do not call this constructor directly. Instead, call
+     * [getOutput] on the [TokenizerInput] that was tokenized.
+     *
+     * Constructs a [TokenizerOutput] representing a [result]
+     * consisting of the specified sequence of tokens.
+     * [characterLength] specifies the number of characters that were
+     * successfully tokenized, and [nextInput] provides a
+     * [TokenizerInput] representing the input for the next stage of
+     * tokenization. If [nextInput] is [null], tokenization is
+     * deemed to be complete. */
+    public function new(result:Array<Token>, characterLength:Int, nextInput:TokenizerInput) {
+        this.result = result;
+        this.characterLength = characterLength;
+        this.nextInput = nextInput;
+    }
+
+    /** Returns true if tokenization was completed. */
+    public function isComplete():Bool {
+        return nextInput == null;
+    }
+
+    /** Gets the [TokenizerInput] to be passed to the next stage of
+     * tokenization. Throws [TokenizerException] if tokenization is
+     * already complete. */
+    public function getNextInput() {
+        if (nextInput != null) {
+            return nextInput;
+        } else {
+            throw new TokenizerException("Unexpected end of query");
+        }
+    }
 }

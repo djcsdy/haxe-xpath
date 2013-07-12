@@ -20,20 +20,19 @@ import xpath.EvaluationException;
 
 
 class VariableReference implements Expression {
-	
-	var name :String;
-	
-	
-	public function new (name:String) {
-		this.name = name;
-	}
-	
-	public function evaluate (context:Context) {
-		var result = context.getVariable(name);
-		if (result == null) throw new EvaluationException(
-			"undefined variable reference $" + name
-		);
-		else return result;
-	}
-	
+    var name:String;
+
+
+    public function new(name:String) {
+        this.name = name;
+    }
+
+    public function evaluate(context:Context) {
+        var result = context.getVariable(name);
+        if (result == null) {
+            throw new EvaluationException("undefined variable reference $" + name);
+        } else {
+            return result;
+        }
+    }
 }

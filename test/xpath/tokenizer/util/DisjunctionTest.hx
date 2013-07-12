@@ -25,90 +25,82 @@ import xpath.tokenizer.TokenizerError;
 
 
 class DisjunctionTest extends TestCase {
-	
-	function testEmpty () {
-		var caught = false;
-		try {
-			new Disjunction([]);
-		} catch (error:TokenizerError) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testAll () {
-		var input = new TokenizerInput("abaaazzz");
-		
-		var tokenizer = new Disjunction([
-			cast(new StringTokenizer("a"), Tokenizer),
-			new StringTokenizer("b"), new StringTokenizer("aa")
-		]);
-		var output = tokenizer.tokenize(input);
-		assertEquals(1, output.characterLength);
-		assertEquals(1, output.result.length);
-		assertTrue(Std.is(output.result[0], StringToken));
-		assertEquals("a", cast(output.result[0], StringToken).string);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(1, output.characterLength);
-		assertEquals(1, output.result.length);
-		assertTrue(Std.is(output.result[0], StringToken));
-		assertEquals("b", cast(output.result[0], StringToken).string);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(2, output.characterLength);
-		assertEquals(1, output.result.length);
-		assertTrue(Std.is(output.result[0], StringToken));
-		assertEquals("aa", cast(output.result[0], StringToken).string);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(1, output.characterLength);
-		assertEquals(1, output.result.length);
-		assertTrue(Std.is(output.result[0], StringToken));
-		assertEquals("a", cast(output.result[0], StringToken).string);
-		
-		var caught = false;
-		try {
-			output = tokenizer.tokenize(output.getNextInput());
-		} catch (exception:ExpectedException) {
-			assertEquals(5, exception.position);
-			caught = true;
-		}
-		assertTrue(caught);
-	}
+    function testEmpty() {
+        var caught = false;
+        try {
+            new Disjunction([]);
+        } catch (error:TokenizerError) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testAll() {
+        var input = new TokenizerInput("abaaazzz");
+
+        var tokenizer = new Disjunction([
+            cast(new StringTokenizer("a"), Tokenizer),
+            new StringTokenizer("b"), new StringTokenizer("aa")
+        ]);
+        var output = tokenizer.tokenize(input);
+        assertEquals(1, output.characterLength);
+        assertEquals(1, output.result.length);
+        assertTrue(Std.is(output.result[0], StringToken));
+        assertEquals("a", cast(output.result[0], StringToken).string);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(1, output.characterLength);
+        assertEquals(1, output.result.length);
+        assertTrue(Std.is(output.result[0], StringToken));
+        assertEquals("b", cast(output.result[0], StringToken).string);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(2, output.characterLength);
+        assertEquals(1, output.result.length);
+        assertTrue(Std.is(output.result[0], StringToken));
+        assertEquals("aa", cast(output.result[0], StringToken).string);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(1, output.characterLength);
+        assertEquals(1, output.result.length);
+        assertTrue(Std.is(output.result[0], StringToken));
+        assertEquals("a", cast(output.result[0], StringToken).string);
+
+        var caught = false;
+        try {
+            output = tokenizer.tokenize(output.getNextInput());
+        } catch (exception:ExpectedException) {
+            assertEquals(5, exception.position);
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }
 
 private class StringToken implements Token {
-	
-	public var string(default, null):String;
-	
-	
-	public function new (string:String) {
-		this.string = string;
-	}
-	
+    public var string(default, null):String;
+
+
+    public function new(string:String) {
+        this.string = string;
+    }
 }
 
 private class StringTokenizer implements Tokenizer {
-	
-	var string :String;
-	
-	
-	public function new (string:String) {
-		this.string = string;
-	}
-	
-	public function tokenize (input:TokenizerInput) {
-		if (input.query.substr(input.position, string.length) == string) {
-			var result = [ cast(new StringToken(string), Token) ];
-			var characterLength = string.length;
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "StringToken",
-				position: input.position
-			}]);
-		}
-	}
-	
+    var string:String;
+
+
+    public function new(string:String) {
+        this.string = string;
+    }
+
+    public function tokenize(input:TokenizerInput) {
+        if (input.query.substr(input.position, string.length) == string) {
+            var result = [ cast(new StringToken(string), Token) ];
+            var characterLength = string.length;
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException([{ tokenName: "StringToken", position: input.position }]);
+        }
+    }
 }

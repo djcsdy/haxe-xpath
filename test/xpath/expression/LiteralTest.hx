@@ -21,18 +21,14 @@ import xpath.value.XPathString;
 
 
 class LiteralTest extends TestCase {
-	
-	function testAll () {
-		for (testString in [
-			"", "dsagsg", "893*()*Â£()'jxN*"+'"'+"jdakfdj'"
-		]) {
-			var literal = new Literal(testString);
-			var context = new FakeContext();
-			var literalValue = literal.evaluate(context);
-			assertTrue(Std.is(literalValue, XPathString));
-			assertEquals(testString, literalValue.getString());
-		}
-	}
-	
+    function testAll() {
+        for (testString in ["", "dsagsg", "893*()*Â£()'jxN*" + '"' + "jdakfdj'"]) {
+            var literal = new Literal(testString);
+            var context = new FakeContext();
+            var literalValue = literal.evaluate(context);
+            assertTrue(Std.is(literalValue, XPathString));
+            assertEquals(testString, literalValue.getString());
+        }
+    }
 }
 

@@ -26,41 +26,40 @@ import xpath.tokenizer.token.ArgumentDelimiterTokenizer;
 /** [Tokenizer] which tokenizes according to the [FunctionArguments]
  * rule. */
 class FunctionArgumentsTokenizer implements Tokenizer {
-	
-	static var instance :FunctionArgumentsTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [FunctionArgumentsTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new FunctionArgumentsTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(ExpressionTokenizer.getInstance(), Tokenizer),
-			new Repetition([
-				cast(ArgumentDelimiterTokenizer.getInstance(), Tokenizer),
-				ExpressionTokenizer.getInstance()
-			])
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:FunctionArgumentsTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [FunctionArgumentsTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new FunctionArgumentsTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(ExpressionTokenizer.getInstance(), Tokenizer),
+            new Repetition([
+                cast(ArgumentDelimiterTokenizer.getInstance(), Tokenizer),
+                ExpressionTokenizer.getInstance()
+            ])
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

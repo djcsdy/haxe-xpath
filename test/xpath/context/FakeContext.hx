@@ -21,25 +21,21 @@ import xpath.xml.XPathHxXml;
 
 /** Fake class extending [Context] for unit testing. */
 class FakeContext extends Context {
-	
-	/** Constructs a new [FakeContext] with the same arguments as
-	 * the constructor for [Context], except that they are all
-	 * optional. Defaults are:<ul>
-	 *   <li>[node]: A [CDATA] node containing the text [abc].</li>
-	 *   <li>[position]: 0.</li>
-	 *   <li>[size]: 0.</li>
-	 *   <li>[environment]: an instance of [DynamicEnvironment] with
-	 *     no variables and no functions attached.</li>
-	 * </ul>*/
-	public function new (
-		?node:XPathXml, ?position:Int,
-		?size:Int, ?environment:Environment
-	) {
-		if (node == null) node = XPathHxXml.wrapNode(Xml.createCData("abc"));
-		if (position == null) position = 0;
-		if (size == null) size = 0;
-		if (environment == null) environment = new DynamicEnvironment();
-		super(node, position, size, environment);
-	}
 
+    /** Constructs a new [FakeContext] with the same arguments as
+     * the constructor for [Context], except that they are all
+     * optional. Defaults are:<ul>
+     *   <li>[node]: A [CDATA] node containing the text [abc].</li>
+     *   <li>[position]: 0.</li>
+     *   <li>[size]: 0.</li>
+     *   <li>[environment]: an instance of [DynamicEnvironment] with
+     *     no variables and no functions attached.</li>
+     * </ul>*/
+    public function new(?node:XPathXml, ?position:Int, ?size:Int, ?environment:Environment) {
+        if (node == null) node = XPathHxXml.wrapNode(Xml.createCData("abc"));
+        if (position == null) position = 0;
+        if (size == null) size = 0;
+        if (environment == null) environment = new DynamicEnvironment();
+        super(node, position, size, environment);
+    }
 }

@@ -20,22 +20,22 @@ package xpath;
 /** [Exception] thrown if a recoverable error occurs during XPath
  * parsing or evaluation. */
 class XPathException {
-	
-	/** Message describing the problem. */
-	public var message (default, null) :String;
-	
-	
-	/** Constructs a new [XPathException], optionally including
-	 * a [message] describing the problem. */
-	public function new (?message:String) {
-		this.message = message;
-	}
-	
-	/** Gets a string representation of the [XPathException]. */
-	public function toString () {
-		var string = "XPathException";
-		if (message != null) string += ": " + message;
-		return string;
-	}
-	
+    /** Message describing the problem. */
+    public var message (default, null):String;
+
+
+    /** Constructs a new [XPathException], optionally including
+     * a [message] describing the problem. */
+    public function new(?message:String) {
+        this.message = message;
+    }
+
+    /** Gets a string representation of the [XPathException]. */
+    public function toString() {
+        var string = "XPathException";
+        if (message != null) {
+            string += ": " + message;
+        }
+        return string;
+    }
 }

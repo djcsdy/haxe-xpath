@@ -22,65 +22,55 @@ import xpath.tokenizer.TokenizerException;
 
 
 class TokenizerInputTest extends TestCase {
-	
-	function testNew () {
-		var tokenizerInput = new TokenizerInput("bananas");
-		assertEquals(0, tokenizerInput.position);
-		assertEquals("bananas", tokenizerInput.query);
-		
-		tokenizerInput = new TokenizerInput("bananas", 4);
-		assertEquals(4, tokenizerInput.position);
-		assertEquals("bananas", tokenizerInput.query);
-	}
-	
-	function testGetOutput () {
-		var tokenizerInput = new TokenizerInput("bananas");
-		var tokenizerOutput = tokenizerInput.getOutput([], 0);
-		assertEquals(0, tokenizerOutput.characterLength);
-		assertEquals(0, tokenizerOutput.result.length);
-		tokenizerInput = tokenizerOutput.getNextInput();
-		assertEquals(0, tokenizerInput.position);
-		assertEquals("bananas", tokenizerInput.query);
-		
-		tokenizerOutput = tokenizerInput.getOutput([
-			cast(new FakeToken1(), Token)
-		], 2);
-		assertEquals(2, tokenizerOutput.characterLength);
-		assertEquals(1, tokenizerOutput.result.length);
-		assertTrue(Std.is(tokenizerOutput.result[0], FakeToken1));
-		tokenizerInput = tokenizerOutput.getNextInput();
-		assertEquals(2, tokenizerInput.position);
-		assertEquals("bananas", tokenizerInput.query);
-		
-		tokenizerOutput = tokenizerInput.getOutput([
-			cast(new FakeToken1(), Token), new FakeToken2()
-		]);
-		assertEquals(5, tokenizerOutput.characterLength);
-		assertEquals(2, tokenizerOutput.result.length);
-		assertTrue(Std.is(tokenizerOutput.result[0], FakeToken1));
-		assertTrue(Std.is(tokenizerOutput.result[1], FakeToken2));
-		
-		var caught = false;
-		try {
-			tokenizerOutput.getNextInput();
-		} catch (exception:TokenizerException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testNew() {
+        var tokenizerInput = new TokenizerInput("bananas");
+        assertEquals(0, tokenizerInput.position);
+        assertEquals("bananas", tokenizerInput.query);
+
+        tokenizerInput = new TokenizerInput("bananas", 4);
+        assertEquals(4, tokenizerInput.position);
+        assertEquals("bananas", tokenizerInput.query);
+    }
+
+    function testGetOutput() {
+        var tokenizerInput = new TokenizerInput("bananas");
+        var tokenizerOutput = tokenizerInput.getOutput([], 0);
+        assertEquals(0, tokenizerOutput.characterLength);
+        assertEquals(0, tokenizerOutput.result.length);
+        tokenizerInput = tokenizerOutput.getNextInput();
+        assertEquals(0, tokenizerInput.position);
+        assertEquals("bananas", tokenizerInput.query);
+
+        tokenizerOutput = tokenizerInput.getOutput([cast(new FakeToken1(), Token)], 2);
+        assertEquals(2, tokenizerOutput.characterLength);
+        assertEquals(1, tokenizerOutput.result.length);
+        assertTrue(Std.is(tokenizerOutput.result[0], FakeToken1));
+        tokenizerInput = tokenizerOutput.getNextInput();
+        assertEquals(2, tokenizerInput.position);
+        assertEquals("bananas", tokenizerInput.query);
+
+        tokenizerOutput = tokenizerInput.getOutput([cast(new FakeToken1(), Token), new FakeToken2()]);
+        assertEquals(5, tokenizerOutput.characterLength);
+        assertEquals(2, tokenizerOutput.result.length);
+        assertTrue(Std.is(tokenizerOutput.result[0], FakeToken1));
+        assertTrue(Std.is(tokenizerOutput.result[1], FakeToken2));
+
+        var caught = false;
+        try {
+            tokenizerOutput.getNextInput();
+        } catch (exception:TokenizerException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }
 
 private class FakeToken1 implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 private class FakeToken2 implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }

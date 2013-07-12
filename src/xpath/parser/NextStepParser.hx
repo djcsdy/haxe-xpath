@@ -21,53 +21,65 @@ import xpath.tokenizer.Token;
 
 
 class NextStepParser implements Parser {
-	
-	static var instance :NextStepParser;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new NextStepParser();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	public function parse (input:ParserInput) {
-		if (!input.hasNext()) return null;
-		var token = input.next();
-		
-		if (Std.is(token, StepDelimiterToken)) {
-			var output = StepParser.getInstance().parse(input.descend());
-			if (output == null) return input.getOutput(input.count, null);
-			else return output;
-		} else if (Std.is(token, BeginPredicateToken)) {
-			var output = ExpressionParser.getInstance().parse(input.descend());
-			if (output == null) throw new ParseError(
-				"Invalid token stream"
-			);
-			var predicateExpression = output.result;
-			input = output.getNextInput();
-			
-			if (!input.hasNext()) throw new ParseError(
-				"Invalid token stream"
-			);
-			token = input.next();
-			if (!Std.is(token, EndPredicateToken)) throw new ParseError(
-				"Invalid token stream"
-			);
-			
-			var nextStep;
-			output = parse(input.descend());
-			if (output == null) nextStep = null;
-			else {
-				nextStep = cast(output.result, PathStep);
-				input = output.getNextInput();
-			}
-			
-			var result = new PredicateStep(predicateExpression, nextStep);
-			return input.getOutput(input.count, result);
-		} else return null;
-	}
-	
+    static var instance:NextStepParser;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new NextStepParser();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    public function parse(input:ParserInput) {
+        if (!input.hasNext()) {
+            return null;
+        }
+
+        var token = input.next();
+
+        if (Std.is(token, StepDelimiterToken)) {
+            var output = StepParser.getInstance().parse(input.descend());
+            if (output == null) {
+                return input.getOutput(input.count, null);
+            } else {
+                return output;
+            }
+        } else if (Std.is(token, BeginPredicateToken)) {
+            var output = ExpressionParser.getInstance().parse(input.descend());
+            if (output == null) {
+                throw new ParseError("Invalid token stream");
+            }
+
+            var predicateExpression = output.result;
+            input = output.getNextInput();
+
+            if (!input.hasNext()) {
+                throw new ParseError("Invalid token stream");
+            }
+
+            token = input.next();
+            if (!Std.is(token, EndPredicateToken)) {
+                throw new ParseError("Invalid token stream");
+            }
+
+            var nextStep;
+            output = parse(input.descend());
+            if (output == null) {
+                nextStep = null;
+            } else {
+                nextStep = cast(output.result, PathStep);
+                input = output.getNextInput();
+            }
+
+            var result = new PredicateStep(predicateExpression, nextStep);
+            return input.getOutput(input.count, result);
+        } else {
+            return null;
+        }
+    }
 }

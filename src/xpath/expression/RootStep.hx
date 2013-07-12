@@ -19,19 +19,17 @@ import xpath.context.Context;
 
 
 class RootStep extends PathStep {
-	
-	public function new (?nextStep:PathStep) {
-		super(rootStep, nextStep);
-	}
-	
-	function rootStep (context:Context) {
-		var node = context.node;
-		var parent = node.getParent();
-		while (parent != null) {
-			node = parent;
-			parent = node.getParent();
-		}
-		return [node];
-	}
-	
+    public function new(?nextStep:PathStep) {
+        super(rootStep, nextStep);
+    }
+
+    function rootStep(context:Context) {
+        var node = context.node;
+        var parent = node.getParent();
+        while (parent != null) {
+            node = parent;
+            parent = node.getParent();
+        }
+        return [node];
+    }
 }

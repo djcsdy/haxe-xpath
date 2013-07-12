@@ -31,31 +31,25 @@ import xpath.tokenizer.ExpectedException;
  * <li>[tokenName:String]&mdash;a text name for the [token]. Used to
  *  report back to the user in the event of tokenization failure. */
 class FixedStringTokenizer extends TokenTokenizer {
-	
-	var token :Token;
-	var string :String;
-	var tokenName :String;
-	
-	
-	private function new (token:Token, string:String, tokenName:String) {
-		this.token = token;
-		this.string = string;
-		this.tokenName = tokenName;
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		if (input.query.substr(input.position, string.length) == string) {
-			var result = [ token ];
-			var characterLength = string.length;
-			characterLength += countWhitespace(
-				input.query, input.position + characterLength
-			);
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException ([
-				{ tokenName: tokenName, position: input.position }
-			]);
-		}
-	}
+    var token:Token;
+    var string:String;
+    var tokenName:String;
 
+
+    private function new(token:Token, string:String, tokenName:String) {
+        this.token = token;
+        this.string = string;
+        this.tokenName = tokenName;
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        if (input.query.substr(input.position, string.length) == string) {
+            var result = [ token ];
+            var characterLength = string.length;
+            characterLength += countWhitespace(input.query, input.position + characterLength);
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException ([{ tokenName: tokenName, position: input.position }]);
+        }
+    }
 }

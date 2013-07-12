@@ -24,88 +24,80 @@ import xpath.Operator;
 
 
 class ExpressionParserTest extends TestCase {
-	
-	function testSimpleLiteral () {
-		var input = new ParserInput([
-			cast(new BeginExpressionToken(), Token),
-			new LiteralToken("test123"),
-			new EndExpressionToken()
-		]);
-		var output = ExpressionParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, Literal));
-		assertEquals("test123", Reflect.field(output.result, "value"));
-	}
-	
-	function testSimpleNumber () {
-		var input = new ParserInput([
-			cast(new BeginExpressionToken(), Token),
-			new NumberToken(123.45),
-			new EndExpressionToken()
-		]);
-		var output = ExpressionParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, Number));
-		assertEquals(123.45, Reflect.field(output.result, "value"));
-	}
-	
-	function testSimpleOperation () {
-		var input = new ParserInput([
-			cast(new BeginExpressionToken(), Token),
-			new NumberToken(123.45),
-			new OperatorToken(Operator.Plus),
-			new NumberToken(67.8),
-			new EndExpressionToken()
-		]);
-		var output = ExpressionParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, Operation));
-		var operation = cast(output.result, Operation);
-		assertEquals(Operator.Plus, Reflect.field(operation, "operator"));
-		assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
-		var leftOperand = cast(
-			Reflect.field(operation, "leftOperand"), Number
-		);
-		assertEquals(123.45, Reflect.field(leftOperand, "value"));
-		assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Number));
-		var rightOperand = cast(
-			Reflect.field(operation, "rightOperand"), Number
-		);
-		assertEquals(67.8, Reflect.field(rightOperand, "value"));
-	}
-	
-	function testPrecedence () {
-		var input = new ParserInput([
-			cast(new BeginExpressionToken(), Token),
-			new NumberToken(1),
-			new OperatorToken(Operator.Plus),
-			new NumberToken(2),
-			new OperatorToken(Operator.Multiply),
-			new NumberToken(3),
-			new EndExpressionToken()
-		]);
-		var output = ExpressionParser.getInstance().parse(input);
-		
-		assertTrue(output.isComplete());
-		assertTrue(Std.is(output.result, Operation));
-		var operation = cast(output.result, Operation);
-		assertEquals(Operator.Plus, Reflect.field(operation, "operator"));
-		assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
-		var leftOperand = cast(
-			Reflect.field(operation, "leftOperand"), Number
-		);
-		assertEquals(1, Reflect.field(leftOperand, "value"));
-		assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Operation));
-		operation = Reflect.field(operation, "rightOperand");
-		assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
-		leftOperand = cast(Reflect.field(operation, "leftOperand"), Number);
-		assertEquals(2, Reflect.field(leftOperand, "value"));
-		assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Number));
-		var rightOperand = cast(Reflect.field(operation, "rightOperand"), Number);
-		assertEquals(3, Reflect.field(rightOperand, "value"));
-	}
-	
+    function testSimpleLiteral() {
+        var input = new ParserInput([
+            cast(new BeginExpressionToken(), Token),
+            new LiteralToken("test123"),
+            new EndExpressionToken()
+        ]);
+        var output = ExpressionParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, Literal));
+        assertEquals("test123", Reflect.field(output.result, "value"));
+    }
+
+    function testSimpleNumber() {
+        var input = new ParserInput([
+            cast(new BeginExpressionToken(), Token),
+            new NumberToken(123.45),
+            new EndExpressionToken()
+        ]);
+        var output = ExpressionParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, Number));
+        assertEquals(123.45, Reflect.field(output.result, "value"));
+    }
+
+    function testSimpleOperation() {
+        var input = new ParserInput([
+            cast(new BeginExpressionToken(), Token),
+            new NumberToken(123.45),
+            new OperatorToken(Operator.Plus),
+            new NumberToken(67.8),
+            new EndExpressionToken()
+        ]);
+        var output = ExpressionParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, Operation));
+        var operation = cast(output.result, Operation);
+        assertEquals(Operator.Plus, Reflect.field(operation, "operator"));
+        assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
+        var leftOperand = cast(Reflect.field(operation, "leftOperand"), Number);
+        assertEquals(123.45, Reflect.field(leftOperand, "value"));
+        assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Number));
+        var rightOperand = cast(Reflect.field(operation, "rightOperand"), Number);
+        assertEquals(67.8, Reflect.field(rightOperand, "value"));
+    }
+
+    function testPrecedence() {
+        var input = new ParserInput([
+            cast(new BeginExpressionToken(), Token),
+            new NumberToken(1),
+            new OperatorToken(Operator.Plus),
+            new NumberToken(2),
+            new OperatorToken(Operator.Multiply),
+            new NumberToken(3),
+            new EndExpressionToken()
+        ]);
+        var output = ExpressionParser.getInstance().parse(input);
+
+        assertTrue(output.isComplete());
+        assertTrue(Std.is(output.result, Operation));
+        var operation = cast(output.result, Operation);
+        assertEquals(Operator.Plus, Reflect.field(operation, "operator"));
+        assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
+        var leftOperand = cast(Reflect.field(operation, "leftOperand"), Number);
+        assertEquals(1, Reflect.field(leftOperand, "value"));
+        assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Operation));
+        operation = Reflect.field(operation, "rightOperand");
+        assertTrue(Std.is(Reflect.field(operation, "leftOperand"), Number));
+        leftOperand = cast(Reflect.field(operation, "leftOperand"), Number);
+        assertEquals(2, Reflect.field(leftOperand, "value"));
+        assertTrue(Std.is(Reflect.field(operation, "rightOperand"), Number));
+        var rightOperand = cast(Reflect.field(operation, "rightOperand"), Number);
+        assertEquals(3, Reflect.field(rightOperand, "value"));
+    }
 }

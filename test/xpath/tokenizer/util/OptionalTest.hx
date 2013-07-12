@@ -24,41 +24,39 @@ import xpath.tokenizer.FakeNeverTokenizer;
 
 
 class OptionalTest extends TestCase {
-	
-	function testAll () {
-		var input = new TokenizerInput("     ");
-		
-		var tokenizer = new Optional([
-			cast(new FakeAnyCharTokenizer(), Tokenizer),
-			new FakeAnyCharTokenizer()
-		]);
-		var output = tokenizer.tokenize(input);
-		assertEquals(2, output.characterLength);
-		assertEquals(2, output.result.length);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(2, output.characterLength);
-		assertEquals(2, output.result.length);
-		
-		output = tokenizer.tokenize(output.getNextInput());
-		assertEquals(0, output.characterLength);
-		assertEquals(0, output.result.length);
-		
-		tokenizer = new Optional([
-			cast(new FakeNeverTokenizer(),  Tokenizer),
-			new FakeAnyCharTokenizer()
-		]);
-		output = tokenizer.tokenize(input);
-		assertEquals(0, output.characterLength);
-		assertEquals(0, output.result.length);
-		
-		tokenizer = new Optional([
-			cast(new FakeAnyCharTokenizer(), Tokenizer),
-			new FakeNeverTokenizer()
-		]);
-		output = tokenizer.tokenize(input);
-		assertEquals(0, output.characterLength);
-		assertEquals(0, output.result.length);
-	}
-	
+    function testAll() {
+        var input = new TokenizerInput("     ");
+
+        var tokenizer = new Optional([
+            cast(new FakeAnyCharTokenizer(), Tokenizer),
+            new FakeAnyCharTokenizer()
+        ]);
+        var output = tokenizer.tokenize(input);
+        assertEquals(2, output.characterLength);
+        assertEquals(2, output.result.length);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(2, output.characterLength);
+        assertEquals(2, output.result.length);
+
+        output = tokenizer.tokenize(output.getNextInput());
+        assertEquals(0, output.characterLength);
+        assertEquals(0, output.result.length);
+
+        tokenizer = new Optional([
+            cast(new FakeNeverTokenizer(), Tokenizer),
+            new FakeAnyCharTokenizer()
+        ]);
+        output = tokenizer.tokenize(input);
+        assertEquals(0, output.characterLength);
+        assertEquals(0, output.result.length);
+
+        tokenizer = new Optional([
+            cast(new FakeAnyCharTokenizer(), Tokenizer),
+            new FakeNeverTokenizer()
+        ]);
+        output = tokenizer.tokenize(input);
+        assertEquals(0, output.characterLength);
+        assertEquals(0, output.result.length);
+    }
 }

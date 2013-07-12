@@ -21,16 +21,14 @@ import xpath.value.XPathValue;
 
 
 class FakeBooleanExpression implements Expression {
-	
-	var value :Bool;
-	
-	
-	public function new (?value:Bool) {
-		this.value = (value == true);
-	}
-	
-	public function evaluate (context:Context) :XPathValue {
-		return new XPathBoolean(value);
-	}
-	
+    var value:Bool;
+
+
+    public function new(?value:Bool) {
+        this.value = (value == true);
+    }
+
+    public function evaluate(context:Context):XPathValue {
+        return new XPathBoolean(value);
+    }
 }

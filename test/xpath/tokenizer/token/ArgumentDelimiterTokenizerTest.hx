@@ -23,33 +23,31 @@ import xpath.tokenizer.ExpectedException;
 
 
 class ArgumentDelimiterTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (whitespace in ["", " ", "     "]) {
-			for (garbage in ["", ",", ",,,dfjs", "/..fgbsogjsfogjp"]) {
-				var input = new TokenizerInput(","+whitespace+garbage);
-				var output = ArgumentDelimiterTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(whitespace.length+1, output.characterLength);
-				assertTrue(Std.is(output.result[0], ArgumentDelimiterToken));
-			}
-		}
-	}
-	
-	function testBad () {
-		for (garbage in ["", " ,", "dfgnsdpobmfl", "/.gn.;fncf"]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try {
-				var output = ArgumentDelimiterTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				assertEquals(0, exception.position);
-				caught = true;
-			}
-			assertTrue(caught);
-		}
-	}
-	
+    function testGood() {
+        for (whitespace in ["", " ", "     "]) {
+            for (garbage in ["", ",", ",,,dfjs", "/..fgbsogjsfogjp"]) {
+                var input = new TokenizerInput("," + whitespace + garbage);
+                var output = ArgumentDelimiterTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(whitespace.length + 1, output.characterLength);
+                assertTrue(Std.is(output.result[0], ArgumentDelimiterToken));
+            }
+        }
+    }
+
+    function testBad() {
+        for (garbage in ["", " ,", "dfgnsdpobmfl", "/.gn.;fncf"]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                var output = ArgumentDelimiterTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                assertEquals(0, exception.position);
+                caught = true;
+            }
+            assertTrue(caught);
+        }
+    }
 }

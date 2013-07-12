@@ -22,18 +22,16 @@ import xpath.tokenizer.Token;
 
 
 class BeginExpressionTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
-			for (whitespace in ["", " ", "    "]) {
-				var input = new TokenizerInput(whitespace + garbage);
-				var output = BeginExpressionTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(whitespace.length, output.characterLength);
-				assertTrue(Std.is(output.result[0], BeginExpressionToken));
-			}
-		}
-	}
-	
+    function testGood() {
+        for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
+            for (whitespace in ["", " ", "    "]) {
+                var input = new TokenizerInput(whitespace + garbage);
+                var output = BeginExpressionTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(whitespace.length, output.characterLength);
+                assertTrue(Std.is(output.result[0], BeginExpressionToken));
+            }
+        }
+    }
 }

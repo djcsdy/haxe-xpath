@@ -23,48 +23,45 @@ import xpath.tokenizer.ExpectedException;
 
 /** [Tokenizer] which tokenizes according to the [Literal] rule. */
 class LiteralTokenizer extends TokenTokenizer {
-	
-	static var instance :LiteralTokenizer;
-	
-	
-	/** Gets the instance of [LiteralTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new LiteralTokenizer();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var pos = input.position;
-		
-		var quote = input.query.charAt(pos);
-		if (quote != "'" && quote != '"') throw new ExpectedException(
-			[ { tokenName: "Literal", position: input.position } ]
-		);
-		
-		var valueStartPos = pos+1;
-		var char;
-		do {
-			char = input.query.charAt(++pos);
-		} while (char != quote && pos < input.query.length-1);
-		
-		if (char == quote) {
-			var value = input.query.substr(
-				valueStartPos, pos - valueStartPos
-			);
-			++pos;
-			pos += countWhitespace(input.query, pos);
+    static var instance:LiteralTokenizer;
 
-			var result = [ cast(new LiteralToken(value), Token) ];
-			var characterLength = pos - input.position;
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "Literal", position: input.position
-			}]);
-		}
-	}
-	
+
+    /** Gets the instance of [LiteralTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new LiteralTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var pos = input.position;
+
+        var quote = input.query.charAt(pos);
+        if (quote != "'" && quote != '"') {
+            throw new ExpectedException([{ tokenName: "Literal", position: input.position }]);
+        }
+
+        var valueStartPos = pos + 1;
+        var char;
+        do {
+            char = input.query.charAt(++pos);
+        } while (char != quote && pos < input.query.length - 1);
+
+        if (char == quote) {
+            var value = input.query.substr(valueStartPos, pos - valueStartPos);
+            ++pos;
+            pos += countWhitespace(input.query, pos);
+
+            var result = [ cast(new LiteralToken(value), Token) ];
+            var characterLength = pos - input.position;
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException([{ tokenName: "Literal", position: input.position }]);
+        }
+    }
 }

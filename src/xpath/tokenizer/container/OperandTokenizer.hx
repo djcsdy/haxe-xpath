@@ -29,43 +29,42 @@ import xpath.tokenizer.token.VariableReferenceTokenizer;
 
 /** [Tokenizer] which tokenizes according to the [Operand] rule. */
 class OperandTokenizer implements Tokenizer {
-	
-	static var instance :OperandTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [OperandTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new OperandTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Disjunction([
-			cast(GroupTokenizer.getInstance(), Tokenizer),
-			LiteralTokenizer.getInstance(),
-			NumberTokenizer.getInstance(),
-			FunctionCallTokenizer.getInstance(),
-			VariableReferenceTokenizer.getInstance(),
-			UnaryOperandTokenizer.getInstance(),
-			PathTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:OperandTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [OperandTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new OperandTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Disjunction([
+            cast(GroupTokenizer.getInstance(), Tokenizer),
+            LiteralTokenizer.getInstance(),
+            NumberTokenizer.getInstance(),
+            FunctionCallTokenizer.getInstance(),
+            VariableReferenceTokenizer.getInstance(),
+            UnaryOperandTokenizer.getInstance(),
+            PathTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

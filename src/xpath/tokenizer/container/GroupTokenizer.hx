@@ -25,39 +25,38 @@ import xpath.tokenizer.token.EndGroupTokenizer;
 
 /** [Tokenizer] which tokenizes according to the [Group] rule. */
 class GroupTokenizer implements Tokenizer {
-	
-	static var instance :GroupTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [GroupTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new GroupTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(BeginGroupTokenizer.getInstance(), Tokenizer),
-			ExpressionTokenizer.getInstance(),
-			EndGroupTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
+    static var instance:GroupTokenizer;
 
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [GroupTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new GroupTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(BeginGroupTokenizer.getInstance(), Tokenizer),
+            ExpressionTokenizer.getInstance(),
+            EndGroupTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

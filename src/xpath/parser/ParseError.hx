@@ -22,19 +22,18 @@ import xpath.XPathError;
  * invalid queries should already have been rejected at the
  * tokenization stage. */
 class ParseError extends XPathError {
-	
-	/** Constructs a new [ParseError], optionally including
-	 * a [message] describing the problem. */
-	public function new (?message:String) {
-		super(message);
-	}
-	
-	/** Gets a string representation of the [ParseError]. */
-	override public function toString () {
-		var string;
-		if (message != null) string = message;
-		else string = "ParseError";
-		return string;
-	}		
-	
+    /** Constructs a new [ParseError], optionally including
+     * a [message] describing the problem. */
+    public function new(?message:String) {
+        super(message);
+    }
+
+    /** Gets a string representation of the [ParseError]. */
+    override public function toString() {
+        if (message != null) {
+            return message;
+        } else {
+            return "ParseError";
+        }
+    }
 }

@@ -25,48 +25,46 @@ import xpath.NodeCategory;
 
 
 class AbbreviatedStepTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (whitespace in ["", " ", "      "]) {
-			for (xpathStr in [".", ".."]) {
-				for (garbage in ["", ",b,ndsjg", "#dsgjg"]) {
-					var extraGarbages;
-					if (xpathStr == "..") extraGarbages = ["", "."];
-					else extraGarbages = [""];
-					
-					for (extraGarbage in extraGarbages) {
-						var input = new TokenizerInput(xpathStr + whitespace + extraGarbage + garbage);
-						var output = AbbreviatedStepTokenizer.getInstance().tokenize(input);
-						
- 						assertEquals(2, output.result.length);
-						assertEquals(xpathStr.length + whitespace.length, output.characterLength);
-						assertTrue(Std.is(output.result[0], AxisToken));
-						if (xpathStr == ".") {
-							assertEquals(Self, cast(output.result[0], AxisToken).axis);
-						} else {
-							assertEquals(Parent, cast(output.result[0], AxisToken).axis);
-						}
-						assertTrue(Std.is(output.result[1], TypeTestToken));
-						assertEquals(Node, cast(output.result[1], TypeTestToken).type);
-					}
-				}
-			}			
-		}
-	}
-	
-	function testBad () {
-		for (garbage in ["", ",vxcgsfp", "/#vxcbkprsjg"]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try { 
-				var output = AbbreviatedStepTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				assertEquals(0, exception.position);
-				caught = true;
-			}
-			assertTrue(caught);
-		}
-	}
-	
+    function testGood() {
+        for (whitespace in ["", " ", "      "]) {
+            for (xpathStr in [".", ".."]) {
+                for (garbage in ["", ",b,ndsjg", "#dsgjg"]) {
+                    var extraGarbages;
+                    if (xpathStr == "..") extraGarbages = ["", "."];
+                    else extraGarbages = [""];
+
+                    for (extraGarbage in extraGarbages) {
+                        var input = new TokenizerInput(xpathStr + whitespace + extraGarbage + garbage);
+                        var output = AbbreviatedStepTokenizer.getInstance().tokenize(input);
+
+                        assertEquals(2, output.result.length);
+                        assertEquals(xpathStr.length + whitespace.length, output.characterLength);
+                        assertTrue(Std.is(output.result[0], AxisToken));
+                        if (xpathStr == ".") {
+                            assertEquals(Self, cast(output.result[0], AxisToken).axis);
+                        } else {
+                            assertEquals(Parent, cast(output.result[0], AxisToken).axis);
+                        }
+                        assertTrue(Std.is(output.result[1], TypeTestToken));
+                        assertEquals(Node, cast(output.result[1], TypeTestToken).type);
+                    }
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (garbage in ["", ",vxcgsfp", "/#vxcbkprsjg"]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                var output = AbbreviatedStepTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                assertEquals(0, exception.position);
+                caught = true;
+            }
+            assertTrue(caught);
+        }
+    }
 }

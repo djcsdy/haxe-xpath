@@ -24,74 +24,67 @@ import xpath.NodeCategory;
 
 /** [Tokenizer] which tokenizes according to the [NodeCategory] rule. */
 class TypeTestTokenizer extends TokenTokenizer {
-	
-	static var instance :TypeTestTokenizer;
-	
-	var typeNames :Array<String>;
-	var typeTestNameToTypeTest :Map<String, NodeCategory>;
-	
-	
-	/** Gets the instance of [TypeTestTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new TypeTestTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		typeTestNameToTypeTest = new Map<String, NodeCategory>();
-		typeTestNameToTypeTest.set("comment", Comment);
-		typeTestNameToTypeTest.set("text", Text);
-		typeTestNameToTypeTest.set("node", Node);
-		
-		typeNames = new Array<String>();
-		for (typeName in typeTestNameToTypeTest.keys()) {
-			typeNames.push(typeName);
-		}
-		
-		// sort type names by length, longest first
-		typeNames.sort(function (x:String, y:String) {
-			return y.length - x.length;
-		});
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var pos = input.position;
-		
-		for (typeName in typeNames) {
-			if (input.query.substr(pos, typeName.length) == typeName) {
-				pos += typeName.length;
-				pos += countWhitespace(input.query, pos);
-				
-				if (input.query.charAt(pos) != "(") {
-					throw new ExpectedException([{
-						tokenName: "NodeCategory",
-						position: input.position
-					}]);
-				}
-				++pos;
-				pos += countWhitespace(input.query, pos);
-				
-				if (input.query.charAt(pos) != ")") {
-					throw new ExpectedException([{
-						tokenName: "NodeCategory",
-						position: input.position
-					}]);
-				}
-				++pos;
-				pos += countWhitespace(input.query, pos);
-				
-				var type:NodeCategory = typeTestNameToTypeTest.get(
-					typeName
-				);
-				var result = [ cast(new TypeTestToken(type), Token) ];
-				var characterLength = pos - input.position;
-				return input.getOutput(result, characterLength);
-			}
-		}
-		
-		throw new ExpectedException([
-			{ tokenName: "NodeCategory", position: input.position }
-		]);
-	}
-	
+    static var instance:TypeTestTokenizer;
+
+    var typeNames:Array<String>;
+    var typeTestNameToTypeTest:Map<String, NodeCategory>;
+
+
+    /** Gets the instance of [TypeTestTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new TypeTestTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        typeTestNameToTypeTest = new Map<String, NodeCategory>();
+        typeTestNameToTypeTest.set("comment", Comment);
+        typeTestNameToTypeTest.set("text", Text);
+        typeTestNameToTypeTest.set("node", Node);
+
+        typeNames = new Array<String>();
+        for (typeName in typeTestNameToTypeTest.keys()) {
+            typeNames.push(typeName);
+        }
+
+        // sort type names by length, longest first
+        typeNames.sort(function(x:String, y:String) {
+            return y.length - x.length;
+        });
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var pos = input.position;
+
+        for (typeName in typeNames) {
+            if (input.query.substr(pos, typeName.length) == typeName) {
+                pos += typeName.length;
+                pos += countWhitespace(input.query, pos);
+
+                if (input.query.charAt(pos) != "(") {
+                    throw new ExpectedException([{ tokenName: "NodeCategory", position: input.position }]);
+                }
+
+                ++pos;
+                pos += countWhitespace(input.query, pos);
+
+                if (input.query.charAt(pos) != ")") {
+                    throw new ExpectedException([{ tokenName: "NodeCategory", position: input.position }]);
+                }
+
+                ++pos;
+                pos += countWhitespace(input.query, pos);
+
+                var type:NodeCategory = typeTestNameToTypeTest.get(typeName);
+                var result = [ cast(new TypeTestToken(type), Token) ];
+                var characterLength = pos - input.position;
+                return input.getOutput(result, characterLength);
+            }
+        }
+
+        throw new ExpectedException([ { tokenName: "NodeCategory", position: input.position } ]);
+    }
 }

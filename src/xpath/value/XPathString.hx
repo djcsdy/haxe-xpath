@@ -19,79 +19,80 @@ package xpath.value;
 
 /** Class implementing the string data type used by XPath queries. */
 class XPathString extends XPathNumber {
-	
-	var stringValue :String;
-	
-	
-	/** Constructs a new [XPathString] with the specified [value],
-	 * which defaults to the empty string. */
-	public function new (?value:String) {
-		super();
-		typeName = "string";
-		if (value == null) stringValue = "";
-		else stringValue = value;
-	}
-	
-	/** Gets the boolean value of this [XPathString] as per the
-	 * [boolean()] function defined by the XPath specification. The
-	 * result is true if and only if the length of the [XPathString]
-	 * is non-zero. */
-	override public function getBool () {
-		return stringValue.length != 0;
-	}
-	
-	/** Gets the numeric value of this [XPathString] as per the
-	 * [number()] function defined by the XPath specification. If the
-	 * value consists of optional whitespace, followed by an optional
-	 * minus sign, followed by a [Number] as defined in the XPath
-	 * grammar, followed by optional whitespace, then the value is
-	 * converted to the IEEE 754 number that is nearest (according to
-	 * the IEEE 754 round-to-nearest rule) to the mathematical value
-	 * represented by the value. Otherwise, the value is converted to
-	 * [NaN]. */
-	override public function getFloat () :Float {
-		return stringToFloat(stringValue);
-	}
-	
-	/** Gets the string value of this object. */
-	override public function getString () {
-		return stringValue;
-	}
-	
-	/** Performs the equality operation as defined by the XPath
-	 * specification. */
-	override public function equals (rightOperand:XPathValue) {
-		if (Std.is(rightOperand, XPathNodeSet)) {
-			var nodes = cast(rightOperand, XPathNodeSet).getNodes();
-			for (node in nodes) {
-				if (getString() == node.getStringValue()) {
-					return new XPathBoolean(true);
-				}
-			}
-			return new XPathBoolean(false);
-		} else if (Std.is(rightOperand, XPathNumber)) {
-			return new XPathBoolean(getString() == rightOperand.getString());
-		} else {
-			return super.equals(rightOperand);
-		}
-	}
-	
-	/** Performs the inequality operation as defined by the XPath
-	 * specification. */
-	override public function notEqual (rightOperand:XPathValue) {
-		if (Std.is(rightOperand, XPathNodeSet)) {
-			var nodes = cast(rightOperand, XPathNodeSet).getNodes();
-			for (node in nodes) {
-				if (getString() != node.getStringValue()) {
-					return new XPathBoolean(true);
-				}
-			}
-			return new XPathBoolean(false);
-		} else if (Std.is(rightOperand, XPathString)) {
-			return new XPathBoolean(getString() != rightOperand.getString());
-		} else {
-			return super.notEqual(rightOperand);
-		}
-	}
-	
+    var stringValue:String;
+
+
+    /** Constructs a new [XPathString] with the specified [value],
+     * which defaults to the empty string. */
+    public function new(?value:String) {
+        super();
+        typeName = "string";
+        if (value == null) {
+            stringValue = "";
+        } else {
+            stringValue = value;
+        }
+    }
+
+    /** Gets the boolean value of this [XPathString] as per the
+     * [boolean()] function defined by the XPath specification. The
+     * result is true if and only if the length of the [XPathString]
+     * is non-zero. */
+    override public function getBool() {
+        return stringValue.length != 0;
+    }
+
+    /** Gets the numeric value of this [XPathString] as per the
+     * [number()] function defined by the XPath specification. If the
+     * value consists of optional whitespace, followed by an optional
+     * minus sign, followed by a [Number] as defined in the XPath
+     * grammar, followed by optional whitespace, then the value is
+     * converted to the IEEE 754 number that is nearest (according to
+     * the IEEE 754 round-to-nearest rule) to the mathematical value
+     * represented by the value. Otherwise, the value is converted to
+     * [NaN]. */
+    override public function getFloat():Float {
+        return stringToFloat(stringValue);
+    }
+
+    /** Gets the string value of this object. */
+    override public function getString() {
+        return stringValue;
+    }
+
+    /** Performs the equality operation as defined by the XPath
+     * specification. */
+    override public function equals(rightOperand:XPathValue) {
+        if (Std.is(rightOperand, XPathNodeSet)) {
+            var nodes = cast(rightOperand, XPathNodeSet).getNodes();
+            for (node in nodes) {
+                if (getString() == node.getStringValue()) {
+                    return new XPathBoolean(true);
+                }
+            }
+            return new XPathBoolean(false);
+        } else if (Std.is(rightOperand, XPathNumber)) {
+            return new XPathBoolean(getString() == rightOperand.getString());
+        } else {
+            return super.equals(rightOperand);
+        }
+    }
+
+    /** Performs the inequality operation as defined by the XPath
+     * specification. */
+    override public function notEqual(rightOperand:XPathValue) {
+        if (Std.is(rightOperand, XPathNodeSet)) {
+            var nodes = cast(rightOperand, XPathNodeSet).getNodes();
+            for (node in nodes) {
+                if (getString() != node.getStringValue()) {
+                    return new XPathBoolean(true);
+                }
+            }
+            return new XPathBoolean(false);
+        } else if (Std.is(rightOperand, XPathString)) {
+            return new XPathBoolean(getString() != rightOperand.getString());
+        } else {
+            return super.notEqual(rightOperand);
+        }
+    }
 }

@@ -28,41 +28,40 @@ import xpath.tokenizer.token.VariableReferenceTokenizer;
 /** [Tokenizer] which tokenizes according to the [FilterOperand]
  * rule. */
 class FilterOperandTokenizer implements Tokenizer {
-	
-	static var instance :FilterOperandTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [FilterOperandTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new FilterOperandTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Disjunction([
-			cast(GroupTokenizer.getInstance(), Tokenizer),
-			LiteralTokenizer.getInstance(),
-			NumberTokenizer.getInstance(),
-			FunctionCallTokenizer.getInstance(),
-			VariableReferenceTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:FilterOperandTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [FilterOperandTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new FilterOperandTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Disjunction([
+            cast(GroupTokenizer.getInstance(), Tokenizer),
+            LiteralTokenizer.getInstance(),
+            NumberTokenizer.getInstance(),
+            FunctionCallTokenizer.getInstance(),
+            VariableReferenceTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

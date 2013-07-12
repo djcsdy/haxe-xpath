@@ -27,58 +27,56 @@ import xpath.EvaluationException;
 
 
 class ContextTest extends TestCase {
-	
-	function testAll () {
-		var xml:XPathXml = XPathHxXml.wrapNode(Xml.createCData("foo"));
-		var environment = new DynamicEnvironment();
-		var context = new Context(xml, 42, 99, environment);
-		assertEquals(xml, context.node);
-		assertEquals(42, context.position);
-		assertEquals(99, context.size);
-		assertEquals(cast(environment, Environment), context.environment);
-		
-		var called = false;
-		var calledParameters = null;
-		environment.setFunction(
-			"bar",
-			function (context:Context, parameters:Array<XPathValue>) {
-				called = true;
-				calledParameters = parameters;
-				return new XPathNumber(5);
-			}
-		);
-		var result = context.callFunction("bar");
-		assertTrue(called);
-		assertEquals(0, calledParameters.length);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(5., result.getFloat());
-		
-		var caught = false;
-		called = false;
-		calledParameters = null;
-		environment.removeFunction("bar");
-		try {
-			context.callFunction("bar");
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		assertFalse(called);
-		assertEquals(null, calledParameters);
-		
-		environment.setVariable("bat", new XPathNumber(3.14159));
-		result = context.getVariable("bat");
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(3.14159, result.getFloat());
-	
-		caught = false;
-		environment.removeVariable("bat");
-		try {
-			context.getVariable("bat");
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testAll() {
+        var xml:XPathXml = XPathHxXml.wrapNode(Xml.createCData("foo"));
+        var environment = new DynamicEnvironment();
+        var context = new Context(xml, 42, 99, environment);
+        assertEquals(xml, context.node);
+        assertEquals(42, context.position);
+        assertEquals(99, context.size);
+        assertEquals(cast(environment, Environment), context.environment);
+
+        var called = false;
+        var calledParameters = null;
+        environment.setFunction(
+            "bar",
+            function(context:Context, parameters:Array<XPathValue>) {
+                called = true;
+                calledParameters = parameters;
+                return new XPathNumber(5);
+            }
+        );
+        var result = context.callFunction("bar");
+        assertTrue(called);
+        assertEquals(0, calledParameters.length);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(5., result.getFloat());
+
+        var caught = false;
+        called = false;
+        calledParameters = null;
+        environment.removeFunction("bar");
+        try {
+            context.callFunction("bar");
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+        assertFalse(called);
+        assertEquals(null, calledParameters);
+
+        environment.setVariable("bat", new XPathNumber(3.14159));
+        result = context.getVariable("bat");
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(3.14159, result.getFloat());
+
+        caught = false;
+        environment.removeVariable("bat");
+        try {
+            context.getVariable("bat");
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

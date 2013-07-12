@@ -25,38 +25,36 @@ import xpath.EvaluationException;
 
 
 class VariableReferenceTest extends TestCase {
-	
-	function testVariables () {
-		var environment = new DynamicEnvironment();
-		environment.setVariable("a", new XPathString("foo"));
-		environment.setVariable("b", new XPathNumber(123));
-		environment.setVariable("c", new XPathBoolean(true));
-		var context = new FakeContext(environment);
-		
-		var variableReference = new VariableReference("a");
-		var result = variableReference.evaluate(context);
-		assertTrue(Std.is(result, XPathString));
-		assertEquals("foo", result.getString());
-		
-		variableReference = new VariableReference("b");
-		result = variableReference.evaluate(context);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(123.0, result.getFloat());
-		
-		variableReference = new VariableReference("c");
-		result = variableReference.evaluate(context);
-		assertTrue(Std.is(result, XPathBoolean));
-		assertTrue(result.getBool());
-		
-		variableReference = new VariableReference("d");
-		var caught = false;
-		try {
-			result = variableReference.evaluate(context);
-		} catch (e:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testVariables() {
+        var environment = new DynamicEnvironment();
+        environment.setVariable("a", new XPathString("foo"));
+        environment.setVariable("b", new XPathNumber(123));
+        environment.setVariable("c", new XPathBoolean(true));
+        var context = new FakeContext(environment);
+
+        var variableReference = new VariableReference("a");
+        var result = variableReference.evaluate(context);
+        assertTrue(Std.is(result, XPathString));
+        assertEquals("foo", result.getString());
+
+        variableReference = new VariableReference("b");
+        result = variableReference.evaluate(context);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(123.0, result.getFloat());
+
+        variableReference = new VariableReference("c");
+        result = variableReference.evaluate(context);
+        assertTrue(Std.is(result, XPathBoolean));
+        assertTrue(result.getBool());
+
+        variableReference = new VariableReference("d");
+        var caught = false;
+        try {
+            result = variableReference.evaluate(context);
+        } catch (e:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }
 

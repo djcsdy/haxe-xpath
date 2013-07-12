@@ -19,7 +19,7 @@ package xpath;
 
 /** Enumeration of the various node type tests supported by XPath. */
 enum NodeCategory {
-	Comment;
-	Text;
-	Node;
+    Comment;
+    Text;
+    Node;
 }

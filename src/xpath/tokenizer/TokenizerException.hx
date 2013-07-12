@@ -20,28 +20,29 @@ import xpath.XPathException;
 /** Exception thrown if a given query or query fragment cannot be
  * tokenized */
 class TokenizerException extends XPathException {
-	
-	/** Character position at which tokenization failed. */
-	public var position (default, null) :Null<Int>;
-	
-	
-	/** Constructs a new [TokenizerException], optionally including
-	 * the character [position] at which tokenization failed and/or
-	 * a [message] describing the problem. */
-	public function new (?position:Null<Int>, ?message:String) {
-		super(message);
-		this.position = position;
-	}
-	
-	/** Gets a string representation of the [TokenizerException]. */
-	override public function toString () {
-		var string = "";
-		if (position != null) {
-			string = "character " + Std.string(position) + ": ";
-		}
-		if (message != null && message != "") string += message;
-		else string += "TokenizerException";
-		return string;
-	}		
-	
+    /** Character position at which tokenization failed. */
+    public var position (default, null):Null<Int>;
+
+
+    /** Constructs a new [TokenizerException], optionally including
+     * the character [position] at which tokenization failed and/or
+     * a [message] describing the problem. */
+    public function new(?position:Null<Int>, ?message:String) {
+        super(message);
+        this.position = position;
+    }
+
+    /** Gets a string representation of the [TokenizerException]. */
+    override public function toString() {
+        var string = "";
+        if (position != null) {
+            string = "character " + Std.string(position) + ": ";
+        }
+        if (message != null && message != "") {
+            string += message;
+        } else {
+            string += "TokenizerException";
+        }
+        return string;
+    }
 }

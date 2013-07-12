@@ -20,30 +20,27 @@ import xpath.tokenizer.token.TokenTokenizer;
 
 
 class TokenTokenizerTest extends TestCase {
-	
-	function testCountWhitespace () {
-		var tokenTokenizer = new TokenTokenizerTester();
-		
-		for (garbage1 in ["", "gushgishrghpi", "jsfog  hsr9h49u3", " ,vmxb"]) {
-			for (whitespace in ["", " ", "          "]) {
-				for (garbage2 in ["", "gushgishrghpi", "jsfog  hsr9h49u3", ",vmxb "]) {
-					var testString = garbage1 + whitespace + garbage2;
-					var length = tokenTokenizer.testCountWhitespace(testString, garbage1.length);
-					assertEquals(whitespace.length, length);
-				}
-			}
-		}
-	}
-	
+    function testCountWhitespace() {
+        var tokenTokenizer = new TokenTokenizerTester();
+
+        for (garbage1 in ["", "gushgishrghpi", "jsfog  hsr9h49u3", " ,vmxb"]) {
+            for (whitespace in ["", " ", "          "]) {
+                for (garbage2 in ["", "gushgishrghpi", "jsfog  hsr9h49u3", ",vmxb "]) {
+                    var testString = garbage1 + whitespace + garbage2;
+                    var length = tokenTokenizer.testCountWhitespace(testString, garbage1.length);
+                    assertEquals(whitespace.length, length);
+                }
+            }
+        }
+    }
+
 }
 
 private class TokenTokenizerTester extends TokenTokenizer {
-	
-	public function new () {
-	}
-	
-	public function testCountWhitespace (query:String, pos:Int) {
-		return countWhitespace(query, pos);
-	}
-	
+    public function new() {
+    }
+
+    public function testCountWhitespace(query:String, pos:Int) {
+        return countWhitespace(query, pos);
+    }
 }

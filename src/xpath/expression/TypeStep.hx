@@ -21,40 +21,35 @@ import xpath.NodeCategory;
 
 
 class TypeStep extends PathStep {
-	
-	var type :NodeCategory;
-	
-	
-	public function new (type:NodeCategory, ?nextStep:PathStep) {
-		super(typeStep, nextStep);
-		this.type = type;
-	}
-	
-	function typeStep (context:Context) {
-		var node = context.node;
-		var nodeType = context.node.getType();
-		
-		switch (type) {
-			case NodeCategory.Node:
-			if (
-				nodeType == XmlNodeType.Element ||
-				nodeType == XmlNodeType.Attribute
-			) {
-				return [node];
-			}
-			
-			case NodeCategory.Text:
-			if (nodeType == XmlNodeType.Text) {
-				return [node];
-			}
-			
-			case NodeCategory.Comment:
-			if (nodeType == XmlNodeType.Comment) {
-				return [node];
-			}
-		}
-		
-		return [];
-	}
-	
+    var type:NodeCategory;
+
+
+    public function new(type:NodeCategory, ?nextStep:PathStep) {
+        super(typeStep, nextStep);
+        this.type = type;
+    }
+
+    function typeStep(context:Context) {
+        var node = context.node;
+        var nodeType = context.node.getType();
+
+        switch (type) {
+            case NodeCategory.Node:
+                if (nodeType == XmlNodeType.Element || nodeType == XmlNodeType.Attribute) {
+                    return [node];
+                }
+
+            case NodeCategory.Text:
+                if (nodeType == XmlNodeType.Text) {
+                    return [node];
+                }
+
+            case NodeCategory.Comment:
+                if (nodeType == XmlNodeType.Comment) {
+                    return [node];
+                }
+        }
+
+        return [];
+    }
 }

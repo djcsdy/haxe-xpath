@@ -19,43 +19,42 @@ package xpath.tokenizer;
 
 /** Class representing some input for tokenization. */
 class TokenizerInput {
-	
-	/** The XPath query string. */
-	public var query (default, null) :String;
-	
-	/** The tokenization position within the XPath query string. */
-	public var position (default, null) :Int;
-	
-	
-	/** Constructs a new [TokenizerInput] representing the specified
-	 * [query] at the specified [position]. If [position] is
-	 * ommitted, it defaults to [0] (the beginning of the query
-	 * string). */
-	public function new (query:String, ?position:Int) {
-		if (position == null) position = 0;
-		this.query = query;
-		this.position = position;
-	}
-	
-	/** Gets a [TokenizerOutput] representing the [result] of
-	 * tokenization on this [TokenizerInput].
-	 *
-	 * [characterLength] specifies the number of characters that
-	 * were successfully tokenized. If it is specified, the
-	 * [TokenizerOutput] will contain a [TokenizerInput] to be
-	 * passed onto the next stage of tokenization. If it is
-	 * ommitted, tokenization is deemed to be completed. */
-	public function getOutput (result:Array<Token>, ?characterLength:Int) {
-		var nextInput = null;
-		if (characterLength == null) {
-			characterLength = query.length - position;
-		} else {
-			nextInput = new TokenizerInput(
-				query, position + characterLength
-			);
-		}
-		
-		return new TokenizerOutput(result, characterLength, nextInput);
-	}
-	
+    /** The XPath query string. */
+    public var query (default, null):String;
+
+    /** The tokenization position within the XPath query string. */
+    public var position (default, null):Int;
+
+
+    /** Constructs a new [TokenizerInput] representing the specified
+     * [query] at the specified [position]. If [position] is
+     * ommitted, it defaults to [0] (the beginning of the query
+     * string). */
+    public function new(query:String, ?position:Int) {
+        if (position == null) {
+            position = 0;
+        }
+
+        this.query = query;
+        this.position = position;
+    }
+
+    /** Gets a [TokenizerOutput] representing the [result] of
+     * tokenization on this [TokenizerInput].
+     *
+     * [characterLength] specifies the number of characters that
+     * were successfully tokenized. If it is specified, the
+     * [TokenizerOutput] will contain a [TokenizerInput] to be
+     * passed onto the next stage of tokenization. If it is
+     * ommitted, tokenization is deemed to be completed. */
+    public function getOutput(result:Array<Token>, ?characterLength:Int) {
+        var nextInput = null;
+        if (characterLength == null) {
+            characterLength = query.length - position;
+        } else {
+            nextInput = new TokenizerInput(query, position + characterLength);
+        }
+
+        return new TokenizerOutput(result, characterLength, nextInput);
+    }
 }

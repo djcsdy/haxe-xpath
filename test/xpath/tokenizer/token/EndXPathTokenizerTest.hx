@@ -23,31 +23,29 @@ import xpath.tokenizer.ExpectedException;
 
 
 class EndXPathTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
-			var input = new TokenizerInput(garbage, garbage.length);
-			var output = EndXPathTokenizer.getInstance().tokenize(input);
-			
-			assertEquals(1, output.result.length);
-			assertEquals(0, output.characterLength);
-			assertTrue(Std.is(output.result[0], EndXPathToken));
-		}
-	}
-	
-	function testBad () {
-		for (garbage in ["dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try {
-				EndXPathTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				caught = true;
-				assertEquals(0, exception.position);
-			}
-			assertTrue(caught);
-		}
-	}
-	
+    function testGood() {
+        for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
+            var input = new TokenizerInput(garbage, garbage.length);
+            var output = EndXPathTokenizer.getInstance().tokenize(input);
+
+            assertEquals(1, output.result.length);
+            assertEquals(0, output.characterLength);
+            assertTrue(Std.is(output.result[0], EndXPathToken));
+        }
+    }
+
+    function testBad() {
+        for (garbage in ["dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                EndXPathTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                caught = true;
+                assertEquals(0, exception.position);
+            }
+            assertTrue(caught);
+        }
+    }
 }

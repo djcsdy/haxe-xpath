@@ -24,29 +24,27 @@ import xpath.NodeCategory;
 
 
 class TypeStepTest extends TestCase {
-	
-	function testNode () {
-		var typeStep = new TypeStep(NodeCategory.Node);
-		var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
-		var result = typeStep.evaluate(new FakeContext(element));
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(element, nodes[0]);
-	}
-	
-	function testText () {
-		var typeStep = new TypeStep(NodeCategory.Text);
-		var element = XPathHxXml.wrapNode(Xml.createElement("foo"));
-		var text:XPathXml = XPathHxXml.wrapNode(Xml.createCData("blabla"));
-		
-		var result = typeStep.evaluate(new FakeContext(element));
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(0, nodes.length);
-		
-		result = typeStep.evaluate(new FakeContext(text));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(text, nodes[0]);
-	}
-	
+    function testNode() {
+        var typeStep = new TypeStep(NodeCategory.Node);
+        var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
+        var result = typeStep.evaluate(new FakeContext(element));
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(element, nodes[0]);
+    }
+
+    function testText() {
+        var typeStep = new TypeStep(NodeCategory.Text);
+        var element = XPathHxXml.wrapNode(Xml.createElement("foo"));
+        var text:XPathXml = XPathHxXml.wrapNode(Xml.createCData("blabla"));
+
+        var result = typeStep.evaluate(new FakeContext(element));
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(0, nodes.length);
+
+        result = typeStep.evaluate(new FakeContext(text));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(text, nodes[0]);
+    }
 }
 

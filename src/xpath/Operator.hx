@@ -20,18 +20,18 @@ package xpath;
 /** Enumeration of the various (binary) operators as defined by the
  * XPath specification. */
 enum Operator {
-	And;
-	Or;
-	Modulo;
-	Divide;
-	Union;
-	Plus;
-	Minus;
-	Equal;
-	NotEqual;
-	LessThan;
-	LessThanOrEqual;
-	GreaterThan;
-	GreaterThanOrEqual;
-	Multiply;
+    And;
+    Or;
+    Modulo;
+    Divide;
+    Union;
+    Plus;
+    Minus;
+    Equal;
+    NotEqual;
+    LessThan;
+    LessThanOrEqual;
+    GreaterThan;
+    GreaterThanOrEqual;
+    Multiply;
 }

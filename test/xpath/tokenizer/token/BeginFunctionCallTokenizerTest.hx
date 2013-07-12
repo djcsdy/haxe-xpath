@@ -23,71 +23,57 @@ import xpath.tokenizer.ExpectedException;
 
 
 class BeginFunctionCallTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (functionName in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
-			for (whitespace in ["", " ", "    "]) {
-				for (whitespace2 in ["", " ", "   "]) {
-					for (garbage in ["", "cxvpsf", "/c./ ,", "(jdfsjfp"]) {
-						var input = new TokenizerInput(
-							functionName + whitespace + "(" + whitespace2 + garbage
-						);
-						var output = BeginFunctionCallTokenizer.getInstance().tokenize(input);
-						
-						assertEquals(1, output.result.length);
-						assertEquals(
-							functionName.length + whitespace.length + 1 + whitespace2.length,
-							output.characterLength
-						);
-						assertTrue(Std.is(output.result[0], BeginFunctionCallToken));
-						assertEquals(functionName, cast(output.result[0], BeginFunctionCallToken).name);
-					}
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (whitespace in ["", " ", "    "]) {
-			for (garbage in ["", "cxvpsf", "/c./ ,"]) {
-				for (functionName in [
-					"ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"
-				]) {
-					var input = new TokenizerInput(
-						functionName + whitespace + garbage
-					);
-					
-					var caught = false;
-					try {
-						BeginFunctionCallTokenizer.getInstance().tokenize(input);
-					} catch (exception:ExpectedException) {
-						assertEquals(0, exception.position);
-						caught = true;
-					}
-					assertTrue(caught);
-				}
-			}
-			
-			for (garbage in [
-				" dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
-				String.fromCharCode(127) + "ghfsgk"
-			]) {
-				for (whitespace2 in ["", " ", "   "]) {
-					var input = new TokenizerInput(
-						garbage + whitespace + "(" + whitespace2
-					);
-					
-					var caught = false;
-					try {
-						BeginFunctionCallTokenizer.getInstance().tokenize(input);
-					} catch (exception:ExpectedException) {
-						assertEquals(0, exception.position);
-						caught = true;
-					}
-					assertTrue(caught);
-				}
-			}
-		}
-	}
-	
+    function testGood() {
+        for (functionName in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
+            for (whitespace in ["", " ", "    "]) {
+                for (whitespace2 in ["", " ", "   "]) {
+                    for (garbage in ["", "cxvpsf", "/c./ ,", "(jdfsjfp"]) {
+                        var input = new TokenizerInput(functionName + whitespace + "(" + whitespace2 + garbage);
+                        var output = BeginFunctionCallTokenizer.getInstance().tokenize(input);
+
+                        assertEquals(1, output.result.length);
+                        assertEquals(functionName.length + whitespace.length + 1 + whitespace2.length,
+                                output.characterLength);
+                        assertTrue(Std.is(output.result[0], BeginFunctionCallToken));
+                        assertEquals(functionName, cast(output.result[0], BeginFunctionCallToken).name);
+                    }
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (whitespace in ["", " ", "    "]) {
+            for (garbage in ["", "cxvpsf", "/c./ ,"]) {
+                for (functionName in ["ajf", "afdj:djbi", "a1nfdjvp", "AJFvmado", "fsd:ADfj", "__fsj:_fdks"]) {
+                    var input = new TokenizerInput(functionName + whitespace + garbage);
+
+                    var caught = false;
+                    try {
+                        BeginFunctionCallTokenizer.getInstance().tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        assertEquals(0, exception.position);
+                        caught = true;
+                    }
+                    assertTrue(caught);
+                }
+            }
+
+            for (garbage in [" dgjj", "1dgjnsg", "-vkjkd", "$jgifjs", "%gfg", "@dgjgmn", "[fnh", "`fgnig", "{fhld",
+                    String.fromCharCode(127) + "ghfsgk"]) {
+                for (whitespace2 in ["", " ", "   "]) {
+                    var input = new TokenizerInput(garbage + whitespace + "(" + whitespace2);
+
+                    var caught = false;
+                    try {
+                        BeginFunctionCallTokenizer.getInstance().tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        assertEquals(0, exception.position);
+                        caught = true;
+                    }
+                    assertTrue(caught);
+                }
+            }
+        }
+    }
 }

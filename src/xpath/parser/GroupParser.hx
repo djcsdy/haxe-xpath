@@ -19,38 +19,45 @@ import xpath.tokenizer.Token;
 
 
 class GroupParser implements Parser {
-	
-	static var instance :GroupParser;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new GroupParser();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	public function parse (input:ParserInput) {
-		if (!input.hasNext()) return null;
-		var token = input.next();
-		if (!Std.is(token, BeginGroupToken)) return null;
-		
-		var output = ExpressionParser.getInstance().parse(input.descend());
-		if (output.result == null) throw new ParseError(
-			"Invalid token stream"
-		);
-		input = output.getNextInput();
-		
-		if (!input.hasNext()) throw new ParseError(
-			"Invalid token stream"
-		);
-		if (!Std.is(input.next(), EndGroupToken)) throw new ParseError(
-			"Invalid token stream"
-		);
-		
-		var result = output.result;
-		return input.getOutput(input.count, result);
-	}
-	
+    static var instance:GroupParser;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new GroupParser();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    public function parse(input:ParserInput) {
+        if (!input.hasNext()) {
+            return null;
+        }
+
+        var token = input.next();
+        if (!Std.is(token, BeginGroupToken)) {
+            return null;
+        }
+
+        var output = ExpressionParser.getInstance().parse(input.descend());
+        if (output.result == null) {
+            throw new ParseError("Invalid token stream");
+        }
+        input = output.getNextInput();
+
+        if (!input.hasNext()) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        if (!Std.is(input.next(), EndGroupToken)) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        var result = output.result;
+        return input.getOutput(input.count, result);
+    }
 }

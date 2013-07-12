@@ -24,57 +24,50 @@ import xpath.NodeCategory;
 
 
 class TypeTestTokenizerTest extends TestCase {
-	
-	var types :Map<String, NodeCategory>;
-	
-	
-	public function new () {
-		super();
-		
-		types = new Map<String, NodeCategory>();
-		types.set("comment", Comment);
-		types.set("text", Text);
-		types.set("node", Node);
-	}
-	
-	function testGood () {
-		for (type in types.keys()) {
-			for (whitespace in ["", " ", "   "]) {
-				for (garbage in ["", "cvjg802", "(F(*"]) {
-					var input = new TokenizerInput(
-						type + whitespace + "(" + whitespace + ")" +
-						whitespace + garbage
-					);
-					var output = TypeTestTokenizer.getInstance().tokenize(input);
-					
-					assertEquals(1, output.result.length);
-					assertEquals(type.length + 2 + whitespace.length*3, output.characterLength);
-					assertTrue(Std.is(output.result[0], TypeTestToken));
-					assertEquals(types.get(type), cast(output.result[0], TypeTestToken).type);
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (type in types.keys()) {
-			for (whitespace in ["", " ", "   "]) {
-				for (garbage in ["", "cvjg802", "(F(*"]) {
-					var input = new TokenizerInput(
-						type + whitespace + "(" + whitespace + garbage
-					);
-					
-					var caught = false;
-					try {
-						TypeTestTokenizer.getInstance().tokenize(input);
-					} catch (exception:ExpectedException) {
-						caught = true;
-						assertEquals(0, exception.position);
-					}
-					assertTrue(caught);
-				}
-			}
-		}
-	}
-	
+    var types:Map<String, NodeCategory>;
+
+
+    public function new() {
+        super();
+
+        types = new Map<String, NodeCategory>();
+        types.set("comment", Comment);
+        types.set("text", Text);
+        types.set("node", Node);
+    }
+
+    function testGood() {
+        for (type in types.keys()) {
+            for (whitespace in ["", " ", "   "]) {
+                for (garbage in ["", "cvjg802", "(F(*"]) {
+                    var input = new TokenizerInput(type + whitespace + "(" + whitespace + ")" + whitespace + garbage);
+                    var output = TypeTestTokenizer.getInstance().tokenize(input);
+
+                    assertEquals(1, output.result.length);
+                    assertEquals(type.length + 2 + whitespace.length * 3, output.characterLength);
+                    assertTrue(Std.is(output.result[0], TypeTestToken));
+                    assertEquals(types.get(type), cast(output.result[0], TypeTestToken).type);
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (type in types.keys()) {
+            for (whitespace in ["", " ", "   "]) {
+                for (garbage in ["", "cvjg802", "(F(*"]) {
+                    var input = new TokenizerInput(type + whitespace + "(" + whitespace + garbage);
+
+                    var caught = false;
+                    try {
+                        TypeTestTokenizer.getInstance().tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        caught = true;
+                        assertEquals(0, exception.position);
+                    }
+                    assertTrue(caught);
+                }
+            }
+        }
+    }
 }

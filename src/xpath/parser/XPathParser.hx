@@ -19,36 +19,51 @@ import xpath.tokenizer.Token;
 
 
 class XPathParser implements Parser {
-	
-	static var instance :XPathParser;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new XPathParser();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	public function parse (input:ParserInput) {
-		if (!input.hasNext()) return null;
-		var token = input.next();
-		if (!Std.is(token, BeginXPathToken)) return null;
-		
-		var output = ExpressionParser.getInstance().parse(input.descend());
-		if (output == null) throw new ParseError("Invalid token stream");
-		var result = output.result;
-		input = output.getNextInput();
-		
-		if (!input.hasNext()) throw new ParseError("Invalid token stream");
-		token = input.next();
-		if (!Std.is(token, EndXPathToken)) throw new ParseError(
-			"Invalid token stream"
-		);
-		
-		if (input.hasNext()) throw new ParseError("Invalid token stream");
-		return input.getOutput(input.count, result);
-	}
-	
+    static var instance:XPathParser;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new XPathParser();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    public function parse(input:ParserInput) {
+        if (!input.hasNext()) {
+            return null;
+        }
+
+        var token = input.next();
+        if (!Std.is(token, BeginXPathToken)) {
+            return null;
+        }
+
+        var output = ExpressionParser.getInstance().parse(input.descend());
+        if (output == null) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        var result = output.result;
+        input = output.getNextInput();
+
+        if (!input.hasNext()) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        token = input.next();
+        if (!Std.is(token, EndXPathToken)) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        if (input.hasNext()) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        return input.getOutput(input.count, result);
+    }
 }

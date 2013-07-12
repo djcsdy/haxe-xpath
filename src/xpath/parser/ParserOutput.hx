@@ -20,40 +20,39 @@ import xpath.expression.Expression;
 
 /** Class representing the output from parsing. */
 class ParserOutput {
-	
-	/** The [Expression] resulting from parsing. */
-	public var result (default, null) :Expression;
-	
-	var getNextInputCallback :Void->ParserInput;
-	
-	
-	/** Do not call this constructor directly. Instead, call
-	 * [getOutput] on the [ParserInput] that was parsed.
-	 *
-	 * Constructs a [ParserOutput] representing a [result]
-	 * [Expression]. [getNextInputCallback] should be a function that
-	 * returns a [ParserInput] for the next stage of parsing, or
-	 * [null] if parsing was completed. [getNextInputCallback] may be
-	 * called more than once, and must return a freshly constructed
-	 * [ParserInput] each time. */
-	public function new (
-		result:Expression, ?getNextInputCallback:Void->ParserInput
-	) {
-		this.result = result;
-		this.getNextInputCallback = getNextInputCallback;
-	}
-	
-	/** Returns true if tokenization was completed. */
-	public function isComplete () :Bool {
-		return getNextInputCallback == null;
-	}
-	
-	/** Gets the [ParserInput] to be passed to the next stage of
-	 * parsing. Throws [ParseError] if parsing is already
-	 * complete. */
-	public function getNextInput () {
-		if (getNextInputCallback != null) return getNextInputCallback();
-		else throw new ParseError("Unexpected end of query");
-	}
-	
+    /** The [Expression] resulting from parsing. */
+    public var result (default, null):Expression;
+
+    var getNextInputCallback:Void -> ParserInput;
+
+
+    /** Do not call this constructor directly. Instead, call
+     * [getOutput] on the [ParserInput] that was parsed.
+     *
+     * Constructs a [ParserOutput] representing a [result]
+     * [Expression]. [getNextInputCallback] should be a function that
+     * returns a [ParserInput] for the next stage of parsing, or
+     * [null] if parsing was completed. [getNextInputCallback] may be
+     * called more than once, and must return a freshly constructed
+     * [ParserInput] each time. */
+    public function new(result:Expression, ?getNextInputCallback:Void -> ParserInput) {
+        this.result = result;
+        this.getNextInputCallback = getNextInputCallback;
+    }
+
+    /** Returns true if tokenization was completed. */
+    public function isComplete():Bool {
+        return getNextInputCallback == null;
+    }
+
+    /** Gets the [ParserInput] to be passed to the next stage of
+     * parsing. Throws [ParseError] if parsing is already
+     * complete. */
+    public function getNextInput() {
+        if (getNextInputCallback != null) {
+            return getNextInputCallback();
+        } else {
+            throw new ParseError("Unexpected end of query");
+        }
+    }
 }

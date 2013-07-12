@@ -21,96 +21,94 @@ import xpath.tokenizer.Token;
 
 
 class FunctionCallTokenizerTest extends ContainerTokenizerTestBase {
+    public function new() {
+        super(FunctionCallTokenizer.getInstance());
+    }
 
-	public function new () {
-		super(FunctionCallTokenizer.getInstance());
-	}
-	
-	private function testEmpty () {
-		doGoodTest("abc()", [
-			cast(new BeginFunctionCallToken("abc"), Token),
-			new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testNumber () {
-		doGoodTest("f(123)", [
-			cast(new BeginFunctionCallToken("f"), Token),
-			new BeginExpressionToken(), new NumberToken(123),
-			new EndExpressionToken(), new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testLiteral () {
-		doGoodTest("gsg('dfasg')", [
-			cast(new BeginFunctionCallToken("gsg"), Token), new BeginExpressionToken(),
-			new LiteralToken("dfasg"), new EndExpressionToken(), new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testFunction () {
-		doGoodTest("gsji(gjk())", [
-			cast(new BeginFunctionCallToken("gsji"), Token), new BeginExpressionToken(),
-			new BeginFunctionCallToken("gjk"), new EndFunctionCallToken(),
-			new EndExpressionToken(), new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testVariable () {
-		doGoodTest("sg($jdf)", [
-			cast(new BeginFunctionCallToken("sg"), Token), new BeginExpressionToken(),
-			new VariableReferenceToken("jdf"), new EndExpressionToken(),
-			new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testGroup () {
-		doGoodTest("gsjgs((123))", [
-			cast(new BeginFunctionCallToken("gsjgs"), Token), new BeginExpressionToken(),
-			new BeginGroupToken(), new BeginExpressionToken(), new NumberToken(123),
-			new EndExpressionToken(), new EndGroupToken(), new EndExpressionToken(),
-			new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testPath () {
-		doGoodTest("do(/abc/def)", [
-			cast(new BeginFunctionCallToken("do"), Token), new BeginExpressionToken(),
-			new BeginPathToken(), new StepDelimiterToken(), new AxisToken(Child),
-			new NameTestToken("abc"), new StepDelimiterToken(), new AxisToken(Child),
-			new NameTestToken("def"), new EndPathToken(), new EndExpressionToken(),
-			new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testNumberPath () {
-		doGoodTest("shp(123,/abc/def)", [
-			cast(new BeginFunctionCallToken("shp"), Token), new BeginExpressionToken(),
-			new NumberToken(123), new EndExpressionToken(), new ArgumentDelimiterToken(),
-			new BeginExpressionToken(), new BeginPathToken(), new StepDelimiterToken(),
-			new AxisToken(Child), new NameTestToken("abc"), new StepDelimiterToken(),
-			new AxisToken(Child), new NameTestToken("def"), new EndPathToken(),
-			new EndExpressionToken(), new EndFunctionCallToken()
-		]);
-	}
-	
-	private function testLiteralFunctionPath () {
-		doGoodTest('czy("edjgijsf", fjh(), //*)', [
-			cast(new BeginFunctionCallToken("czy"), Token), new BeginExpressionToken(),
-			new LiteralToken("edjgijsf"), new EndExpressionToken(), new ArgumentDelimiterToken(),
-			new BeginExpressionToken(), new BeginFunctionCallToken("fjh"), new EndFunctionCallToken(),
-			new EndExpressionToken(), new ArgumentDelimiterToken(), new BeginExpressionToken(),
-			new BeginPathToken(), new StepDelimiterToken(), new AxisToken(DescendantOrSelf),
-			new TypeTestToken(Node), new StepDelimiterToken(), new AxisToken(Child),
-			new NameTestToken("*"), new EndPathToken(), new EndExpressionToken(),
-			new EndFunctionCallToken()
-		]);
-	}
+    private function testEmpty() {
+        doGoodTest("abc()", [
+            cast(new BeginFunctionCallToken("abc"), Token),
+            new EndFunctionCallToken()
+        ]);
+    }
 
-	private function testJunk () {
-		doBadTest("asdjg(");
-		doBadTest("sgsdgj");
-		doBadTest("gjs)");
-	}
-	
+    private function testNumber() {
+        doGoodTest("f(123)", [
+            cast(new BeginFunctionCallToken("f"), Token),
+            new BeginExpressionToken(), new NumberToken(123),
+            new EndExpressionToken(), new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testLiteral() {
+        doGoodTest("gsg('dfasg')", [
+            cast(new BeginFunctionCallToken("gsg"), Token), new BeginExpressionToken(),
+            new LiteralToken("dfasg"), new EndExpressionToken(), new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testFunction() {
+        doGoodTest("gsji(gjk())", [
+            cast(new BeginFunctionCallToken("gsji"), Token), new BeginExpressionToken(),
+            new BeginFunctionCallToken("gjk"), new EndFunctionCallToken(),
+            new EndExpressionToken(), new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testVariable() {
+        doGoodTest("sg($jdf)", [
+            cast(new BeginFunctionCallToken("sg"), Token), new BeginExpressionToken(),
+            new VariableReferenceToken("jdf"), new EndExpressionToken(),
+            new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testGroup() {
+        doGoodTest("gsjgs((123))", [
+            cast(new BeginFunctionCallToken("gsjgs"), Token), new BeginExpressionToken(),
+            new BeginGroupToken(), new BeginExpressionToken(), new NumberToken(123),
+            new EndExpressionToken(), new EndGroupToken(), new EndExpressionToken(),
+            new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testPath() {
+        doGoodTest("do(/abc/def)", [
+            cast(new BeginFunctionCallToken("do"), Token), new BeginExpressionToken(),
+            new BeginPathToken(), new StepDelimiterToken(), new AxisToken(Child),
+            new NameTestToken("abc"), new StepDelimiterToken(), new AxisToken(Child),
+            new NameTestToken("def"), new EndPathToken(), new EndExpressionToken(),
+            new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testNumberPath() {
+        doGoodTest("shp(123,/abc/def)", [
+            cast(new BeginFunctionCallToken("shp"), Token), new BeginExpressionToken(),
+            new NumberToken(123), new EndExpressionToken(), new ArgumentDelimiterToken(),
+            new BeginExpressionToken(), new BeginPathToken(), new StepDelimiterToken(),
+            new AxisToken(Child), new NameTestToken("abc"), new StepDelimiterToken(),
+            new AxisToken(Child), new NameTestToken("def"), new EndPathToken(),
+            new EndExpressionToken(), new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testLiteralFunctionPath() {
+        doGoodTest('czy("edjgijsf", fjh(), //*)', [
+            cast(new BeginFunctionCallToken("czy"), Token), new BeginExpressionToken(),
+            new LiteralToken("edjgijsf"), new EndExpressionToken(), new ArgumentDelimiterToken(),
+            new BeginExpressionToken(), new BeginFunctionCallToken("fjh"), new EndFunctionCallToken(),
+            new EndExpressionToken(), new ArgumentDelimiterToken(), new BeginExpressionToken(),
+            new BeginPathToken(), new StepDelimiterToken(), new AxisToken(DescendantOrSelf),
+            new TypeTestToken(Node), new StepDelimiterToken(), new AxisToken(Child),
+            new NameTestToken("*"), new EndPathToken(), new EndExpressionToken(),
+            new EndFunctionCallToken()
+        ]);
+    }
+
+    private function testJunk() {
+        doBadTest("asdjg(");
+        doBadTest("sgsdgj");
+        doBadTest("gjs)");
+    }
 }

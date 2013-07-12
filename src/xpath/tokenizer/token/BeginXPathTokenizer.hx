@@ -24,30 +24,28 @@ import xpath.tokenizer.ExpectedException;
 /** [Tokenizer] which tokenizes according to the [BeginXPath]
  * rule. */
 class BeginXPathTokenizer extends TokenTokenizer {
-	
-	static var instance :BeginXPathTokenizer;
-	
-	
-	/** Gets the instance of [BeginXPathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new BeginXPathTokenizer();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		if (input.position == 0) {
-			var result = [ cast(new BeginXPathToken(), Token) ];
-			var characterLength = countWhitespace(input.query, 0);
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "BeginXPath",
-				position: input.position
-			}]);
-		}
-	}
-	
+    static var instance:BeginXPathTokenizer;
+
+
+    /** Gets the instance of [BeginXPathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new BeginXPathTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        if (input.position == 0) {
+            var result = [ cast(new BeginXPathToken(), Token) ];
+            var characterLength = countWhitespace(input.query, 0);
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException([{ tokenName: "BeginXPath", position: input.position }]);
+        }
+    }
 }

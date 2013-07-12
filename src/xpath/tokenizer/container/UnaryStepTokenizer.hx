@@ -29,43 +29,43 @@ import xpath.tokenizer.token.AbbreviatedStepTokenizer;
 /** [Tokenizer] which tokenizes according to the [UnaryStep]
  * rule. */
 class UnaryStepTokenizer implements Tokenizer {
-	
-	static var instance :UnaryStepTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [UnaryStepTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new UnaryStepTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Disjunction([
-			cast(new Sequence([
-				cast(AxisTokenizer.getInstance(), Tokenizer),
-				NodeTestTokenizer.getInstance(),
-				new Repetition([
-					cast(PredicateTokenizer.getInstance(), Tokenizer)
-				])
-			]), Tokenizer), AbbreviatedStepTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:UnaryStepTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [UnaryStepTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new UnaryStepTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Disjunction([
+            cast(new Sequence([
+                cast(AxisTokenizer.getInstance(), Tokenizer),
+                NodeTestTokenizer.getInstance(),
+                new Repetition([
+                    cast(PredicateTokenizer.getInstance(), Tokenizer)
+                ])
+            ]), Tokenizer),
+            AbbreviatedStepTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

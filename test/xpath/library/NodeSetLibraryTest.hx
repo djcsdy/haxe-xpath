@@ -27,151 +27,127 @@ import xpath.EvaluationException;
 
 
 class NodeSetLibraryTest extends TestCase {
-	
-	function testLast () {
-		var context = new FakeContext(0, 42);
-		var result = NodeSetLibrary.last(context, []);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(42., result.getFloat());
-		
-		var caught = false;
-		try {
-			NodeSetLibrary.last(context, [
-				cast(new XPathNumber(27), XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testPosition () {
-		var context = new FakeContext(42);
-		var result = NodeSetLibrary.position(context, []);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(42., result.getFloat());
-		
-		var caught = false;
-		try {
-			NodeSetLibrary.position(context, [
-				cast(new XPathNumber(27), XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testCount () {
-		var context = new FakeContext();
-		var nodeSet = new XPathNodeSet([
-			cast(XPathHxXml.wrapNode(Xml.createElement("a")), XPathXml),
-			XPathHxXml.wrapNode(Xml.createCData("foo")),
-			XPathHxXml.wrapNode(Xml.createElement("b"))
-		]);
-		var result = NodeSetLibrary.count(context, [
-			cast(nodeSet, XPathValue)
-		]);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(3., result.getFloat());
-		
-		var caught = false;
-		try {
-			NodeSetLibrary.count(context, []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NodeSetLibrary.count(context, [
-				cast(new XPathNumber(27), XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			NodeSetLibrary.count(context, [
-				cast(nodeSet, XPathValue), nodeSet
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testLocalName () {
-		var contextNode:XPathXml = XPathHxXml.wrapNode(
-			Xml.createElement("foo")
-		);
-		var context = new FakeContext(contextNode);
-		var result = NodeSetLibrary.localName(context, []);
-		assertTrue(Std.is(result, XPathString));
-		assertEquals("foo", result.getString());
-		
-		var a = Xml.createElement("a");
-		var b = Xml.createElement("b");
-		var c = Xml.createElement("c");
-		a.addChild(b);
-		a.addChild(c);
-		var xPathB:XPathXml = XPathHxXml.wrapNode(b);
-		var xPathC:XPathXml = XPathHxXml.wrapNode(c);
-		var nodeSet = new XPathNodeSet([xPathC, xPathB]);
-		var result = NodeSetLibrary.localName(context, [
-			cast(nodeSet, XPathValue)
-		]);
-		assertTrue(Std.is(result, XPathString));
-		assertEquals("b", result.getString());
-		
-		nodeSet = new XPathNodeSet([]);
-		var caught = false;
-		try {
-			NodeSetLibrary.localName(context, [
-				cast(nodeSet, XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testName () {
-		var contextNode:XPathXml = XPathHxXml.wrapNode(
-			Xml.createElement("foo")
-		);
-		var context = new FakeContext(contextNode);
-		var result = NodeSetLibrary.nodeName(context, []);
-		assertTrue(Std.is(result, XPathString));
-		assertEquals("foo", result.getString());
-		
-		var a = Xml.createElement("a");
-		var b = Xml.createElement("b");
-		var c = Xml.createElement("c");
-		a.addChild(b);
-		a.addChild(c);
-		var xPathB:XPathXml = XPathHxXml.wrapNode(b);
-		var xPathC:XPathXml = XPathHxXml.wrapNode(c);
-		var nodeSet = new XPathNodeSet([xPathC, xPathB]);
-		var result = NodeSetLibrary.nodeName(context, [
-			cast(nodeSet, XPathValue)
-		]);
-		assertTrue(Std.is(result, XPathString));
-		assertEquals("b", result.getString());
-		
-		nodeSet = new XPathNodeSet([]);
-		var caught = false;
-		try {
-			NodeSetLibrary.nodeName(context, [
-				cast(nodeSet, XPathValue)
-			]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testLast() {
+        var context = new FakeContext(0, 42);
+        var result = NodeSetLibrary.last(context, []);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(42., result.getFloat());
+
+        var caught = false;
+        try {
+            NodeSetLibrary.last(context, [cast(new XPathNumber(27), XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testPosition() {
+        var context = new FakeContext(42);
+        var result = NodeSetLibrary.position(context, []);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(42., result.getFloat());
+
+        var caught = false;
+        try {
+            NodeSetLibrary.position(context, [cast(new XPathNumber(27), XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testCount() {
+        var context = new FakeContext();
+        var nodeSet = new XPathNodeSet([
+            cast(XPathHxXml.wrapNode(Xml.createElement("a")), XPathXml),
+            XPathHxXml.wrapNode(Xml.createCData("foo")),
+            XPathHxXml.wrapNode(Xml.createElement("b"))
+        ]);
+        var result = NodeSetLibrary.count(context, [cast(nodeSet, XPathValue)]);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(3., result.getFloat());
+
+        var caught = false;
+        try {
+            NodeSetLibrary.count(context, []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NodeSetLibrary.count(context, [cast(new XPathNumber(27), XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            NodeSetLibrary.count(context, [cast(nodeSet, XPathValue), nodeSet]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testLocalName() {
+        var contextNode:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
+        var context = new FakeContext(contextNode);
+        var result = NodeSetLibrary.localName(context, []);
+        assertTrue(Std.is(result, XPathString));
+        assertEquals("foo", result.getString());
+
+        var a = Xml.createElement("a");
+        var b = Xml.createElement("b");
+        var c = Xml.createElement("c");
+        a.addChild(b);
+        a.addChild(c);
+        var xPathB:XPathXml = XPathHxXml.wrapNode(b);
+        var xPathC:XPathXml = XPathHxXml.wrapNode(c);
+        var nodeSet = new XPathNodeSet([xPathC, xPathB]);
+        var result = NodeSetLibrary.localName(context, [cast(nodeSet, XPathValue)]);
+        assertTrue(Std.is(result, XPathString));
+        assertEquals("b", result.getString());
+
+        nodeSet = new XPathNodeSet([]);
+        var caught = false;
+        try {
+            NodeSetLibrary.localName(context, [cast(nodeSet, XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testName() {
+        var contextNode:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
+        var context = new FakeContext(contextNode);
+        var result = NodeSetLibrary.nodeName(context, []);
+        assertTrue(Std.is(result, XPathString));
+        assertEquals("foo", result.getString());
+
+        var a = Xml.createElement("a");
+        var b = Xml.createElement("b");
+        var c = Xml.createElement("c");
+        a.addChild(b);
+        a.addChild(c);
+        var xPathB:XPathXml = XPathHxXml.wrapNode(b);
+        var xPathC:XPathXml = XPathHxXml.wrapNode(c);
+        var nodeSet = new XPathNodeSet([xPathC, xPathB]);
+        var result = NodeSetLibrary.nodeName(context, [cast(nodeSet, XPathValue)]);
+        assertTrue(Std.is(result, XPathString));
+        assertEquals("b", result.getString());
+
+        nodeSet = new XPathNodeSet([]);
+        var caught = false;
+        try {
+            NodeSetLibrary.nodeName(context, [cast(nodeSet, XPathValue)]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

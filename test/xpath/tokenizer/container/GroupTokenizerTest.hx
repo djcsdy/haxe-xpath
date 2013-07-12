@@ -21,46 +21,44 @@ import xpath.tokenizer.Token;
 
 
 class GroupTokenizerTest extends ContainerTokenizerTestBase {
-	
-	public function new () {
-		super(GroupTokenizer.getInstance());
-	}
-	
-	private function testNumber () {
-		doGoodTest("(123)", [
-			cast(new BeginGroupToken(), Token),
-			new BeginExpressionToken(), new NumberToken(123),
-			new EndExpressionToken(), new EndGroupToken()
-		]);
-	}
-	
-	private function testFunction () {
-		doGoodTest("(foo())", [
-			cast(new BeginGroupToken(), Token),
-			new BeginExpressionToken(),
-			new BeginFunctionCallToken("foo"),
-			new EndFunctionCallToken(),
-			new EndExpressionToken(), new EndGroupToken()
-		]);
-	}
-	
-	private function testOperation () {
-		doGoodTest("((1+2)*3)", [
-			cast(new BeginGroupToken(), Token),
-			new BeginExpressionToken(), new BeginGroupToken(),
-			new BeginExpressionToken(), new NumberToken(1),
-			new OperatorToken(Plus), new NumberToken(2),
-			new EndExpressionToken(), new EndGroupToken(),
-			new OperatorToken(Multiply), new NumberToken(3),
-			new EndExpressionToken(), new EndGroupToken()
-		]);
-	}
-		
-	private function testJunk () {
-		doBadTest("()");
-		doBadTest("(8+7");
-		doBadTest("");
-		doBadTest("/a/b");
-	}
-	
+    public function new() {
+        super(GroupTokenizer.getInstance());
+    }
+
+    private function testNumber() {
+        doGoodTest("(123)", [
+            cast(new BeginGroupToken(), Token),
+            new BeginExpressionToken(), new NumberToken(123),
+            new EndExpressionToken(), new EndGroupToken()
+        ]);
+    }
+
+    private function testFunction() {
+        doGoodTest("(foo())", [
+            cast(new BeginGroupToken(), Token),
+            new BeginExpressionToken(),
+            new BeginFunctionCallToken("foo"),
+            new EndFunctionCallToken(),
+            new EndExpressionToken(), new EndGroupToken()
+        ]);
+    }
+
+    private function testOperation() {
+        doGoodTest("((1+2)*3)", [
+            cast(new BeginGroupToken(), Token),
+            new BeginExpressionToken(), new BeginGroupToken(),
+            new BeginExpressionToken(), new NumberToken(1),
+            new OperatorToken(Plus), new NumberToken(2),
+            new EndExpressionToken(), new EndGroupToken(),
+            new OperatorToken(Multiply), new NumberToken(3),
+            new EndExpressionToken(), new EndGroupToken()
+        ]);
+    }
+
+    private function testJunk() {
+        doBadTest("()");
+        doBadTest("(8+7");
+        doBadTest("");
+        doBadTest("/a/b");
+    }
 }

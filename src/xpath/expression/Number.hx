@@ -21,16 +21,14 @@ import xpath.value.XPathValue;
 
 
 class Number implements Expression {
-	
-	var value :Float;
-	
-	
-	public function new (value:Float) {
-		this.value = value;
-	}
-	
-	public function evaluate (context:Context) :XPathValue {
-		return new XPathNumber(value);
-	}
-	
+    var value:Float;
+
+
+    public function new(value:Float) {
+        this.value = value;
+    }
+
+    public function evaluate(context:Context):XPathValue {
+        return new XPathNumber(value);
+    }
 }

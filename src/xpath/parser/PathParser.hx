@@ -24,58 +24,75 @@ import xpath.NodeCategory;
 
 
 class PathParser implements Parser {
-	
-	static var instance :PathParser;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new PathParser();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	public function parse (input:ParserInput) {
-		if (!input.hasNext()) return null;
-		var token = input.next();
-		if (!Std.is(token, BeginPathToken)) return null;
-		
-		if (!input.hasNext()) throw new ParseError("Invalid token stream");
-		token = input.next();
-		var absolute = Std.is(token, StepDelimiterToken);
-		if (!absolute) input.back();
-		
-		var firstStep:PathStep;
-		var output = StepParser.getInstance().parse(input.descend());
-		if (absolute && output == null) {
-			// path of "/"
-			firstStep = null;
-		} else if (output.result == null) {
-			if (absolute) {
-				// path of "/."
-				firstStep = null;
-			} else {
-				// path of "."
-				firstStep = new TypeStep(NodeCategory.Node);
-			}
-			input = output.getNextInput();
-		} else {
-			firstStep = cast(output.result, PathStep);
-			input = output.getNextInput();
-		}
-		
-		if (!input.hasNext()) throw new ParseError("Invalid token stream");
-		token = input.next();
-		if (!Std.is(token, EndPathToken)) throw new ParseError(
-			"Invalid token stream"
-		);
-		
-		var result:Expression;
-		if (absolute) result = new RootStep(firstStep);
-		else result = firstStep;
-		
-		return input.getOutput(input.count, result);
-	}
-	
+    static var instance:PathParser;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new PathParser();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    public function parse(input:ParserInput) {
+        if (!input.hasNext()) {
+            return null;
+        }
+
+        var token = input.next();
+        if (!Std.is(token, BeginPathToken)) {
+            return null;
+        }
+
+        if (!input.hasNext()) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        token = input.next();
+        var absolute = Std.is(token, StepDelimiterToken);
+        if (!absolute) {
+            input.back();
+        }
+
+        var firstStep:PathStep;
+        var output = StepParser.getInstance().parse(input.descend());
+        if (absolute && output == null) {
+            // path of "/"
+            firstStep = null;
+        } else if (output.result == null) {
+            if (absolute) {
+                // path of "/."
+                firstStep = null;
+            } else {
+                // path of "."
+                firstStep = new TypeStep(NodeCategory.Node);
+            }
+            input = output.getNextInput();
+        } else {
+            firstStep = cast(output.result, PathStep);
+            input = output.getNextInput();
+        }
+
+        if (!input.hasNext()) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        token = input.next();
+        if (!Std.is(token, EndPathToken)) {
+            throw new ParseError("Invalid token stream");
+        }
+
+        var result:Expression;
+        if (absolute) {
+            result = new RootStep(firstStep);
+        } else {
+            result = firstStep;
+        }
+
+        return input.getOutput(input.count, result);
+    }
 }

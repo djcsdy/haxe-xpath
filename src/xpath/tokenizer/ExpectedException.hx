@@ -19,47 +19,37 @@ package xpath.tokenizer;
 /** Exception thrown if a given query or query fragment cannot be
  * tokenized because an expected [Token] was not found. */
 class ExpectedException extends TokenizerException {
-	
-	/** Names of expected [Token]s and the character positions at
-	 * which they were expected. */
-	public var expectedTokens (default, null) :Iterable<{
-		tokenName:String, position:Int
-	}>;
-	
-	
-	/** Constructs a new [ExpectedException] indicating that the
-	 * specified [tokenName]s were expected at the specified
-	 * [position]s */
-	public function new (expectedTokens:Iterable<{
-		tokenName:String, position:Int
-	}>) {
-		var array = Lambda.array(expectedTokens);
-		if (array.length > 0) {
-			array.sort(function(
-				token1:{tokenName:String, position:Int},
-				token2:{tokenName:String, position:Int}
-			) {
-				return token1.position - token2.position;
-			});
-			
-			var expectedToken = array.shift();
-			var position = expectedToken.position;
-			var message = "Expected " + expectedToken.tokenName;
-			for (expectedToken in array) {
-				message += ", or " + expectedToken.tokenName;
-				if (expectedToken.position > position) {
-					message += " at character ";
-					message += Std.string(expectedToken.position);
-				}
-			}
-			
-			super(position, message);
-		} else throw new TokenizerError(
-			"Attempted to create an ExpectedException with an " +
-			"empty expected tokens list"
-		);
-		
-		this.expectedTokens = expectedTokens;
-	}
-	
+    /** Names of expected [Token]s and the character positions at
+     * which they were expected. */
+    public var expectedTokens (default, null):Iterable<{tokenName:String, position:Int}>;
+
+
+    /** Constructs a new [ExpectedException] indicating that the
+     * specified [tokenName]s were expected at the specified
+     * [position]s */
+    public function new(expectedTokens:Iterable<{tokenName:String, position:Int}>) {
+        var array = Lambda.array(expectedTokens);
+        if (array.length > 0) {
+            array.sort(function(token1:{tokenName:String, position:Int}, token2:{tokenName:String, position:Int}) {
+                return token1.position - token2.position;
+            });
+
+            var expectedToken = array.shift();
+            var position = expectedToken.position;
+            var message = "Expected " + expectedToken.tokenName;
+            for (expectedToken in array) {
+                message += ", or " + expectedToken.tokenName;
+                if (expectedToken.position > position) {
+                    message += " at character ";
+                    message += Std.string(expectedToken.position);
+                }
+            }
+
+            super(position, message);
+        } else {
+            throw new TokenizerError("Attempted to create an ExpectedException with an empty expected tokens list");
+        }
+
+        this.expectedTokens = expectedTokens;
+    }
 }

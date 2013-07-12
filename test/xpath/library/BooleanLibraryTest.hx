@@ -24,59 +24,53 @@ import xpath.EvaluationException;
 
 
 class BooleanLibraryTest extends TestCase {
-	
-	function testNot () {
-		var xTrue:XPathValue = new XPathBoolean(true);
-		assertFalse(BooleanLibrary.not(
-			new FakeContext(), [ xTrue ]
-		).getBool());
-		
-		var xFalse:XPathValue = new XPathBoolean(false);
-		assertTrue(BooleanLibrary.not(
-			new FakeContext(), [ xFalse ]
-		).getBool());
-		
-		var caught = false;
-		try {
-			BooleanLibrary.not(new FakeContext(), []);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			BooleanLibrary.not(new FakeContext(), [ xTrue, xFalse ]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testTrue () {
-		assertTrue(BooleanLibrary.getTrue(new FakeContext(), []).getBool());
-		
-		var caught = false;
-		try {
-			var xTrue:XPathValue = new XPathBoolean(true);
-			BooleanLibrary.getTrue(new FakeContext(), [ xTrue ]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testFalse () {
-		assertFalse(BooleanLibrary.getFalse(new FakeContext(), []).getBool());
-		
-		var caught = false;
-		try {
-			var xTrue:XPathValue = new XPathBoolean(true);
-			BooleanLibrary.getFalse(new FakeContext(), [ xTrue ]);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testNot() {
+        var xTrue:XPathValue = new XPathBoolean(true);
+        assertFalse(BooleanLibrary.not(new FakeContext(), [ xTrue ]).getBool());
+
+        var xFalse:XPathValue = new XPathBoolean(false);
+        assertTrue(BooleanLibrary.not(new FakeContext(), [ xFalse ]).getBool());
+
+        var caught = false;
+        try {
+            BooleanLibrary.not(new FakeContext(), []);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            BooleanLibrary.not(new FakeContext(), [ xTrue, xFalse ]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testTrue() {
+        assertTrue(BooleanLibrary.getTrue(new FakeContext(), []).getBool());
+
+        var caught = false;
+        try {
+            var xTrue:XPathValue = new XPathBoolean(true);
+            BooleanLibrary.getTrue(new FakeContext(), [ xTrue ]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testFalse() {
+        assertFalse(BooleanLibrary.getFalse(new FakeContext(), []).getBool());
+
+        var caught = false;
+        try {
+            var xTrue:XPathValue = new XPathBoolean(true);
+            BooleanLibrary.getFalse(new FakeContext(), [ xTrue ]);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

@@ -23,46 +23,38 @@ import xpath.xml.XPathHxXml;
 
 
 class PredicateStepTest extends TestCase {
-	
-	function testNumber () {
-		var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
-		
-		for (position in [1, 5, 10]) {
-			for (expressionValue in [1, 5, 10]) {
-				var expression = new Number(expressionValue);
-				var predicateStep = new PredicateStep(expression);
-				var result = predicateStep.evaluate(new FakeContext(
-					element, position, 20
-				));
-				var nodes = Lambda.array(
-					cast(result, XPathNodeSet).getNodes()
-				);
-				
-				if (position == expressionValue) {
-					assertEquals(1, nodes.length);
-					assertEquals(element, nodes[0]);
-				} else {
-					assertEquals(0, nodes.length);
-				}
-			}
-		}
-	}
-	
-	function testBool () {
-		var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
-		
-		var predicateStep = new PredicateStep(
-			new FakeBooleanExpression(true)
-		);
-		var result = predicateStep.evaluate(new FakeContext(element));
-		var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(1, nodes.length);
-		assertEquals(element, nodes[0]);
-		
-		predicateStep = new PredicateStep(new FakeBooleanExpression(false));
-		result = predicateStep.evaluate(new FakeContext(element));
-		nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
-		assertEquals(0, nodes.length);
-	}
-	
+    function testNumber() {
+        var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
+
+        for (position in [1, 5, 10]) {
+            for (expressionValue in [1, 5, 10]) {
+                var expression = new Number(expressionValue);
+                var predicateStep = new PredicateStep(expression);
+                var result = predicateStep.evaluate(new FakeContext(element, position, 20));
+                var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+
+                if (position == expressionValue) {
+                    assertEquals(1, nodes.length);
+                    assertEquals(element, nodes[0]);
+                } else {
+                    assertEquals(0, nodes.length);
+                }
+            }
+        }
+    }
+
+    function testBool() {
+        var element:XPathXml = XPathHxXml.wrapNode(Xml.createElement("foo"));
+
+        var predicateStep = new PredicateStep(new FakeBooleanExpression(true));
+        var result = predicateStep.evaluate(new FakeContext(element));
+        var nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(1, nodes.length);
+        assertEquals(element, nodes[0]);
+
+        predicateStep = new PredicateStep(new FakeBooleanExpression(false));
+        result = predicateStep.evaluate(new FakeContext(element));
+        nodes = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        assertEquals(0, nodes.length);
+    }
 }

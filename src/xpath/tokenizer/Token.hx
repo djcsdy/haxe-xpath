@@ -22,218 +22,172 @@ interface Token {
 }
 
 class ArgumentDelimiterToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class AxisToken implements Token {
-	
-	public var axis (default, null) :xpath.Axis;
-	
-	
-	public function new (axis:xpath.Axis) {
-		this.axis = axis;
-	}
-	
+    public var axis (default, null):xpath.Axis;
+
+
+    public function new(axis:xpath.Axis) {
+        this.axis = axis;
+    }
 }
 
 class BeginExpressionToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class BeginFunctionCallToken implements Token {
-	
-	public var name (default, null) :String;
-	
-	
-	public function new (name:String) {
-		this.name = name;
-	}
-	
+    public var name (default, null):String;
+
+
+    public function new(name:String) {
+        this.name = name;
+    }
 }
 
 class BeginGroupToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class BeginPathToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class BeginPredicateToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class BeginXPathToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class EndExpressionToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class EndFunctionCallToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class EndGroupToken implements Token {
-	
-	public function new () {
-	}
-
+    public function new() {
+    }
 }
 
 class EndPathToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class EndPredicateToken implements Token {
-	
-	public function new () {
-	}
-
+    public function new() {
+    }
 }
 
 class EndXPathToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class LiteralToken implements Token {
-	
-	public var value (default, null) :String;
-	
-	
-	public function new (value:String) {
-		this.value = value;
-	}
-	
+    public var value (default, null):String;
+
+
+    public function new(value:String) {
+        this.value = value;
+    }
 }
 
 class NameTestToken implements Token {
-	
-	public var name (default, null) :String;
-	
-	
-	public function new (name:String) {
-		this.name = name;
-	}
-	
+    public var name (default, null):String;
+
+
+    public function new(name:String) {
+        this.name = name;
+    }
 }
 
 class NegationOperatorToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class NumberToken implements Token {
-	
-	public var value (default, null) :Float;
-	
-	
-	public function new (value:Float) {
-		this.value = value;
-	}
-	
+    public var value (default, null):Float;
+
+
+    public function new(value:Float) {
+        this.value = value;
+    }
 }
 
 class OperatorToken implements Token {
-	
-	public var operator (default, null) :xpath.Operator;
-	
-	
-	public function new (operator:xpath.Operator) {
-		this.operator = operator;
-	}
-	
-	// TODO: move this somewhere more sensible
-	public function getPrecedence () :Int {
-		return switch (operator) {
-			case Or: 0;
-			case And: 1;
-			case Equal: 2;
-			case NotEqual: 2;
-			case LessThanOrEqual: 3;
-			case LessThan: 3;
-			case GreaterThanOrEqual: 3;
-			case GreaterThan: 3;
-			case Plus: 4;
-			case Minus: 4;
-			case Multiply: 5;
-			case Divide: 5;
-			case Modulo: 5;
-			case Union: 6;
-		}
-	}
-	
+    public var operator (default, null):xpath.Operator;
+
+
+    public function new(operator:xpath.Operator) {
+        this.operator = operator;
+    }
+
+    // TODO: move this somewhere more sensible
+    public function getPrecedence():Int {
+        return switch (operator) {
+            case Or: 0;
+            case And: 1;
+            case Equal: 2;
+            case NotEqual: 2;
+            case LessThanOrEqual: 3;
+            case LessThan: 3;
+            case GreaterThanOrEqual: 3;
+            case GreaterThan: 3;
+            case Plus: 4;
+            case Minus: 4;
+            case Multiply: 5;
+            case Divide: 5;
+            case Modulo: 5;
+            case Union: 6;
+        }
+    }
 }
 
 class PINameTestToken implements Token {
-	
-	public var name (default, null) :String;
-	
-	
-	public function new (?name:String) {
-		this.name = name;
-	}
-	
+    public var name (default, null):String;
+
+
+    public function new(?name:String) {
+        this.name = name;
+    }
 }
 
 class StepDelimiterToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }
 
 class TypeTestToken implements Token {
-	
-	public var type (default, null) :xpath.NodeCategory;
-	
-	
-	public function new (type:xpath.NodeCategory) {
-		this.type = type;
-	}
-	
+    public var type (default, null):xpath.NodeCategory;
+
+
+    public function new(type:xpath.NodeCategory) {
+        this.type = type;
+    }
 }
 
 class VariableReferenceToken implements Token {
-	
-	public var name (default, null) :String;
-	
-	
-	public function new (name:String) {
-		this.name = name;
-	}
-	
+    public var name (default, null):String;
+
+
+    public function new(name:String) {
+        this.name = name;
+    }
 }

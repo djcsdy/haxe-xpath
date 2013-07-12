@@ -74,91 +74,91 @@ import xpath.context.BaseEnvironmentTest;
 import haxe.unit.TestRunner;
 
 class Test {
-	public static function main() {
-		var runner = new TestRunner();
+    public static function main() {
+        var runner = new TestRunner();
 
-		runner.add(new BaseEnvironmentTest());
-		runner.add(new ContextTest());
-		runner.add(new DynamicEnvironmentTest());
-		runner.add(new AxisStepTest());
-		runner.add(new FilterStepTest());
-		runner.add(new FunctionCallTest());
-		runner.add(new LiteralTest());
-		runner.add(new NameStepTest());
-		runner.add(new NegationTest());
-		runner.add(new NumberTest());
-		runner.add(new PathStepTest());
-		runner.add(new PredicateStepTest());
-		runner.add(new RootStepTest());
-		runner.add(new TypeStepTest());
-		runner.add(new VariableReferenceTest());
-		runner.add(new BooleanLibraryTest());
-		runner.add(new NodeSetLibraryTest());
-		runner.add(new NumberLibraryTest());
-		runner.add(new StringLibraryTest());
-		runner.add(new ExpressionParserTest());
-		runner.add(new PathParserTest());
-		runner.add(new ExpressionTokenizerTest());
-		runner.add(new FilterExpressionTokenizerTest());
-		runner.add(new FilterOperandTokenizerTest());
-		runner.add(new FunctionArgumentsTokenizerTest());
-		runner.add(new FunctionCallTokenizerTest());
-		runner.add(new GroupTokenizerTest());
-		runner.add(new NodeTestTokenizerTest());
-		runner.add(new OperandTokenizerTest());
-		runner.add(new AbbreviatedStepTokenizerTest());
-		runner.add(new ArgumentDelimiterTokenizerTest());
-		runner.add(new AxisTokenizerTest());
-		runner.add(new BeginExpressionTokenizerTest());
-		runner.add(new BeginFunctionCallTokenizerTest());
-		runner.add(new BeginGroupTokenizerTest());
-		runner.add(new BeginPathTokenizerTest());
-		runner.add(new BeginPredicateTokenizerTest());
-		runner.add(new BeginXPathTokenizerTest());
-		runner.add(new DeepStepDelimiterTokenizerTest());
-		runner.add(new EndExpressionTokenizerTest());
-		runner.add(new EndFunctionCallTokenizerTest());
-		runner.add(new EndGroupTokenizerTest());
-		runner.add(new EndPathTokenizerTest());
-		runner.add(new EndPredicateTokenizerTest());
-		runner.add(new EndXPathTokenizerTest());
-		runner.add(new FixedStringTokenizerTest());
-		runner.add(new LiteralTokenizerTest());
-		runner.add(new NameTestTokenizerTest());
-		runner.add(new NegationOperatorTokenizerTest());
-		runner.add(new NumberTokenizerTest());
-		runner.add(new OperatorTokenizerTest());
-		runner.add(new PINameTestTokenizerTest());
-		runner.add(new StepDelimiterTokenizerTest());
-		runner.add(new TokenTokenizerTest());
-		runner.add(new TypeTestTokenizerTest());
-		runner.add(new VariableReferenceTokenizerTest());
-		runner.add(new DisjunctionTest());
-		runner.add(new OptionalTest());
-		runner.add(new RepetitionTest());
-		runner.add(new SequenceTest());
-		runner.add(new ExpectedExceptionTest());
-		runner.add(new TokenizerErrorTest());
-		runner.add(new TokenizerExceptionTest());
-		runner.add(new TokenizerInputTest());
-		runner.add(new TokenizerOutputTest());
-		runner.add(new XPathBooleanTest());
-		runner.add(new XPathNodeSetTest());
-		runner.add(new XPathNumberTest());
-		runner.add(new XPathStringTest());
-		runner.add(new XPathHxXmlTest());
-		runner.add(new XPathXmlTest());
-		runner.add(new XPathHxTest());
-		runner.add(new XPathTest());
+        runner.add(new BaseEnvironmentTest());
+        runner.add(new ContextTest());
+        runner.add(new DynamicEnvironmentTest());
+        runner.add(new AxisStepTest());
+        runner.add(new FilterStepTest());
+        runner.add(new FunctionCallTest());
+        runner.add(new LiteralTest());
+        runner.add(new NameStepTest());
+        runner.add(new NegationTest());
+        runner.add(new NumberTest());
+        runner.add(new PathStepTest());
+        runner.add(new PredicateStepTest());
+        runner.add(new RootStepTest());
+        runner.add(new TypeStepTest());
+        runner.add(new VariableReferenceTest());
+        runner.add(new BooleanLibraryTest());
+        runner.add(new NodeSetLibraryTest());
+        runner.add(new NumberLibraryTest());
+        runner.add(new StringLibraryTest());
+        runner.add(new ExpressionParserTest());
+        runner.add(new PathParserTest());
+        runner.add(new ExpressionTokenizerTest());
+        runner.add(new FilterExpressionTokenizerTest());
+        runner.add(new FilterOperandTokenizerTest());
+        runner.add(new FunctionArgumentsTokenizerTest());
+        runner.add(new FunctionCallTokenizerTest());
+        runner.add(new GroupTokenizerTest());
+        runner.add(new NodeTestTokenizerTest());
+        runner.add(new OperandTokenizerTest());
+        runner.add(new AbbreviatedStepTokenizerTest());
+        runner.add(new ArgumentDelimiterTokenizerTest());
+        runner.add(new AxisTokenizerTest());
+        runner.add(new BeginExpressionTokenizerTest());
+        runner.add(new BeginFunctionCallTokenizerTest());
+        runner.add(new BeginGroupTokenizerTest());
+        runner.add(new BeginPathTokenizerTest());
+        runner.add(new BeginPredicateTokenizerTest());
+        runner.add(new BeginXPathTokenizerTest());
+        runner.add(new DeepStepDelimiterTokenizerTest());
+        runner.add(new EndExpressionTokenizerTest());
+        runner.add(new EndFunctionCallTokenizerTest());
+        runner.add(new EndGroupTokenizerTest());
+        runner.add(new EndPathTokenizerTest());
+        runner.add(new EndPredicateTokenizerTest());
+        runner.add(new EndXPathTokenizerTest());
+        runner.add(new FixedStringTokenizerTest());
+        runner.add(new LiteralTokenizerTest());
+        runner.add(new NameTestTokenizerTest());
+        runner.add(new NegationOperatorTokenizerTest());
+        runner.add(new NumberTokenizerTest());
+        runner.add(new OperatorTokenizerTest());
+        runner.add(new PINameTestTokenizerTest());
+        runner.add(new StepDelimiterTokenizerTest());
+        runner.add(new TokenTokenizerTest());
+        runner.add(new TypeTestTokenizerTest());
+        runner.add(new VariableReferenceTokenizerTest());
+        runner.add(new DisjunctionTest());
+        runner.add(new OptionalTest());
+        runner.add(new RepetitionTest());
+        runner.add(new SequenceTest());
+        runner.add(new ExpectedExceptionTest());
+        runner.add(new TokenizerErrorTest());
+        runner.add(new TokenizerExceptionTest());
+        runner.add(new TokenizerInputTest());
+        runner.add(new TokenizerOutputTest());
+        runner.add(new XPathBooleanTest());
+        runner.add(new XPathNodeSetTest());
+        runner.add(new XPathNumberTest());
+        runner.add(new XPathStringTest());
+        runner.add(new XPathHxXmlTest());
+        runner.add(new XPathXmlTest());
+        runner.add(new XPathHxTest());
+        runner.add(new XPathTest());
 
-		#if sys
-		if (runner.run()) {
-			Sys.exit(0);
-		} else {
-			Sys.exit(1);
-		}
-		#else
-		runner.run();
-		#end
-	}
+#if sys
+        if (runner.run()) {
+            Sys.exit(0);
+        } else {
+            Sys.exit(1);
+        }
+#else
+        runner.run();
+#end
+    }
 }

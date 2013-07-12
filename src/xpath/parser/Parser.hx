@@ -35,7 +35,5 @@ import xpath.parser.ParserOutput;
  * is passed to the parser, which uses the [Token]s to build a parse
  * tree (represented by the classes in [xpath.expression]). */
 interface Parser {
-	
-	public function parse (input:ParserInput) :ParserOutput;
-	
+    public function parse(input:ParserInput):ParserOutput;
 }

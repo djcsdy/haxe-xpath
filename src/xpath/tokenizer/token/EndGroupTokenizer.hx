@@ -21,18 +21,19 @@ import xpath.tokenizer.Token;
 
 /** [Tokenizer] which tokenizes according to the [EndGroup] rule. */
 class EndGroupTokenizer extends FixedStringTokenizer {
-	
-	static var instance :EndGroupTokenizer;
-	
-	
-	/** Gets the instance of [EndGroupTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new EndGroupTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new EndGroupToken(), ")", "EndGroup");
-	}
+    static var instance:EndGroupTokenizer;
 
+
+    /** Gets the instance of [EndGroupTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new EndGroupTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new EndGroupToken(), ")", "EndGroup");
+    }
 }

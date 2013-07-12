@@ -25,34 +25,27 @@ import xpath.tokenizer.TokenizerError;
  * <i>token rules</i>. This class exists to provide the convenience
  * function [countWhitespace]. */
 class TokenTokenizer implements Tokenizer {
-	
-	/** Abstract function; must be overridden by descendant classes.
-	 *
-	 * Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) :TokenizerOutput {
-		throw new TokenizerError(
-			"xpath.tokenizer.token.TokenTokenizer.tokenize() must " +
-			"be overridden"
-		);
-		return null;
-	}
-	
-	/** Counts the number of sequential whitespace characters in
-	 * [query] beginning with the character indexed by [start]. */
-	public function countWhitespace (query:String, start:Int) {
-		var i = -1;
-		var char;
-		do {
-			char = query.charAt(start + ++i);
-		} while (
-			char == "\x20" || char == "\x09" ||
-			char == "\x0d" || char == "\x0a"
-		);
-		return i;
-	}
+    /** Abstract function; must be overridden by descendant classes.
+     *
+     * Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput):TokenizerOutput {
+        throw new TokenizerError("xpath.tokenizer.token.TokenTokenizer.tokenize() must " +
+                "be overridden");
+        return null;
+    }
 
+    /** Counts the number of sequential whitespace characters in
+     * [query] beginning with the character indexed by [start]. */
+    public function countWhitespace(query:String, start:Int) {
+        var i = -1;
+        var char;
+        do {
+            char = query.charAt(start + ++i);
+        } while (char == "\x20" || char == "\x09" || char == "\x0d" || char == "\x0a");
+        return i;
+    }
 }

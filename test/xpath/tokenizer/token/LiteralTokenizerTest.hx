@@ -23,68 +23,60 @@ import xpath.tokenizer.ExpectedException;
 
 
 class LiteralTokenizerTest extends TestCase {
-	
-	var otherQuotes :Map<String, String>;
-	
-	
-	public function new () {
-		super();
-		otherQuotes = new Map<String, String>();
-		otherQuotes.set("'", '"');
-		otherQuotes.set('"', "'");
-	}
-	
-	function testGood () {
-		for (quote in ["'", '"']) {
-			var otherQuote:String = otherQuotes.get(quote);
-			
-			for (literal in ["", "sdjf", otherQuote, "NVIsnjnfg" + otherQuote + "235 <XV"]) {
-				for (whitespace in ["", " ", "   "]) {
-					for (garbage in [
-						"", "jfgbnxvv u00U()", quote, otherQuote, otherQuote + quote,
-						quote + otherQuote, quote + quote, otherQuote + otherQuote
-					]) {
-						var input = new TokenizerInput(
-							quote + literal + quote + whitespace + garbage
-						);
-						var output = LiteralTokenizer.getInstance().tokenize(input);
-						
-						assertEquals(1, output.result.length);
-						assertEquals(
-							quote.length + literal.length + quote.length +
-							whitespace.length, output.characterLength
-						);
-						assertTrue(Std.is(output.result[0], LiteralToken));
-						assertEquals(literal, cast(output.result[0], LiteralToken).value);
-					}
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (quote in ["'", '"']) {
-			var otherQuote:String = otherQuotes.get(quote);
-			
-			for (literal in ["", "sdjf", otherQuote, "NVIsnjnfg" + otherQuote + "235 <XV"]) {
-				for (whitespace in ["", " ", "   "]) {
-					for (garbage in ["", "jfgbnxvv u00U()", "193<C<ZM", "|>"]) {
-						var input = new TokenizerInput(
-							quote + literal + otherQuote + whitespace + garbage
-						);
-						
-						var caught = false;
-						try {
-							LiteralTokenizer.getInstance().tokenize(input);
-						} catch (exception:ExpectedException) {
-							caught = true;
-							assertEquals(0, exception.position);
-						}
-						assertTrue(caught);
-					}
-				}
-			}
-		}
-	}
-	
+    var otherQuotes:Map<String, String>;
+
+
+    public function new() {
+        super();
+        otherQuotes = new Map<String, String>();
+        otherQuotes.set("'", '"');
+        otherQuotes.set('"', "'");
+    }
+
+    function testGood() {
+        for (quote in ["'", '"']) {
+            var otherQuote:String = otherQuotes.get(quote);
+
+            for (literal in ["", "sdjf", otherQuote, "NVIsnjnfg" + otherQuote + "235 <XV"]) {
+                for (whitespace in ["", " ", "   "]) {
+                    for (garbage in [
+                        "", "jfgbnxvv u00U()", quote, otherQuote, otherQuote + quote,
+                        quote + otherQuote, quote + quote, otherQuote + otherQuote
+                    ]) {
+                        var input = new TokenizerInput(quote + literal + quote + whitespace + garbage);
+                        var output = LiteralTokenizer.getInstance().tokenize(input);
+
+                        assertEquals(1, output.result.length);
+                        assertEquals(quote.length + literal.length + quote.length + whitespace.length,
+                                output.characterLength);
+                        assertTrue(Std.is(output.result[0], LiteralToken));
+                        assertEquals(literal, cast(output.result[0], LiteralToken).value);
+                    }
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (quote in ["'", '"']) {
+            var otherQuote:String = otherQuotes.get(quote);
+
+            for (literal in ["", "sdjf", otherQuote, "NVIsnjnfg" + otherQuote + "235 <XV"]) {
+                for (whitespace in ["", " ", "   "]) {
+                    for (garbage in ["", "jfgbnxvv u00U()", "193<C<ZM", "|>"]) {
+                        var input = new TokenizerInput(quote + literal + otherQuote + whitespace + garbage);
+
+                        var caught = false;
+                        try {
+                            LiteralTokenizer.getInstance().tokenize(input);
+                        } catch (exception:ExpectedException) {
+                            caught = true;
+                            assertEquals(0, exception.position);
+                        }
+                        assertTrue(caught);
+                    }
+                }
+            }
+        }
+    }
 }

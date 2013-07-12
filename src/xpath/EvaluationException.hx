@@ -20,18 +20,17 @@ import xpath.XPathException;
 
 /** Exception thrown if evaluation of an XPath query fails. */
 class EvaluationException extends XPathException {
-	
-	/** Constructs a new [TokenizerException], optionally including
-	 * the character [position] at which tokenization failed and/or
-	 * a [message] describing the problem. */
-	public function new (?message:String) {
-		super(message);
-	}
-	
-	/** Gets a string representation of the [EvaluationException]. */
-	override public function toString () {
-		return if (message == null) "EvaluationException";
-		else "EvaluationException: " + message;
-	}		
-	
+    /** Constructs a new [TokenizerException], optionally including
+     * the character [position] at which tokenization failed and/or
+     * a [message] describing the problem. */
+    public function new(?message:String) {
+        super(message);
+    }
+
+    /** Gets a string representation of the [EvaluationException]. */
+    override public function toString() {
+        return if (message == null) "EvaluationException";
+        else "EvaluationException: " + message;
+    }
+
 }

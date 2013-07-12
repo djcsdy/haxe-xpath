@@ -24,36 +24,33 @@ import xpath.tokenizer.ExpectedException;
 /** [Tokenizer] which tokenizes according to the [DeepStepDelimiter]
  * rule. */
 class DeepStepDelimiterTokenizer extends TokenTokenizer {
-	
-	static var instance :DeepStepDelimiterTokenizer;
-	
-	
-	/** Gets the instance of [DeepStepDelimiterTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new DeepStepDelimiterTokenizer();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		if (input.query.substr(input.position, 2) == "//") {
-			var result = [
-				cast(new StepDelimiterToken(), Token),
-				new AxisToken(DescendantOrSelf),
-				new TypeTestToken(Node), new StepDelimiterToken()
-			];
-			var characterLength = 2 + countWhitespace(
-				input.query, input.position + 2
-			);
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "DeepStepDelimiter",
-				position: input.position
-			}]);
-		}
-	}
-	
+    static var instance:DeepStepDelimiterTokenizer;
+
+
+    /** Gets the instance of [DeepStepDelimiterTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new DeepStepDelimiterTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        if (input.query.substr(input.position, 2) == "//") {
+            var result = [
+                cast(new StepDelimiterToken(), Token),
+                new AxisToken(DescendantOrSelf),
+                new TypeTestToken(Node),
+                new StepDelimiterToken()
+            ];
+            var characterLength = 2 + countWhitespace(input.query, input.position + 2);
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException([{ tokenName: "DeepStepDelimiter", position: input.position }]);
+        }
+    }
 }

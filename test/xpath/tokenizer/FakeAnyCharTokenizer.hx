@@ -22,27 +22,21 @@ import xpath.tokenizer.ExpectedException;
 
 
 class FakeAnyCharTokenizer implements Tokenizer {
-	
-	public function new () {
-	}
-	
-	public function tokenize (input:TokenizerInput) {
-		if (input.position < input.query.length) {
-			var result = [ cast(new FakeAnyCharToken(), Token) ];
-			var characterLength = 1;
-			return input.getOutput(result, characterLength);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "AnyChar", position: input.position
-			}]);
-		}
-	}
-	
+   public function new() {
+    }
+
+    public function tokenize(input:TokenizerInput) {
+        if (input.position < input.query.length) {
+            var result = [ cast(new FakeAnyCharToken(), Token) ];
+            var characterLength = 1;
+            return input.getOutput(result, characterLength);
+        } else {
+            throw new ExpectedException([{tokenName: "AnyChar", position: input.position}]);
+        }
+    }
 }
 
 private class FakeAnyCharToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }

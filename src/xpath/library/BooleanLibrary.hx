@@ -25,56 +25,50 @@ import xpath.EvaluationException;
  * library. For more information about the implementation of functions
  * in XPath, see [xpath.XPathFunction]. */
 class BooleanLibrary {
-	
-	/** boolean() function from the XPath core function library. The
-	 * query must pass exactly one parameter which is converted to a
-	 * boolean by calling getXPathBoolean. Throws
-	 * [EvaluationException] if [parameters.length != 1]. */
-	public static function boolean (
-		context:Context, parameters:Array<XPathValue>
-	) {
-		if (parameters.length != 1) {
-			throw new EvaluationException("Incorrect parameter count");
-		}
-		return parameters[0].getXPathBoolean();
-	}
-	
-	/** not() function from the XPath core function library. The query
-	 * must pass exactly one parameter which is converted to a boolean
-	 * by calling getXPathBoolean. The sense of the boolean is then
-	 * inverted and the result returned. Throws [EvaluationException]
-	 * if [parameters.length != 1]. */
-	public static function not (
-		context:Context, parameters:Array<XPathValue>
-	) {
-		if (parameters.length != 1) {
-			throw new EvaluationException("Incorrect parameter count");
-		}
-		return new XPathBoolean(!parameters[0].getBool());
-	}
-	
-	/** true() function from the XPath core function library. The
-	 * query must pass no parameters. Throws [EvaluationException] if
-	 * [parameters.length != 0]. */
-	public static function getTrue (
-		context:Context, parameters:Array<XPathValue>
-	) {
-		if (parameters.length != 0) {
-			throw new EvaluationException("Incorrect parameter count");
-		}
-		return new XPathBoolean(true);
-	}
-	
-	/** false() function from the XPath core function library. The
-	 * query must pass no parameters. Throws [EvaluationException] if
-	 * [parameters.length != 0]. */
-	public static function getFalse (
-		context:Context, parameters:Array<XPathValue>
-	) {
-		if (parameters.length != 0) {
-			throw new EvaluationException("Incorrect parameter count");
-		}
-		return new XPathBoolean(false);
-	}
-	
+    /** boolean() function from the XPath core function library. The
+     * query must pass exactly one parameter which is converted to a
+     * boolean by calling getXPathBoolean. Throws
+     * [EvaluationException] if [parameters.length != 1]. */
+    public static function boolean(context:Context, parameters:Array<XPathValue>) {
+        if (parameters.length != 1) {
+            throw new EvaluationException("Incorrect parameter count");
+        }
+
+        return parameters[0].getXPathBoolean();
+    }
+
+    /** not() function from the XPath core function library. The query
+     * must pass exactly one parameter which is converted to a boolean
+     * by calling getXPathBoolean. The sense of the boolean is then
+     * inverted and the result returned. Throws [EvaluationException]
+     * if [parameters.length != 1]. */
+    public static function not(context:Context, parameters:Array<XPathValue>) {
+        if (parameters.length != 1) {
+            throw new EvaluationException("Incorrect parameter count");
+        }
+
+        return new XPathBoolean(!parameters[0].getBool());
+    }
+
+    /** true() function from the XPath core function library. The
+     * query must pass no parameters. Throws [EvaluationException] if
+     * [parameters.length != 0]. */
+    public static function getTrue(context:Context, parameters:Array<XPathValue>) {
+        if (parameters.length != 0) {
+            throw new EvaluationException("Incorrect parameter count");
+        }
+
+        return new XPathBoolean(true);
+    }
+
+    /** false() function from the XPath core function library. The
+     * query must pass no parameters. Throws [EvaluationException] if
+     * [parameters.length != 0]. */
+    public static function getFalse(context:Context, parameters:Array<XPathValue>) {
+        if (parameters.length != 0) {
+            throw new EvaluationException("Incorrect parameter count");
+        }
+
+        return new XPathBoolean(false);
+    }
 }

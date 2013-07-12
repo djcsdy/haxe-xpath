@@ -22,17 +22,15 @@ import xpath.xml.XPathXml;
 
 
 class FakeNodeSetExpression implements Expression {
-	
-	var value :Iterable<XPathXml>;
-	
-	
-	public function new (?value:Iterable<XPathXml>) {
-		if (value == null) this.value = new List<XPathXml>();
-		else this.value = value;
-	}
-	
-	public function evaluate (context:Context) :XPathValue {
-		return new XPathNodeSet(value);
-	}
-	
+    var value:Iterable<XPathXml>;
+
+
+    public function new(?value:Iterable<XPathXml>) {
+        if (value == null) this.value = new List<XPathXml>();
+        else this.value = value;
+    }
+
+    public function evaluate(context:Context):XPathValue {
+        return new XPathNodeSet(value);
+    }
 }

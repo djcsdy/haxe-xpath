@@ -30,45 +30,45 @@ import xpath.tokenizer.TokenizerError;
  * two or more rules match the same number of characters, the rule
  * listed first is preferred. */
 class Disjunction implements Tokenizer {
-	
-	var tokenizers :Iterable<Tokenizer>;
-	
-	
-	/** Constructs a new [Disjunction] which tokenizes the
-	 * disjunction of [tokenizers]. */
-	public function new (tokenizers:Iterable<Tokenizer>) {
-		if (tokenizers.iterator().hasNext()) {
-			this.tokenizers = tokenizers;
-		} else throw new TokenizerError(
-			"Attempted to create an empty disjunction"
-		);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		var expectedTokens = new List<{tokenName:String, position:Int}>();
-		var output:TokenizerOutput = null;
-		
-		for (tokenizer in tokenizers) {
-			try {
-				var tmpOutput = tokenizer.tokenize(input);
-				if (
-					output == null ||
-					tmpOutput.characterLength > output.characterLength
-				) output = tmpOutput;
-			} catch (exception:ExpectedException) {
-				for (expectedToken in exception.expectedTokens) {
-					expectedTokens.push(expectedToken);
-				}
-			}
-		}
-		
-		if (output == null) throw new ExpectedException(expectedTokens);
-		else return output;
-	}
-	
+    var tokenizers:Iterable<Tokenizer>;
+
+
+    /** Constructs a new [Disjunction] which tokenizes the
+     * disjunction of [tokenizers]. */
+    public function new(tokenizers:Iterable<Tokenizer>) {
+        if (tokenizers.iterator().hasNext()) {
+            this.tokenizers = tokenizers;
+        } else {
+            throw new TokenizerError("Attempted to create an empty disjunction");
+        }
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        var expectedTokens = new List<{tokenName:String, position:Int}>();
+        var output:TokenizerOutput = null;
+
+        for (tokenizer in tokenizers) {
+            try {
+                var tmpOutput = tokenizer.tokenize(input);
+                if (output == null || tmpOutput.characterLength > output.characterLength) {
+                    output = tmpOutput;
+                }
+            } catch (exception:ExpectedException) {
+                for (expectedToken in exception.expectedTokens) {
+                    expectedTokens.push(expectedToken);
+                }
+            }
+        }
+
+        if (output == null) {
+            throw new ExpectedException(expectedTokens);
+        } else {
+            return output;
+        }
+    }
 }

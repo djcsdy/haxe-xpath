@@ -25,38 +25,37 @@ import xpath.tokenizer.token.DeepStepDelimiterTokenizer;
 /** [Tokenizer] which tokenizes according to the [StepDelimiters]
  * rule. */
 class StepDelimitersTokenizer implements Tokenizer {
-	
-	static var instance :StepDelimitersTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [StepDelimitersTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new StepDelimitersTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Disjunction([
-			cast(StepDelimiterTokenizer.getInstance(), Tokenizer),
-			DeepStepDelimiterTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:StepDelimitersTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [StepDelimitersTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new StepDelimitersTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Disjunction([
+            cast(StepDelimiterTokenizer.getInstance(), Tokenizer),
+            DeepStepDelimiterTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

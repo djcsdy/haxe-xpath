@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [BeginGroup]
  * rule. */
 class BeginGroupTokenizer extends FixedStringTokenizer {
-	
-	static var instance :BeginGroupTokenizer;
-	
-	
-	/** Gets the instance of [BeginGroupTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new BeginGroupTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new BeginGroupToken(), "(", "BeginGroup");
-	}
-	
+    static var instance:BeginGroupTokenizer;
+
+
+    /** Gets the instance of [BeginGroupTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new BeginGroupTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new BeginGroupToken(), "(", "BeginGroup");
+    }
 }

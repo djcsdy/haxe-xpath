@@ -23,34 +23,32 @@ import xpath.tokenizer.ExpectedException;
 
 
 class BeginXPathTokenizerTest extends TestCase {
-	
-	function testAll () {
-		for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
-			for (whitespace in ["", " ", "    "]) {
-				var input = new TokenizerInput(whitespace + garbage);
-				var output = BeginXPathTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(whitespace.length, output.characterLength);
-				assertTrue(Std.is(output.result[0], BeginXPathToken));
-				
-				var length = whitespace.length + garbage.length;
-				if (length > 1) {
-					var pos = Math.floor(length/2);
-					output = input.getOutput([], Std.int(pos));
-					input = output.getNextInput();
-					
-					var caught = false;
-					try {
-						BeginXPathTokenizer.getInstance().tokenize(input);
-					} catch (exception:ExpectedException) {
-						caught = true;
-						assertEquals(pos, exception.position);
-					}
-					assertTrue(caught);
-				}
-			}
-		}
-	}
-	
+    function testAll() {
+        for (garbage in ["", "dgnxcmbo", "/xcv.# bcds", ",v/x l xf[kgs;"]) {
+            for (whitespace in ["", " ", "    "]) {
+                var input = new TokenizerInput(whitespace + garbage);
+                var output = BeginXPathTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(whitespace.length, output.characterLength);
+                assertTrue(Std.is(output.result[0], BeginXPathToken));
+
+                var length = whitespace.length + garbage.length;
+                if (length > 1) {
+                    var pos = Math.floor(length / 2);
+                    output = input.getOutput([], Std.int(pos));
+                    input = output.getNextInput();
+
+                    var caught = false;
+                    try {
+                        BeginXPathTokenizer.getInstance().tokenize(input);
+                    } catch (exception:ExpectedException) {
+                        caught = true;
+                        assertEquals(pos, exception.position);
+                    }
+                    assertTrue(caught);
+                }
+            }
+        }
+    }
 }

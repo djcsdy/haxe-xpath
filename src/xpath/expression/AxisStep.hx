@@ -22,22 +22,21 @@ import xpath.Axis;
 
 
 class AxisStep extends PathStep {
-	
-	var axis :Axis;
-	
-	
-	public function new (axis:Axis, ?nextStep:PathStep) {
-		super(axisStep, nextStep);
-		this.axis = axis;
-	}
-	
-	function axisStep (context:Context) :Iterable<XPathXml> {
-		var me = this;
-		return {
-			iterator: function () {
-				return context.node.getAxisIterator(me.axis);
-			}
-		};
-	}
-	
+    var axis:Axis;
+
+
+    public function new(axis:Axis, ?nextStep:PathStep) {
+        super(axisStep, nextStep);
+        this.axis = axis;
+    }
+
+    function axisStep(context:Context):Iterable<XPathXml> {
+        var me = this;
+
+        return {
+            iterator: function() {
+                return context.node.getAxisIterator(me.axis);
+            }
+        };
+    }
 }

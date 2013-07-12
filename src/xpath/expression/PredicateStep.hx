@@ -20,30 +20,28 @@ import xpath.value.XPathNumber;
 
 
 class PredicateStep extends PathStep {
-	
-	var expression :Expression;
-	
-	
-	public function new (expression:Expression, ?nextStep:PathStep) {
-		super(predicateStep, nextStep);
-		this.expression = expression;
-	}
-	
-	function predicateStep (context:Context) {
-		var result = expression.evaluate(context);
-		if (Std.is(result, XPathNumber)) {
-			if (result.getFloat() == context.position) {
-				return [context.node];
-			} else {
-				return [];
-			}
-		} else {
-			if (result.getBool()) {
-				return [context.node];
-			} else {
-				return [];
-			}
-		}
-	}
-	
+    var expression:Expression;
+
+
+    public function new(expression:Expression, ?nextStep:PathStep) {
+        super(predicateStep, nextStep);
+        this.expression = expression;
+    }
+
+    function predicateStep(context:Context) {
+        var result = expression.evaluate(context);
+        if (Std.is(result, XPathNumber)) {
+            if (result.getFloat() == context.position) {
+                return [context.node];
+            } else {
+                return [];
+            }
+        } else {
+            if (result.getBool()) {
+                return [context.node];
+            } else {
+                return [];
+            }
+        }
+    }
 }

@@ -22,40 +22,32 @@ import xpath.tokenizer.Token;
 
 
 class PINameTestTokenizerTest extends TestCase {
-	
-	function testGood () {
-		for (whitespace in ["", " ", "   "]) {
-			for (garbage in ["", "mgrsij4", ":fgsï¿½%98385"]) {
-				var input = new TokenizerInput(
-					"processing-instruction" + whitespace + "(" + whitespace +
-					")" + whitespace + garbage
-				);
-				var output = PINameTestTokenizer.getInstance().tokenize(input);
-				
-				assertEquals(1, output.result.length);
-				assertEquals(24 + whitespace.length*3, output.characterLength);
-				assertTrue(Std.is(output.result[0], PINameTestToken));
-				assertEquals(null, cast(output.result[0], PINameTestToken).name);
-				
-				for (quote in ["'", '"']) {
-					for (name in ["", "dfsjhg", "(ï¿½&UJFIONEï¿½"]) {
-						var input = new TokenizerInput(
-							"processing-instruction" + whitespace + "(" + whitespace +
-							quote + name + quote + whitespace + ")" + whitespace
-						);
-						var output = PINameTestTokenizer.getInstance().tokenize(input);
-						
-						assertEquals(1, output.result.length);
-						assertEquals(
-							24 + whitespace.length*4 + quote.length*2 +
-							name.length, output.characterLength
-						);
-						assertTrue(Std.is(output.result[0], PINameTestToken));
-						assertEquals(name, cast(output.result[0], PINameTestToken).name);
-					}
-				}
-			}
-		}
-	}
-	
+    function testGood() {
+        for (whitespace in ["", " ", "   "]) {
+            for (garbage in ["", "mgrsij4", ":fgsï¿½%98385"]) {
+                var input = new TokenizerInput("processing-instruction" + whitespace + "(" + whitespace +
+                        ")" + whitespace + garbage);
+                var output = PINameTestTokenizer.getInstance().tokenize(input);
+
+                assertEquals(1, output.result.length);
+                assertEquals(24 + whitespace.length * 3, output.characterLength);
+                assertTrue(Std.is(output.result[0], PINameTestToken));
+                assertEquals(null, cast(output.result[0], PINameTestToken).name);
+
+                for (quote in ["'", '"']) {
+                    for (name in ["", "dfsjhg", "(ï¿½&UJFIONEï¿½"]) {
+                        var input = new TokenizerInput("processing-instruction" + whitespace + "(" + whitespace +
+                                quote + name + quote + whitespace + ")" + whitespace);
+                        var output = PINameTestTokenizer.getInstance().tokenize(input);
+
+                        assertEquals(1, output.result.length);
+                        assertEquals(24 + whitespace.length * 4 + quote.length * 2 + name.length,
+                                output.characterLength);
+                        assertTrue(Std.is(output.result[0], PINameTestToken));
+                        assertEquals(name, cast(output.result[0], PINameTestToken).name);
+                    }
+                }
+            }
+        }
+    }
 }

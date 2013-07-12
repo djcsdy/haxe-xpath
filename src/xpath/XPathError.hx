@@ -20,22 +20,22 @@ package xpath;
 /** [Exception] thrown as a result of an unrecoverable internal
  * error. This exception should never be caught. */
 class XPathError {
-	
-	/** Message describing the problem. */
-	public var message (default, null) :String;
-	
-	
-	/** Constructs a new [XPathError], optionally including
-	 * a [message] describing the problem. */
-	public function new (?message:String) {
-		this.message = message;
-	}
-	
-	/** Gets a string representation of the [XPathError]. */
-	public function toString () {
-		var string = "XPathError";
-		if (message != null) string += ": " + message;
-		return string;
-	}
-	
+    /** Message describing the problem. */
+    public var message (default, null):String;
+
+
+    /** Constructs a new [XPathError], optionally including
+     * a [message] describing the problem. */
+    public function new(?message:String) {
+        this.message = message;
+    }
+
+    /** Gets a string representation of the [XPathError]. */
+    public function toString() {
+        var string = "XPathError";
+        if (message != null) {
+            string += ": " + message;
+        }
+        return string;
+    }
 }

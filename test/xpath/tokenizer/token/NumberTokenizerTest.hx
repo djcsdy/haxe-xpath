@@ -23,36 +23,34 @@ import xpath.tokenizer.ExpectedException;
 
 
 class NumberTokenizerTest extends TestCase {
+    function testGood() {
+        for (number in ["5", "537895", ".3489", "38598."]) {
+            for (whitespace in ["", " ", "    "]) {
+                for (garbage in ["", "djgsogj", "!$()ï¿½*"]) {
+                    var input = new TokenizerInput(number + whitespace + garbage);
+                    var output = NumberTokenizer.getInstance().tokenize(input);
 
-	function testGood () {
-		for (number in ["5", "537895", ".3489", "38598."]) {
-			for (whitespace in ["", " ", "    "]) {
-				for (garbage in ["", "djgsogj", "!$()ï¿½*"]) {
-					var input = new TokenizerInput(number + whitespace + garbage);
-					var output = NumberTokenizer.getInstance().tokenize(input);
-					
-					assertEquals(1, output.result.length);
-					assertEquals(number.length + whitespace.length, output.characterLength);
-					assertTrue(Std.is(output.result[0], NumberToken));
-					assertEquals(Std.parseFloat(number), cast(output.result[0], NumberToken).value);
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (garbage in ["", ".", ".sfjgs0", "sgj3.", "(ï¿½*%)"]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try {
-				NumberTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				caught = true;
-				assertEquals(0, exception.position);
-			}
-			assertTrue(caught);
-		}
-	}
-	
+                    assertEquals(1, output.result.length);
+                    assertEquals(number.length + whitespace.length, output.characterLength);
+                    assertTrue(Std.is(output.result[0], NumberToken));
+                    assertEquals(Std.parseFloat(number), cast(output.result[0], NumberToken).value);
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (garbage in ["", ".", ".sfjgs0", "sgj3.", "(ï¿½*%)"]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                NumberTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                caught = true;
+                assertEquals(0, exception.position);
+            }
+            assertTrue(caught);
+        }
+    }
 }

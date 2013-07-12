@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [StepDelimiter]
  * rule. */
 class StepDelimiterTokenizer extends FixedStringTokenizer {
-	
-	static var instance :StepDelimiterTokenizer;
-	
-	
-	/** Gets the instance of [StepDelimiterTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new StepDelimiterTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new StepDelimiterToken(), "/", "StepDelimiter");
-	}
-	
+    static var instance:StepDelimiterTokenizer;
+
+
+    /** Gets the instance of [StepDelimiterTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new StepDelimiterTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new StepDelimiterToken(), "/", "StepDelimiter");
+    }
 }

@@ -218,12 +218,10 @@ package xpath.tokenizer;
  * <li>A match of [..] results in the token sequence corresponding to
  *  [parent::node()].</li></ul> */
 interface Tokenizer {
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) :TokenizerOutput;
-	
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput):TokenizerOutput;
 }

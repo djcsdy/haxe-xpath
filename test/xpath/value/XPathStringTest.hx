@@ -22,86 +22,72 @@ import xpath.EvaluationException;
 
 
 class XPathStringTest extends TestCase {
-	
-	function testGetBool () {
-		for (string in [ "abcsd", "false", "FALSE", "null", "0" ]) {
-			var xPathString = new XPathString(string);
-			assertTrue(xPathString.getBool());
-		}
-		
-		var xPathString = new XPathString("");
-		assertFalse(xPathString.getBool());
-	}
-	
-	function testGetFloat () {
-		for (string in [ "jgs", "  3392k", "uf3832985", "", "1..2" ]) {
-			var xPathString = new XPathString(string);
-			assertTrue(Math.isNaN(xPathString.getFloat()));
-		}
-		
-		for (string in [ "0", "1", "0.1234", "3983.3249783" ]) {
-			for (wsl in [ "", " ", "   " ]) {
-				for (wsr in [ "", " ", "   " ]) {
-					var xPathString = new XPathString(wsl + string + wsr);
-					assertEquals(Std.parseFloat(string), xPathString.getFloat());
-					for (wsm in [ "", " ", "   " ]) {
-						xPathString = new XPathString(wsl + "-" + wsm + string + wsr);
-						assertEquals(-Std.parseFloat(string), xPathString.getFloat());
-					}
-				}
-			}
-		}
-	}
-	
-	function testGetString () {
-		for (string in [ "", "dsfhsg" ]) {
-			var xPathString = new XPathString(string);
-			assertEquals(string, xPathString.getString());
-		}
-	}
-	
-	function testEquals () {
-		for (left in [ "", "ajifij", " ajifij" ]) {
-			var xPathLeft = new XPathString(left);
-			for (right in [ "", "ajifij", "ajifij " ]) {
-				var xPathRight = new XPathString(right);
-				assertEquals(
-					left == right,
-					xPathLeft.equals(xPathRight).getBool()
-				);
-				assertEquals(
-					left == right,
-					xPathRight.equals(xPathLeft).getBool()
-				);
-			}
-		}
-	}
-	
-	function testNotEqual () {
-		for (left in [ "", "ajifij", " ajifij" ]) {
-			var xPathLeft = new XPathString(left);
-			for (right in [ "", "ajifij", "ajifij " ]) {
-				var xPathRight = new XPathString(right);
-				assertEquals(
-					left != right,
-					xPathLeft.notEqual(xPathRight).getBool()
-				);
-				assertEquals(
-					left != right,
-					xPathRight.notEqual(xPathLeft).getBool()
-				);
-			}
-		}
-	}
-	
-	function testUnion () {
-		var caught = false;
-		try {
-			new XPathString("abc").union(new XPathNodeSet([]));
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testGetBool() {
+        for (string in [ "abcsd", "false", "FALSE", "null", "0" ]) {
+            var xPathString = new XPathString(string);
+            assertTrue(xPathString.getBool());
+        }
+
+        var xPathString = new XPathString("");
+        assertFalse(xPathString.getBool());
+    }
+
+    function testGetFloat() {
+        for (string in [ "jgs", "  3392k", "uf3832985", "", "1..2" ]) {
+            var xPathString = new XPathString(string);
+            assertTrue(Math.isNaN(xPathString.getFloat()));
+        }
+
+        for (string in [ "0", "1", "0.1234", "3983.3249783" ]) {
+            for (wsl in [ "", " ", "   " ]) {
+                for (wsr in [ "", " ", "   " ]) {
+                    var xPathString = new XPathString(wsl + string + wsr);
+                    assertEquals(Std.parseFloat(string), xPathString.getFloat());
+                    for (wsm in [ "", " ", "   " ]) {
+                        xPathString = new XPathString(wsl + "-" + wsm + string + wsr);
+                        assertEquals(-Std.parseFloat(string), xPathString.getFloat());
+                    }
+                }
+            }
+        }
+    }
+
+    function testGetString() {
+        for (string in [ "", "dsfhsg" ]) {
+            var xPathString = new XPathString(string);
+            assertEquals(string, xPathString.getString());
+        }
+    }
+
+    function testEquals() {
+        for (left in [ "", "ajifij", " ajifij" ]) {
+            var xPathLeft = new XPathString(left);
+            for (right in [ "", "ajifij", "ajifij " ]) {
+                var xPathRight = new XPathString(right);
+                assertEquals(left == right, xPathLeft.equals(xPathRight).getBool());
+                assertEquals(left == right, xPathRight.equals(xPathLeft).getBool());
+            }
+        }
+    }
+
+    function testNotEqual() {
+        for (left in [ "", "ajifij", " ajifij" ]) {
+            var xPathLeft = new XPathString(left);
+            for (right in [ "", "ajifij", "ajifij " ]) {
+                var xPathRight = new XPathString(right);
+                assertEquals(left != right, xPathLeft.notEqual(xPathRight).getBool());
+                assertEquals(left != right, xPathRight.notEqual(xPathLeft).getBool());
+            }
+        }
+    }
+
+    function testUnion() {
+        var caught = false;
+        try {
+            new XPathString("abc").union(new XPathNodeSet([]));
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
 }

@@ -20,17 +20,17 @@ package xpath;
 /** Enumeration of the various axes as defined by the XPath
  * specification. */
 enum Axis {
-	Ancestor;
-	AncestorOrSelf;
-	Attribute;
-	Child;
-	Descendant;
-	DescendantOrSelf;
-	Following;
-	FollowingSibling;
-	Namespace;
-	Parent;
-	Preceding;
-	PrecedingSibling;
-	Self;
+    Ancestor;
+    AncestorOrSelf;
+    Attribute;
+    Child;
+    Descendant;
+    DescendantOrSelf;
+    Following;
+    FollowingSibling;
+    Namespace;
+    Parent;
+    Preceding;
+    PrecedingSibling;
+    Self;
 }

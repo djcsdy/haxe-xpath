@@ -28,39 +28,38 @@ import xpath.tokenizer.token.EndXPathTokenizer;
  * string, this class is one of the primary interfaces between
  * the tokenizer and the rest of the XPath package. */
 class XPathTokenizer implements Tokenizer {
-	
-	static var instance :XPathTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [XPathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new XPathTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(BeginXPathTokenizer.getInstance(), Tokenizer),
-			ExpressionTokenizer.getInstance(),
-			EndXPathTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:XPathTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [XPathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new XPathTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(BeginXPathTokenizer.getInstance(), Tokenizer),
+            ExpressionTokenizer.getInstance(),
+            EndXPathTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

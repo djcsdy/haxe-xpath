@@ -25,77 +25,61 @@ import xpath.value.XPathNumber;
 
 
 class FunctionCallTest extends TestCase {
-	
-	var context :FakeContext;
-	
-	
-	public function new () {
-		super();
-		
-		var environment = new DynamicEnvironment();
-		
-		environment.setFunction("simple", function (
-			context:Context,
-			arguments:Array<XPathValue>
-		) {
-			return new XPathString("simple");
-		});
-		
-		environment.setFunction("string", function (
-			context:Context,
-			arguments:Array<XPathValue>
-		) {
-			return arguments[0].getXPathString();
-		});
-		
-		environment.setFunction("sum", function (
-			context:Context,
-			arguments:Array<XPathValue>
-		) {
-			return new XPathNumber(
-				arguments[0].getFloat() +
-				arguments[1].getFloat()
-			);
-		});
-		
-		context = new FakeContext(environment);
-	}
-	
-	function testSimple () {
-		var functionCall = new FunctionCall("simple", []);
-		var result = functionCall.evaluate(context);
-		assertEquals("simple", result.getString());
-	}
-	
-	function test1Arg () {
-		for (arg in [
-			cast(new Literal("abcdef"), Expression),
-			new Literal(""),
-			new Literal("foo"),
-			new Number(24),
-			new Number(-511),
-			new FakeBooleanExpression(true),
-			new FakeBooleanExpression(false)
-		]) {
-			var functionCall = new FunctionCall("string", [arg]);
-			var result = functionCall.evaluate(context);
-			assertEquals(arg.evaluate(context).getString(), result.getString());
-		}
-	}
-	
-	function test2Arg () {
-		for (arg1Value in [0.0, 1.5, 5, 10, -50, 200]) {
-			var arg1 = new Number(arg1Value);
-			
-			for (arg2Value in [0, 20, -217.823, 4000]) {
-				var arg2 = new Number(arg2Value);
-				var functionCall = new FunctionCall("sum", [
-					cast(arg1, Expression), arg2
-				]);
-				var result =  functionCall.evaluate(context);
-				assertEquals(arg1Value+arg2Value, result.getFloat());
-			}
-		}
-	}
-	
+    var context:FakeContext;
+
+
+    public function new() {
+        super();
+
+        var environment = new DynamicEnvironment();
+
+        environment.setFunction("simple", function(context:Context, arguments:Array<XPathValue>) {
+            return new XPathString("simple");
+        });
+
+        environment.setFunction("string", function(context:Context, arguments:Array<XPathValue>) {
+            return arguments[0].getXPathString();
+        });
+
+        environment.setFunction("sum", function(context:Context, arguments:Array<XPathValue>) {
+            return new XPathNumber(arguments[0].getFloat() + arguments[1].getFloat());
+        });
+
+        context = new FakeContext(environment);
+    }
+
+    function testSimple() {
+        var functionCall = new FunctionCall("simple", []);
+        var result = functionCall.evaluate(context);
+        assertEquals("simple", result.getString());
+    }
+
+    function test1Arg() {
+        for (arg in [
+            cast(new Literal("abcdef"), Expression),
+            new Literal(""),
+            new Literal("foo"),
+            new Number(24),
+            new Number(-511),
+            new FakeBooleanExpression(true),
+            new FakeBooleanExpression(false)
+        ]) {
+            var functionCall = new FunctionCall("string", [arg]);
+            var result = functionCall.evaluate(context);
+            assertEquals(arg.evaluate(context).getString(), result.getString());
+        }
+    }
+
+    function test2Arg() {
+        for (arg1Value in [0.0, 1.5, 5, 10, -50, 200]) {
+            var arg1 = new Number(arg1Value);
+
+            for (arg2Value in [0, 20, -217.823, 4000]) {
+                var arg2 = new Number(arg2Value);
+                var functionCall = new FunctionCall("sum", [cast(arg1, Expression), arg2]);
+                var result = functionCall.evaluate(context);
+                assertEquals(arg1Value + arg2Value, result.getFloat());
+            }
+        }
+    }
 }

@@ -20,13 +20,11 @@ import xpath.tokenizer.TokenizerError;
 
 
 class TokenizerErrorTest extends TestCase {
-	
-	function testToString () :Void {
-		var tokenizerError = new TokenizerError();
-		assertEquals("TokenizerError", tokenizerError.toString());
-		
-		tokenizerError = new TokenizerError("bananas");
-		assertEquals("TokenizerError: bananas", tokenizerError.toString());
-	}
-	
+    function testToString():Void {
+        var tokenizerError = new TokenizerError();
+        assertEquals("TokenizerError", tokenizerError.toString());
+
+        tokenizerError = new TokenizerError("bananas");
+        assertEquals("TokenizerError: bananas", tokenizerError.toString());
+    }
 }

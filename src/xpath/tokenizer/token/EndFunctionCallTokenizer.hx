@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [EndFunctionCall]
  * rule. */
 class EndFunctionCallTokenizer extends FixedStringTokenizer {
-	
-	static var instance :EndFunctionCallTokenizer;
-	
-	
-	/** Gets the instance of [EndFunctionCallTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new EndFunctionCallTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new EndFunctionCallToken(), ")", "EndFunctionCall");
-	}
-	
+    static var instance:EndFunctionCallTokenizer;
+
+
+    /** Gets the instance of [EndFunctionCallTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new EndFunctionCallTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new EndFunctionCallToken(), ")", "EndFunctionCall");
+    }
 }

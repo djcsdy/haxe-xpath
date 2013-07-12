@@ -20,25 +20,23 @@ import xpath.tokenizer.TokenizerException;
 
 
 class TokenizerExceptionTest extends TestCase {
-	
-	function testToString () :Void {
-		var tokenizerException = new TokenizerException();
-		assertEquals("TokenizerException", tokenizerException.toString());
-		
-		tokenizerException = new TokenizerException("");
-		assertEquals("TokenizerException", tokenizerException.toString());
-		
-		tokenizerException = new TokenizerException(42);
-		assertEquals("character 42: TokenizerException", tokenizerException.toString());
-		
-		tokenizerException = new TokenizerException(42, "");
-		assertEquals("character 42: TokenizerException", tokenizerException.toString());
-		
-		tokenizerException = new TokenizerException("bananas");
-		assertEquals("bananas", tokenizerException.toString());
-		
-		tokenizerException = new TokenizerException(42, "bananas");
-		assertEquals("character 42: bananas", tokenizerException.toString());
-	}
-	
+    function testToString():Void {
+        var tokenizerException = new TokenizerException();
+        assertEquals("TokenizerException", tokenizerException.toString());
+
+        tokenizerException = new TokenizerException("");
+        assertEquals("TokenizerException", tokenizerException.toString());
+
+        tokenizerException = new TokenizerException(42);
+        assertEquals("character 42: TokenizerException", tokenizerException.toString());
+
+        tokenizerException = new TokenizerException(42, "");
+        assertEquals("character 42: TokenizerException", tokenizerException.toString());
+
+        tokenizerException = new TokenizerException("bananas");
+        assertEquals("bananas", tokenizerException.toString());
+
+        tokenizerException = new TokenizerException(42, "bananas");
+        assertEquals("character 42: bananas", tokenizerException.toString());
+    }
 }

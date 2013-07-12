@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [ArgumentDelimiter]
  * rule. */
 class ArgumentDelimiterTokenizer extends FixedStringTokenizer {
-	
-	static var instance :ArgumentDelimiterTokenizer;
-	
-	
-	/** Gets the instance of [ArgumentDelimiterTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new ArgumentDelimiterTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new ArgumentDelimiterToken(), ",", "ArgumentDelimiter");
-	}
-	
+    static var instance:ArgumentDelimiterTokenizer;
+
+
+    /** Gets the instance of [ArgumentDelimiterTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new ArgumentDelimiterTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new ArgumentDelimiterToken(), ",", "ArgumentDelimiter");
+    }
 }

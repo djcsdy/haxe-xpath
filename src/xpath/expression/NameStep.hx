@@ -20,26 +20,23 @@ import xpath.xml.XmlNodeType;
 
 
 class NameStep extends PathStep {
-	
-	var name :String;
-	
-	
-	public function new (name:String, ?nextStep:PathStep) {
-		super(nameStep, nextStep);
-		this.name = name;
-	}
-	
-	private function nameStep (context:Context) {
-		var contextNodeType = context.node.getType();
-		if (
-			contextNodeType == XmlNodeType.Element ||
-			contextNodeType == XmlNodeType.Attribute
-		) {
-			if (name == "*" || context.node.getName() == name) {
-				return [context.node];
-			}
-		}
-		return [];
-	}
-	
+    var name:String;
+
+
+    public function new(name:String, ?nextStep:PathStep) {
+        super(nameStep, nextStep);
+        this.name = name;
+    }
+
+    private function nameStep(context:Context) {
+        var contextNodeType = context.node.getType();
+        if (contextNodeType == XmlNodeType.Element ||
+                contextNodeType == XmlNodeType.Attribute) {
+            if (name == "*" || context.node.getName() == name) {
+                return [context.node];
+            }
+        }
+        return [];
+    }
+
 }

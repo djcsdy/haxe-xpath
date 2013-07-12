@@ -21,17 +21,15 @@ import xpath.value.XPathValue;
 
 
 class Literal implements Expression {
-	
-	var value :String;
-	
-	
-	public function new (value:String) {
-		this.value = value;
-	}
-	
-	
-	public function evaluate (context:Context) :XPathValue {
-		return new XPathString(value);
-	}
-	
+    var value:String;
+
+
+    public function new(value:String) {
+        this.value = value;
+    }
+
+
+    public function evaluate(context:Context):XPathValue {
+        return new XPathString(value);
+    }
 }

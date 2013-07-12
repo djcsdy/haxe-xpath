@@ -23,80 +23,81 @@ import xpath.Axis;
 
 /** [Tokenizer] which tokenizes according to the [Axis] rule. */
 class AxisTokenizer extends TokenTokenizer {
+    static var instance:AxisTokenizer;
+    var axisNames:Array<String>;
+    var axisNameToAxis:Map<String, Axis>;
 
-	static var instance :AxisTokenizer;
-	var axisNames :Array<String>;
-	var axisNameToAxis :Map<String, Axis>;
-	
 
-	/** Gets the instance of [AxisTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new AxisTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		axisNameToAxis = new Map<String, Axis>();
-		axisNameToAxis.set("ancestor", Ancestor);
-		axisNameToAxis.set("ancestor-or-self", AncestorOrSelf);
-		axisNameToAxis.set("attribute", Attribute);
-		axisNameToAxis.set("child", Child);
-		axisNameToAxis.set("descendant", Descendant);
-		axisNameToAxis.set("descendant-or-self", DescendantOrSelf);
-		axisNameToAxis.set("following", Following);
-		axisNameToAxis.set("following-sibling", FollowingSibling);
-		axisNameToAxis.set("namespace", Namespace);
-		axisNameToAxis.set("parent", Parent);
-		axisNameToAxis.set("preceding", Preceding);
-		axisNameToAxis.set("preceding-sibling", PrecedingSibling);
-		axisNameToAxis.set("self", Self);
-		
-		axisNames = new Array<String>();
-		for (axisName in axisNameToAxis.keys()) {
-			axisNames.push(axisName);
-		}
-		
-		// sort names by length, longest first
-		axisNames.sort(function (x:String, y:String) {
-			return y.length - x.length;
-		});
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var pos = input.position;
-		
-		var axis = null;
-		for (axisName in axisNames) {
-			if (input.query.substr(pos, axisName.length) == axisName) {
-				pos += axisName.length;
-				pos += countWhitespace(input.query, pos);
-				
-				if (input.query.substr(pos, 2) == "::") {
-					pos += 2;
-					axis = axisNameToAxis.get(axisName);
-				} else {
-					pos = input.position;
-					axis = Child;
-				}
-				break;
-			}
-		}
-		
-		if (axis == null) {
-			if (input.query.charAt(pos) == "@") {
-				axis = Attribute;
-				++pos;
-			} else {
-				axis = Child;
-			}
-		}
-		
-		pos += countWhitespace(input.query, pos);
-		
-		var characterLength = pos - input.position;
-		var result = [ cast(new AxisToken(axis), Token) ];
-		
-		return input.getOutput(result, characterLength);
-	}
-	
+    /** Gets the instance of [AxisTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new AxisTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        axisNameToAxis = new Map<String, Axis>();
+        axisNameToAxis.set("ancestor", Ancestor);
+        axisNameToAxis.set("ancestor-or-self", AncestorOrSelf);
+        axisNameToAxis.set("attribute", Attribute);
+        axisNameToAxis.set("child", Child);
+        axisNameToAxis.set("descendant", Descendant);
+        axisNameToAxis.set("descendant-or-self", DescendantOrSelf);
+        axisNameToAxis.set("following", Following);
+        axisNameToAxis.set("following-sibling", FollowingSibling);
+        axisNameToAxis.set("namespace", Namespace);
+        axisNameToAxis.set("parent", Parent);
+        axisNameToAxis.set("preceding", Preceding);
+        axisNameToAxis.set("preceding-sibling", PrecedingSibling);
+        axisNameToAxis.set("self", Self);
+
+        axisNames = new Array<String>();
+        for (axisName in axisNameToAxis.keys()) {
+            axisNames.push(axisName);
+        }
+
+        // sort names by length, longest first
+        axisNames.sort(function(x:String, y:String) {
+            return y.length - x.length;
+        });
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var pos = input.position;
+
+        var axis = null;
+        for (axisName in axisNames) {
+            if (input.query.substr(pos, axisName.length) == axisName) {
+                pos += axisName.length;
+                pos += countWhitespace(input.query, pos);
+
+                if (input.query.substr(pos, 2) == "::") {
+                    pos += 2;
+                    axis = axisNameToAxis.get(axisName);
+                } else {
+                    pos = input.position;
+                    axis = Child;
+                }
+                break;
+            }
+        }
+
+        if (axis == null) {
+            if (input.query.charAt(pos) == "@") {
+                axis = Attribute;
+                ++pos;
+            } else {
+                axis = Child;
+            }
+        }
+
+        pos += countWhitespace(input.query, pos);
+
+        var characterLength = pos - input.position;
+        var result = [ cast(new AxisToken(axis), Token) ];
+
+        return input.getOutput(result, characterLength);
+    }
 }

@@ -23,36 +23,30 @@ import xpath.tokenizer.TokenizerException;
 
 
 class TokenizerOutputTest extends TestCase {
-	
-	function testAll () :Void {
-		var tokenizerOutput = new TokenizerOutput([], 0, null);
-		assertTrue(tokenizerOutput.isComplete());
-		assertEquals(0, tokenizerOutput.characterLength);
-		assertEquals(0, tokenizerOutput.result.length);
-		var caught = false;
-		try {
-			tokenizerOutput.getNextInput();
-		} catch (exception:TokenizerException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		var nextInput = new TokenizerInput("bananas", 5);
-		tokenizerOutput = new TokenizerOutput(
-			[ cast(new FakeToken(), Token) ], 3, nextInput
-		);
-		assertFalse(tokenizerOutput.isComplete());
-		assertEquals(3, tokenizerOutput.characterLength);
-		assertEquals(1, tokenizerOutput.result.length);
-		assertTrue(Std.is(tokenizerOutput.result[0], FakeToken));
-		assertEquals(nextInput, tokenizerOutput.getNextInput());
-	}
-	
+    function testAll():Void {
+        var tokenizerOutput = new TokenizerOutput([], 0, null);
+        assertTrue(tokenizerOutput.isComplete());
+        assertEquals(0, tokenizerOutput.characterLength);
+        assertEquals(0, tokenizerOutput.result.length);
+        var caught = false;
+        try {
+            tokenizerOutput.getNextInput();
+        } catch (exception:TokenizerException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        var nextInput = new TokenizerInput("bananas", 5);
+        tokenizerOutput = new TokenizerOutput([ cast(new FakeToken(), Token) ], 3, nextInput);
+        assertFalse(tokenizerOutput.isComplete());
+        assertEquals(3, tokenizerOutput.characterLength);
+        assertEquals(1, tokenizerOutput.result.length);
+        assertTrue(Std.is(tokenizerOutput.result[0], FakeToken));
+        assertEquals(nextInput, tokenizerOutput.getNextInput());
+    }
 }
 
 private class FakeToken implements Token {
-	
-	public function new () {
-	}
-	
+    public function new() {
+    }
 }

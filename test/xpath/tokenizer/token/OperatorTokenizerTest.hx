@@ -24,58 +24,56 @@ import xpath.Operator;
 
 
 class OperatorTokenizerTest extends TestCase {
-	
-	var operators :Map<String, Operator>;
-	
-	
-	public function new () {
-		super();
-		operators = new Map<String, Operator>();
-		operators.set("and", And);
-		operators.set("mod", Modulo);
-		operators.set("div", Divide);
-		operators.set("or", Or);
-		operators.set("!=", NotEqual);
-		operators.set("<=", LessThanOrEqual);
-		operators.set(">=", GreaterThanOrEqual);
-		operators.set("=", Equal);
-		operators.set("|", Union);
-		operators.set("+", Plus);
-		operators.set("-", Minus);
-		operators.set("<", LessThan);
-		operators.set(">", GreaterThan);
-		operators.set("*", Multiply);
-	}
+    var operators:Map<String, Operator>;
 
-	function testGood () {
-		for (whitespace in ["", " ", "    "]) {
-			for (garbage in ["", "fmnvisfjg-", "cx. ]", "?MVCZ"]) {
-				for (operator in operators.keys()) {
-					var input = new TokenizerInput(operator + whitespace + garbage);
-					var output = OperatorTokenizer.getInstance().tokenize(input);
-					
-					assertEquals(1, output.result.length);
-					assertEquals(operator.length + whitespace.length, output.characterLength);
-					assertTrue(Std.is(output.result[0], OperatorToken));
-					assertEquals(operators.get(operator), cast(output.result[0], OperatorToken).operator);
-				}
-			}
-		}
-	}
-	
-	function testBad () {
-		for (garbage in ["", "fmnvisfjg-", "cx. ]", "?MVCZ"]) {
-			var input = new TokenizerInput(garbage);
-			
-			var caught = false;
-			try {
-				OperatorTokenizer.getInstance().tokenize(input);
-			} catch (exception:ExpectedException) {
-				caught = true;
-				assertEquals(0, exception.position);
-			}
-			assertTrue(caught);
-		}
-	}
-	
+
+    public function new() {
+        super();
+        operators = new Map<String, Operator>();
+        operators.set("and", And);
+        operators.set("mod", Modulo);
+        operators.set("div", Divide);
+        operators.set("or", Or);
+        operators.set("!=", NotEqual);
+        operators.set("<=", LessThanOrEqual);
+        operators.set(">=", GreaterThanOrEqual);
+        operators.set("=", Equal);
+        operators.set("|", Union);
+        operators.set("+", Plus);
+        operators.set("-", Minus);
+        operators.set("<", LessThan);
+        operators.set(">", GreaterThan);
+        operators.set("*", Multiply);
+    }
+
+    function testGood() {
+        for (whitespace in ["", " ", "    "]) {
+            for (garbage in ["", "fmnvisfjg-", "cx. ]", "?MVCZ"]) {
+                for (operator in operators.keys()) {
+                    var input = new TokenizerInput(operator + whitespace + garbage);
+                    var output = OperatorTokenizer.getInstance().tokenize(input);
+
+                    assertEquals(1, output.result.length);
+                    assertEquals(operator.length + whitespace.length, output.characterLength);
+                    assertTrue(Std.is(output.result[0], OperatorToken));
+                    assertEquals(operators.get(operator), cast(output.result[0], OperatorToken).operator);
+                }
+            }
+        }
+    }
+
+    function testBad() {
+        for (garbage in ["", "fmnvisfjg-", "cx. ]", "?MVCZ"]) {
+            var input = new TokenizerInput(garbage);
+
+            var caught = false;
+            try {
+                OperatorTokenizer.getInstance().tokenize(input);
+            } catch (exception:ExpectedException) {
+                caught = true;
+                assertEquals(0, exception.position);
+            }
+            assertTrue(caught);
+        }
+    }
 }

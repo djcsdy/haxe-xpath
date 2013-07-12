@@ -24,19 +24,17 @@ import xpath.tokenizer.TokenizerException;
 /** [Tokenizer] which tokenizes according to an optional
  * sequence of rules, e.g. [(A B C)?]. */
 class Optional extends Sequence {
-	
-	/** Constructs a new [Optional] that tokenizes according to
-	 * the sequence of rules tokenized by [tokenizers]. */
-	public function new (tokenizers:Iterable<Tokenizer>) {
-		super(tokenizers);
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		try {
-			return super.tokenize(input);
-		} catch (exception:TokenizerException) {
-			return input.getOutput([], 0);
-		}
-	}
-	
+    /** Constructs a new [Optional] that tokenizes according to
+     * the sequence of rules tokenized by [tokenizers]. */
+    public function new(tokenizers:Iterable<Tokenizer>) {
+        super(tokenizers);
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        try {
+            return super.tokenize(input);
+        } catch (exception:TokenizerException) {
+            return input.getOutput([], 0);
+        }
+    }
 }

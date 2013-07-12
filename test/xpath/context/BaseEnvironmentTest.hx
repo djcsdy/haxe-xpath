@@ -22,100 +22,95 @@ import xpath.EvaluationException;
 
 
 class BaseEnvironmentTest extends TestCase {
-	
-	function testExists () {
-		var environment = new FakeBaseEnvironment();
-		assertFalse(environment.existsFunction("bananas"));
-		assertFalse(environment.existsVariable("bananas"));
-		assertTrue(environment.existsFunction("apples"));
-		assertFalse(environment.existsVariable("apples"));
-		assertFalse(environment.existsFunction("pears"));
-		assertFalse(environment.existsVariable("pears"));
-		assertFalse(environment.existsFunction("cherries"));
-		assertTrue(environment.existsVariable("cherries"));
-		assertFalse(environment.existsFunction("grapes"));
-		assertFalse(environment.existsVariable("grapes"));
-	}
-	
-	function testCallFunction () {
-		var environment = new FakeBaseEnvironment();
-		var context = new FakeContext(environment);
-		
-		var parameters = new Array<XPathValue>();
-		var result = environment.callFunction(
-			context, "apples", parameters
-		);
-		assertEquals(1, environment.applesCount);
-		assertEquals(parameters, environment.applesParameters);
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(3.14159, result.getFloat());
-		
-		var caught = false;
-		try {
-			environment.callFunction(context, "bananas", parameters);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			environment.callFunction(context, "pears", parameters);
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
-	function testGetVariable () {
-		var environment = new FakeBaseEnvironment();
-		var context = new FakeContext(environment);
-		
-		var result = environment.getVariable("cherries");
-		assertTrue(Std.is(result, XPathNumber));
-		assertEquals(42., result.getFloat());
-		
-		var caught = false;
-		try {
-			environment.getVariable("bananas");
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-		
-		caught = false;
-		try {
-			environment.getVariable("grapes");
-		} catch (exception:EvaluationException) {
-			caught = true;
-		}
-		assertTrue(caught);
-	}
-	
+    function testExists() {
+        var environment = new FakeBaseEnvironment();
+        assertFalse(environment.existsFunction("bananas"));
+        assertFalse(environment.existsVariable("bananas"));
+        assertTrue(environment.existsFunction("apples"));
+        assertFalse(environment.existsVariable("apples"));
+        assertFalse(environment.existsFunction("pears"));
+        assertFalse(environment.existsVariable("pears"));
+        assertFalse(environment.existsFunction("cherries"));
+        assertTrue(environment.existsVariable("cherries"));
+        assertFalse(environment.existsFunction("grapes"));
+        assertFalse(environment.existsVariable("grapes"));
+    }
+
+    function testCallFunction() {
+        var environment = new FakeBaseEnvironment();
+        var context = new FakeContext(environment);
+
+        var parameters = new Array<XPathValue>();
+        var result = environment.callFunction(
+            context, "apples", parameters
+        );
+        assertEquals(1, environment.applesCount);
+        assertEquals(parameters, environment.applesParameters);
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(3.14159, result.getFloat());
+
+        var caught = false;
+        try {
+            environment.callFunction(context, "bananas", parameters);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            environment.callFunction(context, "pears", parameters);
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
+    function testGetVariable() {
+        var environment = new FakeBaseEnvironment();
+        var context = new FakeContext(environment);
+
+        var result = environment.getVariable("cherries");
+        assertTrue(Std.is(result, XPathNumber));
+        assertEquals(42., result.getFloat());
+
+        var caught = false;
+        try {
+            environment.getVariable("bananas");
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+
+        caught = false;
+        try {
+            environment.getVariable("grapes");
+        } catch (exception:EvaluationException) {
+            caught = true;
+        }
+        assertTrue(caught);
+    }
+
 }
 
 private class FakeBaseEnvironment extends BaseEnvironment {
-	
-	public var applesCount :Int;
-	public var applesParameters :Array<XPathValue>;
-	
-	
-	public function new () {
-		super();
-		applesCount = 0;
-		
-		var me = this;
-		functions.set("apples", function (
-			context:Context, parameters:Array<XPathValue>
-		) :XPathValue {
-			me.applesCount++;
-			me.applesParameters = parameters;
-			return new XPathNumber(3.14159);
-		});
-		functions.set("pears", null);
-		
-		variables.set("cherries", new XPathNumber(42));
-		variables.set("grapes", null);
-	}
-	
+    public var applesCount:Int;
+    public var applesParameters:Array<XPathValue>;
+
+
+    public function new() {
+        super();
+        applesCount = 0;
+
+        var me = this;
+        functions.set("apples", function(context:Context, parameters:Array<XPathValue>):XPathValue {
+            me.applesCount++;
+            me.applesParameters = parameters;
+            return new XPathNumber(3.14159);
+        });
+        functions.set("pears", null);
+
+        variables.set("cherries", new XPathNumber(42));
+        variables.set("grapes", null);
+    }
 }

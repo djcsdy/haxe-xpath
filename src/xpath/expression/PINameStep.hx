@@ -20,22 +20,20 @@ import xpath.xml.XmlNodeType;
 
 
 class PINameStep extends PathStep {
-	
-	var name :String;
-	
-	
-	public function new (?name:String, ?nextStep:PathStep) {
-		super(piNameStep, nextStep);
-		this.name = name;
-	}
-	
-	function piNameStep (context:Context) {
-		if (context.node.getType() == XmlNodeType.ProcessingInstruction) {
-			if (name == null || context.node.getName() == name) {
-				return [context.node];
-			}
-		}
-		return [];
-	}
-	
+    var name:String;
+
+
+    public function new(?name:String, ?nextStep:PathStep) {
+        super(piNameStep, nextStep);
+        this.name = name;
+    }
+
+    function piNameStep(context:Context) {
+        if (context.node.getType() == XmlNodeType.ProcessingInstruction) {
+            if (name == null || context.node.getName() == name) {
+                return [context.node];
+            }
+        }
+        return [];
+    }
 }

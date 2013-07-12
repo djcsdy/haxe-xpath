@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [BeginPath]
  * rule. */
 class BeginPathTokenizer extends FixedStringTokenizer {
-	
-	static var instance :BeginPathTokenizer;
-	
-	
-	/** Gets the instance of [BeginPathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new BeginPathTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new BeginPathToken(), "", "BeginPath");
-	}
-	
+    static var instance:BeginPathTokenizer;
+
+
+    /** Gets the instance of [BeginPathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new BeginPathTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new BeginPathToken(), "", "BeginPath");
+    }
 }

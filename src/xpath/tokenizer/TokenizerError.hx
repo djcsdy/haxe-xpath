@@ -20,18 +20,19 @@ import xpath.XPathError;
 /** [Exception] thrown if an unrecoverable internal error occurs
  * during tokenization. This [Exception] should not be caught. */
 class TokenizerError extends XPathError {
-	
-	/** Constructs a new [TokenizerError], optionally including
-	 * a [message] describing the problem. */
-	public function new (?message:String) {
-		super(message);
-	}
-	
-	/** Gets a string representation of the [TokenizerError]. */
-	override public function toString () {
-		var string = "TokenizerError";
-		if (message != null) string += ": " + message;
-		return string;
-	}		
-	
+    /** Constructs a new [TokenizerError], optionally including
+     * a [message] describing the problem. */
+    public function new(?message:String) {
+        super(message);
+    }
+
+    /** Gets a string representation of the [TokenizerError]. */
+    override public function toString() {
+        var string = "TokenizerError";
+        if (message != null) {
+            string += ": " + message;
+        }
+        return string;
+    }
+
 }

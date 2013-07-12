@@ -24,26 +24,22 @@ import xpath.value.XPathValue;
  * BaseEnvironment, or construct an Environment dynamically using
  * DynamicEnvironment. */
 interface Environment {
-	
-	/** Tests if a function with the specified name is provided by
-	 * this environment. */
-	public function existsFunction (name:String) :Bool;
-	
-	/** Returns a reference to the function with the specified
-	 * name. */
-	public function getFunction (name:String) :XPathFunction;
-	
-	/** Calls a function with the specified parameters and returns the
-	 * result. */
-	public function callFunction (
-		context:Context, name:String, ?parameters:Array<XPathValue>
-	) :XPathValue;
-	
-	/** Tests if a variable with the specified name is provided by
-	 * this environment. */
-	public function existsVariable (name:String) :Bool;
-	
-	/** Gets the value of the variable with the specified name. */
-	public function getVariable (name:String) :XPathValue;
+    /** Tests if a function with the specified name is provided by
+     * this environment. */
+    public function existsFunction(name:String):Bool;
 
+    /** Returns a reference to the function with the specified
+     * name. */
+    public function getFunction(name:String):XPathFunction;
+
+    /** Calls a function with the specified parameters and returns the
+     * result. */
+    public function callFunction(context:Context, name:String, ?parameters:Array<XPathValue>):XPathValue;
+
+    /** Tests if a variable with the specified name is provided by
+     * this environment. */
+    public function existsVariable(name:String):Bool;
+
+    /** Gets the value of the variable with the specified name. */
+    public function getVariable(name:String):XPathValue;
 }

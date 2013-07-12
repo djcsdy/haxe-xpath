@@ -29,51 +29,51 @@ import xpath.tokenizer.token.EndPathTokenizer;
 
 /** [Tokenizer] which tokenizes according to the [Path] rule. */
 class PathTokenizer implements Tokenizer {
-	
-	static var instance :PathTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [PathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new PathTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(BeginPathTokenizer.getInstance(), Tokenizer), new Disjunction([
-				cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
-				new Sequence([
-					cast(new Disjunction([
-						cast(new Sequence([
-							cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
-							UnaryStepTokenizer.getInstance()
-						]), Tokenizer), StepTokenizer.getInstance()
-					]), Tokenizer),
-					new Repetition([
-						cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
-						UnaryStepTokenizer.getInstance()
-					])
-				])
-			]), EndPathTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:PathTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [PathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new PathTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(BeginPathTokenizer.getInstance(), Tokenizer),
+            new Disjunction([
+                cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
+                new Sequence([
+                    cast(new Disjunction([
+                        cast(new Sequence([
+                            cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
+                            UnaryStepTokenizer.getInstance()
+                        ]), Tokenizer), StepTokenizer.getInstance()
+                    ]), Tokenizer),
+                    new Repetition([
+                        cast(StepDelimitersTokenizer.getInstance(), Tokenizer),
+                        UnaryStepTokenizer.getInstance()
+                    ])
+                ])
+            ]), EndPathTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

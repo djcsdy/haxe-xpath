@@ -1,31 +1,32 @@
 <project name="Haxe XPath" basedir="." default="all">
-	
-	<target name="all" depends="doc,haxelib"/>
 
-	<target name="doc">
-		<mkdir dir="build/doc"/>
-		<exec executable="haxe" failonerror="true">
-			<arg file="util/build-doc.hxml"/>
-		</exec>
-		<exec executable="haxedoc" dir="doc" failonerror="true">
-			<arg value="../build/doc/doc.xml"/>
-			<arg value="-f"/><arg value="xpath"/>
-		</exec>
-		<zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
-	</target>
-	
-	<target name="haxelib">
-		<delete file="xpath.zip"/>
+    <target name="all" depends="doc,haxelib"/>
 
-		<zip destfile="xpath.zip">
-			<fileset dir="src">
-				<include name="**/*.hx"/>
-			</fileset>
-			<fileset file="haxelib.xml"/>
-			<fileset file="README.md"/>
-			<fileset file="LICENCE.txt"/>
-			<fileset file="AUTHORS.txt"/>
-		</zip>
-	</target>
-	
+    <target name="doc">
+        <mkdir dir="build/doc"/>
+        <exec executable="haxe" failonerror="true">
+            <arg file="util/build-doc.hxml"/>
+        </exec>
+        <exec executable="haxedoc" dir="doc" failonerror="true">
+            <arg value="../build/doc/doc.xml"/>
+            <arg value="-f"/>
+            <arg value="xpath"/>
+        </exec>
+        <zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
+    </target>
+
+    <target name="haxelib">
+        <delete file="xpath.zip"/>
+
+        <zip destfile="xpath.zip">
+            <fileset dir="src">
+                <include name="**/*.hx"/>
+            </fileset>
+            <fileset file="haxelib.xml"/>
+            <fileset file="README.md"/>
+            <fileset file="LICENCE.txt"/>
+            <fileset file="AUTHORS.txt"/>
+        </zip>
+    </target>
+
 </project>

@@ -23,29 +23,27 @@ import xpath.tokenizer.ExpectedException;
 
 /** [Tokenizer] which tokenizes according to the [EndXPath] rule. */
 class EndXPathTokenizer extends TokenTokenizer {
-	
-	static var instance :EndXPathTokenizer;
-	
-	
-	/** Gets the instance of [EndXPathTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new EndXPathTokenizer();
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		if (input.query.length == input.position) {
-			var result = [ cast(new EndXPathToken(), Token) ];
-			return input.getOutput(result);
-		} else {
-			throw new ExpectedException([{
-				tokenName: "EndXPath",
-				position: input.position
-			}]);
-		}
-	}
-	
+    static var instance:EndXPathTokenizer;
+
+
+    /** Gets the instance of [EndXPathTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new EndXPathTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        if (input.query.length == input.position) {
+            var result = [ cast(new EndXPathToken(), Token) ];
+            return input.getOutput(result);
+        } else {
+            throw new ExpectedException([{ tokenName: "EndXPath", position: input.position }]);
+        }
+    }
 }

@@ -22,18 +22,19 @@ import xpath.tokenizer.Token;
 /** [Tokenizer] which tokenizes according to the [BeginExpression]
  * rule. */
 class BeginExpressionTokenizer extends FixedStringTokenizer {
-	
-	static var instance :BeginExpressionTokenizer;
-	
-	
-	/** Gets the instance of [BeginExpressionTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) instance = new BeginExpressionTokenizer();
-		return instance;
-	}
-	
-	function new () {
-		super(new BeginExpressionToken(), "", "BeginExpression");
-	}
-	
+    static var instance:BeginExpressionTokenizer;
+
+
+    /** Gets the instance of [BeginExpressionTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new BeginExpressionTokenizer();
+        }
+
+        return instance;
+    }
+
+    function new() {
+        super(new BeginExpressionToken(), "", "BeginExpression");
+    }
 }

@@ -20,29 +20,27 @@ import xpath.value.XPathValue;
 
 /** Class implementing an environment which may be modified at runtime. */
 class DynamicEnvironment extends BaseEnvironment {
-	
-	public function new () {
-		super();
-	}
-	
-	/** Defines a function with the specified name. */
-	public function setFunction (name:String, f:XPathFunction) :Void {
-		functions.set(name, f);
-	}
-	
-	/** Removes the function with the specified name. */
-	public function removeFunction (name:String) :Void {
-		functions.remove(name);
-	}
+    public function new() {
+        super();
+    }
 
-	/** Defines a variable with the specified name and value. */
-	public function setVariable (name:String, value:XPathValue) :Void {
-		variables.set(name, value);
-	}
-	
-	/** Removes the variable with the specified name. */
-	public function removeVariable (name:String) :Void {
-		variables.remove(name);
-	}
-	
+    /** Defines a function with the specified name. */
+    public function setFunction(name:String, f:XPathFunction):Void {
+        functions.set(name, f);
+    }
+
+    /** Removes the function with the specified name. */
+    public function removeFunction(name:String):Void {
+        functions.remove(name);
+    }
+
+    /** Defines a variable with the specified name and value. */
+    public function setVariable(name:String, value:XPathValue):Void {
+        variables.set(name, value);
+    }
+
+    /** Removes the variable with the specified name. */
+    public function removeVariable(name:String):Void {
+        variables.remove(name);
+    }
 }

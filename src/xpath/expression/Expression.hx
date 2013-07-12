@@ -20,7 +20,5 @@ import xpath.value.XPathValue;
 
 
 interface Expression {
-	
-	public function evaluate (context:Context) :XPathValue;
-	
+    public function evaluate(context:Context):XPathValue;
 }

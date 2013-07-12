@@ -21,49 +21,37 @@ import xpath.tokenizer.Token;
 
 
 class NodeTestTokenizerTest extends ContainerTokenizerTestBase {
-	
-	public function new () {
-		super(NodeTestTokenizer.getInstance());
-	}
-	
-	private function testWildcard () {
-		doGoodTest("*", [cast(new NameTestToken("*"), Token)]);
-	}
-	
-	private function testNamespaceWildcard () {
-		doGoodTest("_abc:*", [
-			cast(new NameTestToken("_abc:*"), Token)
-		]);
-	}
-	
-	private function testNamespaceName () {
-		doGoodTest("GSnskfg:___grsjg-sgj", [
-			cast(new NameTestToken("GSnskfg:___grsjg-sgj"), Token)
-		]);
-	}
-	
-	private function testTypeTest () {	
-		doGoodTest("node()", [cast(new TypeTestToken(Node), Token)]);
-		doGoodTest("text ()", [cast(new TypeTestToken(Text), Token)]);
-		doGoodTest("comment () ", [cast(new TypeTestToken(Comment), Token)]);
-	}
+    public function new() {
+        super(NodeTestTokenizer.getInstance());
+    }
 
-	private function testPITypeTest () {
-		doGoodTest("processing-instruction()", [
-			cast(new PINameTestToken(), Token)
-		]);
-		doGoodTest("processing-instruction('dsfgjs')", [
-			cast(new PINameTestToken("dsfgjs"), Token)
-		]);
-		doGoodTest('processing-instruction("sjgjh")', [
-			cast(new PINameTestToken("sjgjh"), Token)
-		]);
-	}
-	
-	private function testJunk () {	
-		doBadTest("-sgsjg-gsgj");
-		doBadTest("(hshg)");
-		doBadTest("[sgjsg]");
-	}
+    private function testWildcard() {
+        doGoodTest("*", [cast(new NameTestToken("*"), Token)]);
+    }
 
+    private function testNamespaceWildcard() {
+        doGoodTest("_abc:*", [cast(new NameTestToken("_abc:*"), Token)]);
+    }
+
+    private function testNamespaceName() {
+        doGoodTest("GSnskfg:___grsjg-sgj", [cast(new NameTestToken("GSnskfg:___grsjg-sgj"), Token)]);
+    }
+
+    private function testTypeTest() {
+        doGoodTest("node()", [cast(new TypeTestToken(Node), Token)]);
+        doGoodTest("text ()", [cast(new TypeTestToken(Text), Token)]);
+        doGoodTest("comment () ", [cast(new TypeTestToken(Comment), Token)]);
+    }
+
+    private function testPITypeTest() {
+        doGoodTest("processing-instruction()", [cast(new PINameTestToken(), Token)]);
+        doGoodTest("processing-instruction('dsfgjs')", [cast(new PINameTestToken("dsfgjs"), Token)]);
+        doGoodTest('processing-instruction("sjgjh")', [cast(new PINameTestToken("sjgjh"), Token)]);
+    }
+
+    private function testJunk() {
+        doBadTest("-sgsjg-gsgj");
+        doBadTest("(hshg)");
+        doBadTest("[sgjsg]");
+    }
 }

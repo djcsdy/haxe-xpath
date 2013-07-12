@@ -20,23 +20,21 @@ import xpath.value.XPathValue;
 
 
 class FunctionCall implements Expression {
-	
-	var name :String;
-	
-	var parameters :Iterable<Expression>;
-	
-	
-	public function new (name:String, parameters:Iterable<Expression>) {
-		this.name = name;
-		this.parameters = parameters;
-	}
-	
-	public function evaluate (context:Context) {	
-		var parameterValues = new Array<XPathValue>();
-		for (parameter in parameters) {
-			parameterValues.push(parameter.evaluate(context));
-		}
-		return context.callFunction(name, parameterValues);
-	}
-	
+    var name:String;
+
+    var parameters:Iterable<Expression>;
+
+
+    public function new(name:String, parameters:Iterable<Expression>) {
+        this.name = name;
+        this.parameters = parameters;
+    }
+
+    public function evaluate(context:Context) {
+        var parameterValues = new Array<XPathValue>();
+        for (parameter in parameters) {
+            parameterValues.push(parameter.evaluate(context));
+        }
+        return context.callFunction(name, parameterValues);
+    }
 }

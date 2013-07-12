@@ -24,65 +24,64 @@ import xpath.Operator;
 
 /** [Tokenizer] which tokenizes according to the [Operator] rule. */
 class OperatorTokenizer extends TokenTokenizer {
-	
-	static var instance :OperatorTokenizer;
-	
-	var operatorSymbols :Array<String>;
-	var operatorSymbolToOperator :Map<String, Operator>;
-	
-	
-	public static function getInstance () {
-		if (instance == null) instance = new OperatorTokenizer();
-		return instance;
-	}
-	
-	/** Gets the instance of [OperatorTokenizer]. */
-	function new () {
-		operatorSymbolToOperator = new Map<String, Operator>();
-		operatorSymbolToOperator.set("and", And);
-		operatorSymbolToOperator.set("mod", Modulo);
-		operatorSymbolToOperator.set("div", Divide);
-		operatorSymbolToOperator.set("or", Or);
-		operatorSymbolToOperator.set("!=", NotEqual);
-		operatorSymbolToOperator.set("<=", LessThanOrEqual);
-		operatorSymbolToOperator.set(">=", GreaterThanOrEqual);
-		operatorSymbolToOperator.set("=", Equal);
-		operatorSymbolToOperator.set("|", Union);
-		operatorSymbolToOperator.set("+", Plus);
-		operatorSymbolToOperator.set("-", Minus);
-		operatorSymbolToOperator.set("<", LessThan);
-		operatorSymbolToOperator.set(">", GreaterThan);
-		operatorSymbolToOperator.set("*", Multiply);
-		
-		operatorSymbols = new Array<String>();
-		for (operatorSymbol in operatorSymbolToOperator.keys()) {
-			operatorSymbols.push(operatorSymbol);
-		}
-		
-		// sort symbols by length, longest first
-		operatorSymbols.sort(function (x:String, y:String) {
-			return y.length - x.length;
-		});
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var pos = input.position;
-		
-		// check for operator symbol
-		for (operatorSymbol in operatorSymbols) {
-			if (input.query.substr(pos, operatorSymbol.length) == operatorSymbol) {
-				pos += operatorSymbol.length;
-				var operator = operatorSymbolToOperator.get(operatorSymbol);
-				var result = [ cast(new OperatorToken(operator), Token) ];
-				var characterLength = pos - input.position;
-				characterLength += countWhitespace(input.query, pos);
-				return input.getOutput(result, characterLength);
-			}
-		}
-		
-		throw new ExpectedException([
-			{ tokenName: "Operator", position: input.position }
-		]);
-	}
-	
+    static var instance:OperatorTokenizer;
+
+    var operatorSymbols:Array<String>;
+    var operatorSymbolToOperator:Map<String, Operator>;
+
+
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new OperatorTokenizer();
+        }
+
+        return instance;
+    }
+
+    /** Gets the instance of [OperatorTokenizer]. */
+    function new() {
+        operatorSymbolToOperator = new Map<String, Operator>();
+        operatorSymbolToOperator.set("and", And);
+        operatorSymbolToOperator.set("mod", Modulo);
+        operatorSymbolToOperator.set("div", Divide);
+        operatorSymbolToOperator.set("or", Or);
+        operatorSymbolToOperator.set("!=", NotEqual);
+        operatorSymbolToOperator.set("<=", LessThanOrEqual);
+        operatorSymbolToOperator.set(">=", GreaterThanOrEqual);
+        operatorSymbolToOperator.set("=", Equal);
+        operatorSymbolToOperator.set("|", Union);
+        operatorSymbolToOperator.set("+", Plus);
+        operatorSymbolToOperator.set("-", Minus);
+        operatorSymbolToOperator.set("<", LessThan);
+        operatorSymbolToOperator.set(">", GreaterThan);
+        operatorSymbolToOperator.set("*", Multiply);
+
+        operatorSymbols = new Array<String>();
+        for (operatorSymbol in operatorSymbolToOperator.keys()) {
+            operatorSymbols.push(operatorSymbol);
+        }
+
+        // sort symbols by length, longest first
+        operatorSymbols.sort(function(x:String, y:String) {
+            return y.length - x.length;
+        });
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var pos = input.position;
+
+        // check for operator symbol
+        for (operatorSymbol in operatorSymbols) {
+            if (input.query.substr(pos, operatorSymbol.length) == operatorSymbol) {
+                pos += operatorSymbol.length;
+                var operator = operatorSymbolToOperator.get(operatorSymbol);
+                var result = [ cast(new OperatorToken(operator), Token) ];
+                var characterLength = pos - input.position;
+                characterLength += countWhitespace(input.query, pos);
+                return input.getOutput(result, characterLength);
+            }
+        }
+
+        throw new ExpectedException([{ tokenName: "Operator", position: input.position }]);
+    }
 }

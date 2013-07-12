@@ -25,36 +25,34 @@ import xpath.tokenizer.Token;
 /** Tokenizer which tokenizes according to a sequence of rules which
  * may repeat zero or more times, e.g. [(A B C)*]. */
 class Repetition extends Sequence {
-	
-	/** Constructs a new [Repetition] that tokenizes according to
-	 * the sequence of rules tokenized by [tokenizers]. */
-	public function new (tokenizers:Iterable<Tokenizer>) {
-		super(tokenizers);
-	}
-	
-	override public function tokenize (input:TokenizerInput) {
-		var workingInput = input;
-		var result = new Array<Token>();
-		var characterLength:Null<Int> = 0;
-		
-		var done = false;
-		while (!done) {
-			try {
-				var output = super.tokenize(workingInput);
-				result = result.concat(output.result);
-				characterLength += output.characterLength;
-				if (output.isComplete()) {
-					characterLength = null;
-					done = true;
-				} else {
-					workingInput = output.getNextInput();
-				}
-			} catch (exception:TokenizerException) {
-				done = true;
-			}
-		}
-		
-		return input.getOutput(result, characterLength);
-	}
-	
+    /** Constructs a new [Repetition] that tokenizes according to
+     * the sequence of rules tokenized by [tokenizers]. */
+    public function new(tokenizers:Iterable<Tokenizer>) {
+        super(tokenizers);
+    }
+
+    override public function tokenize(input:TokenizerInput) {
+        var workingInput = input;
+        var result = new Array<Token>();
+        var characterLength:Null<Int> = 0;
+
+        var done = false;
+        while (!done) {
+            try {
+                var output = super.tokenize(workingInput);
+                result = result.concat(output.result);
+                characterLength += output.characterLength;
+                if (output.isComplete()) {
+                    characterLength = null;
+                    done = true;
+                } else {
+                    workingInput = output.getNextInput();
+                }
+            } catch (exception:TokenizerException) {
+                done = true;
+            }
+        }
+
+        return input.getOutput(result, characterLength);
+    }
 }

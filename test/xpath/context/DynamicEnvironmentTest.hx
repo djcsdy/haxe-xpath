@@ -21,37 +21,32 @@ import xpath.value.XPathBoolean;
 
 
 class DynamicEnvironmentTest extends TestCase {
-	
-	function testAll () {
-		var environment = new DynamicEnvironment();
-		assertFalse(environment.existsFunction("foo"));
-		assertFalse(environment.existsVariable("bar"));
-		
-		var foo = function (
-			context:Context,
-			parameters:Array<XPathValue>
-		) :XPathValue {
-			return new XPathBoolean(false);
-		};
-		environment.setFunction("foo", foo);
-		assertTrue(environment.existsFunction("foo"));
-		assertFalse(environment.existsVariable("foo"));
-		assertEquals(foo, environment.getFunction("foo"));
-		var result = environment.callFunction(new FakeContext(), "foo", []);
-		assertTrue(Std.is(result, XPathBoolean));
-		assertFalse(result.getBool());
-		
-		environment.removeFunction("foo");
-		assertFalse(environment.existsFunction("foo"));
-		
-		var bar = new XPathBoolean(true);
-		environment.setVariable("bar", bar);
-		assertTrue(environment.existsVariable("bar"));
-		assertFalse(environment.existsFunction("bar"));
-		assertEquals(cast(bar, XPathValue), environment.getVariable("bar"));
-		
-		environment.removeVariable("bar");
-		assertFalse(environment.existsVariable("bar"));
-	}
-	
+    function testAll() {
+        var environment = new DynamicEnvironment();
+        assertFalse(environment.existsFunction("foo"));
+        assertFalse(environment.existsVariable("bar"));
+
+        var foo = function(context:Context, parameters:Array<XPathValue>):XPathValue {
+            return new XPathBoolean(false);
+        };
+        environment.setFunction("foo", foo);
+        assertTrue(environment.existsFunction("foo"));
+        assertFalse(environment.existsVariable("foo"));
+        assertEquals(foo, environment.getFunction("foo"));
+        var result = environment.callFunction(new FakeContext(), "foo", []);
+        assertTrue(Std.is(result, XPathBoolean));
+        assertFalse(result.getBool());
+
+        environment.removeFunction("foo");
+        assertFalse(environment.existsFunction("foo"));
+
+        var bar = new XPathBoolean(true);
+        environment.setVariable("bar", bar);
+        assertTrue(environment.existsVariable("bar"));
+        assertFalse(environment.existsFunction("bar"));
+        assertEquals(cast(bar, XPathValue), environment.getVariable("bar"));
+
+        environment.removeVariable("bar");
+        assertFalse(environment.existsVariable("bar"));
+    }
 }

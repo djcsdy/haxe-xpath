@@ -19,11 +19,11 @@ package xpath.xml;
 /** Enumeration of the XML node types defined by the XPath
  * specification. */
 enum XmlNodeType {
-	Root;
-	Element;
-	Text;
-	Attribute;
-	Namespace;
-	ProcessingInstruction;
-	Comment;
+    Root;
+    Element;
+    Text;
+    Attribute;
+    Namespace;
+    ProcessingInstruction;
+    Comment;
 }

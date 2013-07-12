@@ -26,39 +26,38 @@ import xpath.tokenizer.token.EndPredicateTokenizer;
 /** [Tokenizer] which tokenizes according to the [Predicate]
  * rule. */
 class PredicateTokenizer implements Tokenizer {
-	
-	static var instance :PredicateTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [PredicateTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new PredicateTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Sequence([
-			cast(BeginPredicateTokenizer.getInstance(), Tokenizer),
-			ExpressionTokenizer.getInstance(),
-			EndPredicateTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:PredicateTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [PredicateTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new PredicateTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Sequence([
+            cast(BeginPredicateTokenizer.getInstance(), Tokenizer),
+            ExpressionTokenizer.getInstance(),
+            EndPredicateTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }

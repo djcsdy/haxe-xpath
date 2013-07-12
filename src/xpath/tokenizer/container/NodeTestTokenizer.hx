@@ -25,39 +25,38 @@ import xpath.tokenizer.token.PINameTestTokenizer;
 
 /** [Tokenizer] which tokenizes according to the [NodeTest] rule. */
 class NodeTestTokenizer implements Tokenizer {
-	
-	static var instance :NodeTestTokenizer;
-	
-	var tokenizer :Tokenizer;
-	
-	
-	/** Gets the instance of [NodeTestTokenizer]. */
-	public static function getInstance () {
-		if (instance == null) {
-			instance = new NodeTestTokenizer();
-			instance.init();
-		}
-		return instance;
-	}
-	
-	function new () {
-	}
-	
-	function init () {
-		tokenizer = new Disjunction([
-			cast(NameTestTokenizer.getInstance(), Tokenizer),
-			TypeTestTokenizer.getInstance(),
-			PINameTestTokenizer.getInstance()
-		]);
-	}
-	
-	/** Tokenizes [input], which represents a partially tokenized
-	 * XPath query string. Returns the resulting [TokenizerOutput].
-	 *
-	 * Throws [TokenizerException] if the [input] cannot be
-	 * tokenized by this [Tokenizer]. */
-	public function tokenize (input:TokenizerInput) {
-		return tokenizer.tokenize(input);
-	}
-	
+    static var instance:NodeTestTokenizer;
+
+    var tokenizer:Tokenizer;
+
+
+    /** Gets the instance of [NodeTestTokenizer]. */
+    public static function getInstance() {
+        if (instance == null) {
+            instance = new NodeTestTokenizer();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    function new() {
+    }
+
+    function init() {
+        tokenizer = new Disjunction([
+            cast(NameTestTokenizer.getInstance(), Tokenizer),
+            TypeTestTokenizer.getInstance(),
+            PINameTestTokenizer.getInstance()
+        ]);
+    }
+
+    /** Tokenizes [input], which represents a partially tokenized
+     * XPath query string. Returns the resulting [TokenizerOutput].
+     *
+     * Throws [TokenizerException] if the [input] cannot be
+     * tokenized by this [Tokenizer]. */
+    public function tokenize(input:TokenizerInput) {
+        return tokenizer.tokenize(input);
+    }
 }
