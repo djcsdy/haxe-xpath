@@ -112,7 +112,7 @@ class NodeSetLibrary {
      * parameters.length != 1, or if the parameter is not a
      * node set. */
     public static function nodeName(context:Context, parameters:Array<XPathValue>) {
-        // FIXME
+        // FIXME #9 XML Namespace support
         return localName(context, parameters);
     }
 }

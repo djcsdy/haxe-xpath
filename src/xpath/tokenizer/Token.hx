@@ -139,7 +139,7 @@ class OperatorToken implements Token {
         this.operator = operator;
     }
 
-    // TODO: move this somewhere more sensible
+    // TODO: #8 move this somewhere more sensible
     public function getPrecedence():Int {
         return switch (operator) {
             case Or: 0;

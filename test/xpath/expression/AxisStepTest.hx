@@ -332,7 +332,7 @@ class AxisStepTest extends TestCase {
         assertEquals(j, cast(nodes[1], XPathHxXml).getWrappedXml());
     }
 
-    // TODO: testNamespace
+    // TODO: #9 testNamespace
 
     function testParent() {
         var axisStep = new AxisStep(Axis.Parent);
