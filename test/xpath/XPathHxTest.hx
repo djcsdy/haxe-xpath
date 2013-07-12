@@ -90,23 +90,19 @@ class XPathHxTest extends TestCase {
         assertEquals(e, nodes[4]);
     }
 
-    /* Currently broken on Flash 9 due to a *very* obscure issue.
-     * TODO: fix
     function testRoot () {
         var xpathQry = new XPathHx("/");
         var nodes = Lambda.array(xpathQry.selectNodes(b));
         assertEquals(1, nodes.length);
         assertEquals(xml, nodes[0]);
-    }*/
+    }
 
-    /* Currently broken on Flash 9 due to a *very* obscure issue.
-     * TODO: fix
     function testAbbreviatedStep1 () {
         var xpathQry = new XPathHx(".");
         var nodes = Lambda.array(xpathQry.selectNodes(a));
         assertEquals(1, nodes.length);
         assertEquals(a, nodes[0]);
-    }*/
+    }
 
     function testAbbreviatedStep2() {
         var xpathQry = new XPathHx("..");
