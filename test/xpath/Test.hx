@@ -1,5 +1,11 @@
 package xpath;
 
+import xpath.xml.XPathXmlTest;
+import xpath.xml.XPathHxXmlTest;
+import xpath.value.XPathStringTest;
+import xpath.value.XPathNumberTest;
+import xpath.value.XPathNodeSetTest;
+import xpath.value.XPathBooleanTest;
 import xpath.tokenizer.token.EndPredicateTokenizerTest;
 import xpath.tokenizer.token.LiteralTokenizerTest;
 import xpath.tokenizer.token.NameTestTokenizerTest;
@@ -136,6 +142,14 @@ class Test {
 		runner.add(new TokenizerExceptionTest());
 		runner.add(new TokenizerInputTest());
 		runner.add(new TokenizerOutputTest());
+		runner.add(new XPathBooleanTest());
+		runner.add(new XPathNodeSetTest());
+		runner.add(new XPathNumberTest());
+		runner.add(new XPathStringTest());
+		runner.add(new XPathHxXmlTest());
+		runner.add(new XPathXmlTest());
+		runner.add(new XPathHxTest());
+		runner.add(new XPathTest());
 
 		#if sys
 		if (runner.run()) {
