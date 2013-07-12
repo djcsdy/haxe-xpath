@@ -33,7 +33,7 @@ class XPathNumberTest extends TestCase {
 			assertTrue(xPathNumber.getBool());
 		}
 		
-		for (falseNumber in [ 0.0, #if !flash9 null, #end Math.NaN ]) {
+		for (falseNumber in [ 0.0, null, Math.NaN ]) {
 			var xPathNumber = new XPathNumber(falseNumber);
 			assertFalse(xPathNumber.getBool());
 		}
