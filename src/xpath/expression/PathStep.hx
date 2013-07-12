@@ -31,7 +31,7 @@ class PathStep implements Expression {
         this.nextStep = nextStep;
     }
 
-    public function evaluate(context:Context):XPathValue {
+    public function evaluate(context:Context):XPathNodeSet {
         if (nextStep == null) {
             return new XPathNodeSet(step(context));
         } else {
@@ -47,7 +47,7 @@ class PathStep implements Expression {
                 var node = nextNode;
                 while (!nextStepNodes.hasNext() && index < selected.length) {
                     var nextStepContext = new Context(selected[index], index + 1, selected.length, context.environment);
-                    var nextStepResult = cast(me.nextStep.evaluate(nextStepContext), XPathNodeSet);
+                    var nextStepResult = me.nextStep.evaluate(nextStepContext);
                     nextStepNodes = nextStepResult.getNodes().iterator();
                     ++index;
                 }
