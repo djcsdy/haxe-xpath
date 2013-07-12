@@ -9,9 +9,6 @@ following caveats must be considered:
    Support can be provided by providing a wrapper for the desired
    XML class that extends `xpath.xml.XPathXml`. At present, a wrapper
    for the Haxe Xml class is provided in `xpath.xml.XPathHxXml`.
- * The previous version directly supported dcxml. At present there
-   is no support for dcxml in this version. You can still install
-   the old version using haxelib.
  * The XPath functions `id()`, `namespace-uri()` and `lang()` are not
    implemented.
  * XPath treats XML comments as nodes, but neither Haxe’s built in
