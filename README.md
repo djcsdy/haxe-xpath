@@ -12,9 +12,6 @@ following caveats must be considered:
  * The previous version directly supported dcxml. At present there
    is no support for dcxml in this version. You can still install
    the old version using haxelib.
- * Haxe XPath doesn’t compile for JavaScript at the moment. This
-   will be fixed in the future, although patches are always
-   welcome.
  * The XPath functions `id()`, `namespace-uri()` and `lang()` are not
    implemented.
  * XPath treats XML comments as nodes, but neither Haxe’s built in
