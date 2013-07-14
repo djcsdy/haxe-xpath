@@ -11,6 +11,7 @@
             <arg value="xpath.context.DynamicEnvironment"/>
             <arg value="-neko"/>
             <arg file="build/doc/doc.n"/>
+            <arg value="--no-output"/>
             <arg value="-xml"/>
             <arg file="build/doc/doc.xml"/>
         </exec>
