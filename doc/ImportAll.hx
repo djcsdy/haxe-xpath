@@ -18,6 +18,14 @@ class ImportAll {
     static function importDirectory(path:String, packageName:String="") {
         path = ~/\/*$/.replace(path, "");
 
+        if (!FileSystem.exists(path) || !FileSystem.isDirectory(path)) {
+            // For some reason on Linux some of the standard library
+            // classes claim to live in a directory that doesn't exist.
+            // We don't want to import those classes anyway, so just
+            // skip them.
+            return;
+        }
+
         for (fileName in FileSystem.readDirectory(path)) {
             if (StringTools.startsWith(fileName, ".")) {
                 continue;
