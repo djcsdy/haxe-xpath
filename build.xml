@@ -5,7 +5,14 @@
     <target name="doc">
         <mkdir dir="build/doc"/>
         <exec executable="haxe" failonerror="true">
-            <arg file="util/build-doc.hxml"/>
+            <arg value="-cp"/>
+            <arg file="src"/>
+            <arg value="xpath.XPath"/>
+            <arg value="xpath.context.DynamicEnvironment"/>
+            <arg value="-neko"/>
+            <arg file="build/doc/doc.n"/>
+            <arg value="-xml"/>
+            <arg file="build/doc/doc.xml"/>
         </exec>
         <exec executable="haxedoc" dir="doc" failonerror="true">
             <arg value="../build/doc/doc.xml"/>
