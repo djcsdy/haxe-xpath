@@ -8,6 +8,7 @@ before_script:
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib install hxjava
+  - haxelib install hxcs
 
 script:
   - ant
