@@ -30,9 +30,10 @@ class ExpectedException extends TokenizerException {
     public function new(expectedTokens:Iterable<{tokenName:String, position:Int}>) {
         var array = Lambda.array(expectedTokens);
         if (array.length > 0) {
-            array.sort(function(token1:{tokenName:String, position:Int}, token2:{tokenName:String, position:Int}) {
-                return token1.position - token2.position;
-            });
+            haxe.ds.ArraySort.sort(array,
+                    function(token1:{tokenName:String, position:Int}, token2:{tokenName:String, position:Int}) {
+                        return token1.position - token2.position;
+                    });
 
             var expectedToken = array.shift();
             var position = expectedToken.position;
