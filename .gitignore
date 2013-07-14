@@ -1,7 +1,7 @@
-/build
 *.iml
 .idea
 /doc/content
 /doc/index.html
 /haxe-xpath-doc.zip
 /xpath.zip
+/haxedoc.xml

@@ -2,8 +2,7 @@
 
     <target name="all" depends="doc,haxelib"/>
 
-    <target name="doc">
-        <mkdir dir="build/doc"/>
+    <target name="haxedoc.xml" description="Generates API documentation XML.">
         <exec executable="haxe" failonerror="true">
             <arg value="-cp"/>
             <arg file="src"/>
@@ -12,13 +11,16 @@
             <arg value="--macro"/>
             <arg value="ImportAll.run()"/>
             <arg value="-neko"/>
-            <arg file="build/doc/doc.n"/>
+            <arg file="doc.n"/>
             <arg value="--no-output"/>
             <arg value="-xml"/>
-            <arg file="build/doc/doc.xml"/>
+            <arg file="haxedoc.xml"/>
         </exec>
+    </target>
+
+    <target name="doc" depends="haxedoc.xml" description="Generates and packages all documentation.">
         <exec executable="haxedoc" dir="doc" failonerror="true">
-            <arg value="../build/doc/doc.xml"/>
+            <arg value="../haxedoc.xml"/>
             <arg value="-f"/>
             <arg value="xpath"/>
         </exec>
@@ -29,7 +31,7 @@
         </zip>
     </target>
 
-    <target name="haxelib">
+    <target name="haxelib" depends="haxedoc.xml" description="Generates a Haxelib package for distribution.">
         <delete file="xpath.zip"/>
 
         <zip destfile="xpath.zip">
@@ -40,6 +42,7 @@
             <fileset file="README.md"/>
             <fileset file="LICENCE.txt"/>
             <fileset file="AUTHORS.txt"/>
+            <fileset file="haxedoc.xml"/>
         </zip>
     </target>
 
