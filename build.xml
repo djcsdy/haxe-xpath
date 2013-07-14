@@ -7,8 +7,10 @@
         <exec executable="haxe" failonerror="true">
             <arg value="-cp"/>
             <arg file="src"/>
-            <arg value="xpath.XPath"/>
-            <arg value="xpath.context.DynamicEnvironment"/>
+            <arg value="-cp"/>
+            <arg file="doc"/>
+            <arg value="--macro"/>
+            <arg value="ImportAll.run()"/>
             <arg value="-neko"/>
             <arg file="build/doc/doc.n"/>
             <arg value="--no-output"/>
@@ -23,6 +25,7 @@
         <zip basedir="doc" destfile="haxe-xpath-doc.zip">
             <include name="**/*"/>
             <exclude name="template.xml"/>
+            <exclude name="ImportAll.hx"/>
         </zip>
     </target>
 
