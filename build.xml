@@ -79,7 +79,7 @@
     </target>
 
     <target name="test.cs" description="Runs the automated tests on C#.">
-        <!--exec executable="haxe" failonerror="true">
+        <exec executable="haxe" failonerror="true">
             <arg value="-cp"/>
             <arg file="src"/>
             <arg value="-cp"/>
@@ -88,7 +88,7 @@
             <arg file="test-cs"/>
             <arg value="-main"/>
             <arg value="xpath.Test"/>
-        </exec-->
+        </exec>
 
         <exec executable="test-cs/bin/test-cs.exe" failonerror="true"/>
     </target>
