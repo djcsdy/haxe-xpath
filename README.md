@@ -1,3 +1,4 @@
+# Haxe XPath [![Build Status][1]][2]
 
 Haxe XPath aims to be a complete implementation of XPath for Haxe.
 To get started, See the documentation for the class `xpath.XPath`.
@@ -22,3 +23,6 @@ following caveats must be considered:
 
 Please direct comments, questions, patches and bug reports to
 https://github.com/djcsdy/haxe-xpath/issues/new
+
+  [1]: https://travis-ci.org/djcsdy/haxe-xpath.png
+  [2]: https://travis-ci.org/djcsdy/haxe-xpath
