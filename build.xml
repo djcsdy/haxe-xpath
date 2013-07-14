@@ -20,7 +20,10 @@
             <arg value="-f"/>
             <arg value="xpath"/>
         </exec>
-        <zip basedir="doc" destfile="haxe-xpath-doc.zip"/>
+        <zip basedir="doc" destfile="haxe-xpath-doc.zip">
+            <include name="**/*"/>
+            <exclude name="template.xml"/>
+        </zip>
     </target>
 
     <target name="haxelib">
