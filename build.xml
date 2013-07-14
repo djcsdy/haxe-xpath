@@ -70,12 +70,12 @@
             <arg value="-cp"/>
             <arg file="test"/>
             <arg value="-java"/>
-            <arg file="xpath-java"/>
+            <arg file="test-java"/>
             <arg value="-main"/>
             <arg value="xpath.Test"/>
         </exec>
 
-        <java fork="true" jar="xpath-java/xpath-java.jar" failonerror="true"/>
+        <java fork="true" jar="test-java/test-java.jar" failonerror="true"/>
     </target>
 
     <target name="test" depends="test.neko, test.java" description="Runs the automated tests on all platforms"/>
