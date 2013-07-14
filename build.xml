@@ -90,6 +90,8 @@
             <arg value="xpath.Test"/>
         </exec>
 
+        <chmod file="test-cs/bin/test-cs.exe" perm="u+x"/>
+
         <exec executable="test-cs/bin/test-cs.exe" failonerror="true"/>
     </target>
 
