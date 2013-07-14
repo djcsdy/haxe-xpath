@@ -1,6 +1,6 @@
 <project name="Haxe XPath" basedir="." default="all">
 
-    <target name="all" depends="doc,haxelib"/>
+    <target name="all" depends="test,doc,haxelib"/>
 
     <target name="haxedoc.xml" description="Generates API documentation XML.">
         <exec executable="haxe" failonerror="true">
@@ -44,6 +44,23 @@
             <fileset file="AUTHORS.txt"/>
             <fileset file="haxedoc.xml"/>
         </zip>
+    </target>
+
+    <target name="test" description="Runs the automated tests on Neko.">
+        <exec executable="haxe" failonerror="true">
+            <arg value="-cp"/>
+            <arg file="src"/>
+            <arg value="-cp"/>
+            <arg file="test"/>
+            <arg value="-neko"/>
+            <arg file="test.n"/>
+            <arg value="-main"/>
+            <arg value="xpath.Test"/>
+        </exec>
+
+        <exec executable="neko" failonerror="true">
+            <arg file="test.n"/>
+        </exec>
     </target>
 
 </project>
