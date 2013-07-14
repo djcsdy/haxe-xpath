@@ -46,7 +46,7 @@
         </zip>
     </target>
 
-    <target name="test" description="Runs the automated tests on Neko.">
+    <target name="test.neko" description="Runs the automated tests on Neko.">
         <exec executable="haxe" failonerror="true">
             <arg value="-cp"/>
             <arg file="src"/>
@@ -62,5 +62,22 @@
             <arg file="test.n"/>
         </exec>
     </target>
+
+    <target name="test.java" description="Runs the automated tests on Java.">
+        <exec executable="haxe" failonerror="true">
+            <arg value="-cp"/>
+            <arg file="src"/>
+            <arg value="-cp"/>
+            <arg file="test"/>
+            <arg value="-java"/>
+            <arg file="xpath-java"/>
+            <arg value="-main"/>
+            <arg value="xpath.Test"/>
+        </exec>
+
+        <java fork="true" jar="xpath-java/xpath-java.jar"/>
+    </target>
+
+    <target name="test" depends="test.neko, test.java" description="Runs the automated tests on all platforms"/>
 
 </project>
