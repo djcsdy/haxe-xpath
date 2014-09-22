@@ -75,7 +75,7 @@
             <arg value="xpath.Test"/>
         </exec>
 
-        <java fork="true" jar="test-java/test-java.jar" failonerror="true"/>
+        <java fork="true" jar="test-java/Test.jar" failonerror="true"/>
     </target>
 
     <target name="test" depends="test.neko, test.java" description="Runs the automated tests on all platforms"/>
