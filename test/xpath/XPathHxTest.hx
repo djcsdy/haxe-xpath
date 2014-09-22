@@ -15,6 +15,13 @@
 
 
 package xpath;
+import xpath.xml.XPathHxXml;
+import xpath.value.XPathString;
+import xpath.value.XPathNodeSet;
+import xpath.context.DynamicEnvironment;
+import xpath.xml.XPathXml;
+import xpath.value.XPathValue;
+import xpath.context.Context;
 import haxe.unit.TestCase;
 import xpath.tokenizer.TokenizerException;
 
@@ -163,6 +170,38 @@ class XPathHxTest extends TestCase {
             caught = true;
         }
         assertTrue(caught);
+    }
+
+    function testFunctionCallVariable() {
+        var contextNode = a;
+        var xpath = new XPathHx("kittens($chocolate)");
+
+        var contextPassedToFunction:Context = null;
+        var argumentsPassedToFunction: Array<XPathValue> = null;
+        var functionResultNode:XPathXml = XPathHxXml.wrapNode(e);
+
+        var environment = new DynamicEnvironment();
+
+        environment.setFunction("kittens", function (context: Context, arguments:Array<XPathValue>): XPathValue {
+            contextPassedToFunction = context;
+            argumentsPassedToFunction = arguments;
+            return new XPathNodeSet([functionResultNode]);
+        });
+
+        environment.setVariable("chocolate", new XPathString("cup of tea"));
+
+        var result = xpath.selectNodes(contextNode, environment);
+        assertTrue(Std.is(result, XPathNodeSet));
+        var resultArray = Lambda.array(cast(result, XPathNodeSet).getNodes());
+
+        assertEquals(1, resultArray.length);
+        assertEquals(functionResultNode, resultArray[0]);
+        assertEquals(contextNode, cast(contextPassedToFunction.node, XPathHxXml).getWrappedXml());
+        assertEquals(1, contextPassedToFunction.position);
+        assertEquals(1, contextPassedToFunction.size);
+        assertEquals(1, argumentsPassedToFunction.length);
+        assertTrue(Std.is(argumentsPassedToFunction[0], XPathString));
+        assertEquals("cup of tea", cast(argumentsPassedToFunction[0], XPathString).getString());
     }
 
     function testOperation1() {
