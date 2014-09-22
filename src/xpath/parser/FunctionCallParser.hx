@@ -71,7 +71,7 @@ class FunctionCallParser implements Parser {
                 }
             }
 
-            if (!hasNext) {
+            if (hasNext) {
                 input.back();
             }
         }
