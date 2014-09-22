@@ -203,7 +203,7 @@ class XPathTest extends TestCase {
         assertEquals(1, resultArray.length);
         assertEquals(functionResultNode, resultArray[0]);
         assertEquals(contextNode, contextPassedToFunction.node);
-        assertEquals(0, contextPassedToFunction.position);
+        assertEquals(1, contextPassedToFunction.position);
         assertEquals(1, contextPassedToFunction.size);
         assertEquals(1, argumentsPassedToFunction.length);
         assertTrue(Std.is(argumentsPassedToFunction[0], XPathString));
