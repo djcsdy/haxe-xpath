@@ -178,21 +178,20 @@ class XPathHxTest extends TestCase {
 
         var contextPassedToFunction:Context = null;
         var argumentsPassedToFunction: Array<XPathValue> = null;
-        var functionResultNode:XPathXml = XPathHxXml.wrapNode(e);
+        var functionResultNode = e;
 
         var environment = new DynamicEnvironment();
 
         environment.setFunction("kittens", function (context: Context, arguments:Array<XPathValue>): XPathValue {
             contextPassedToFunction = context;
             argumentsPassedToFunction = arguments;
-            return new XPathNodeSet([functionResultNode]);
+            return new XPathNodeSet([XPathHxXml.wrapNode(functionResultNode)]);
         });
 
         environment.setVariable("chocolate", new XPathString("cup of tea"));
 
         var result = xpath.selectNodes(contextNode, environment);
-        assertTrue(Std.is(result, XPathNodeSet));
-        var resultArray = Lambda.array(cast(result, XPathNodeSet).getNodes());
+        var resultArray = Lambda.array(result);
 
         assertEquals(1, resultArray.length);
         assertEquals(functionResultNode, resultArray[0]);
