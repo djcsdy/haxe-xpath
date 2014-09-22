@@ -1,5 +1,6 @@
 package xpath;
 
+import xpath.parser.FunctionCallParserTest;
 import xpath.xml.XPathXmlTest;
 import xpath.xml.XPathHxXmlTest;
 import xpath.value.XPathStringTest;
@@ -97,6 +98,7 @@ class Test {
         runner.add(new NumberLibraryTest());
         runner.add(new StringLibraryTest());
         runner.add(new ExpressionParserTest());
+        runner.add(new FunctionCallParserTest());
         runner.add(new PathParserTest());
         runner.add(new ExpressionTokenizerTest());
         runner.add(new FilterExpressionTokenizerTest());
