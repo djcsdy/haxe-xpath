@@ -47,7 +47,7 @@ class XPathHx {
      * var nodes = Lambda.array(xpath.selectNodes(...));] */
     public function selectNodes(contextNode:Xml, ?environment):Iterable<Xml> {
         var wrappedContextNode = XPathHxXml.wrapNode(contextNode);
-        var xpathXmlNodes = xpath.selectNodes(wrappedContextNode);
+        var xpathXmlNodes = xpath.selectNodes(wrappedContextNode, environment);
 
         return {
             iterator: function() {
