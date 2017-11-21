@@ -6,5 +6,6 @@
     "contributors": ["djc"],
     "releasenote": "Support Haxe 2.0, for JavaScript, Flash 8, Flash 9 and Neko targets",
     "version": "0.3.0",
-    "url": "http://code.google.com/p/haxe-xpath/"
+    "url": "http://code.google.com/p/haxe-xpath/",
+    "classPath": "src"
 }

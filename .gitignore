@@ -1,5 +1,6 @@
 *.iml
 .idea
+.vscode
 /doc/content
 /doc/index.html
 /haxe-xpath-doc.zip
