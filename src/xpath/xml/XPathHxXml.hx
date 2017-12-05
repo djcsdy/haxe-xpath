@@ -38,7 +38,7 @@ class XPathHxXml extends XPathXml {
      * seperate nodes. Therefore, wrapping any [PCData] or [CData]
      * node which is part of a series will result in an [XPathHxXml]
      * representing the series as a whole. */
-    public static function wrapNode(hxXml:Xml) {
+    public static function wrapNode(hxXml:Xml):XPathHxXml {
         if (hxXml == null) {
             throw new XPathException("Can't wrap null for XPath");
         } else if (hxXml.nodeType == Xml.DocType) {
