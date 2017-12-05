@@ -1,8 +1,8 @@
 /* Haxe XPath by Daniel J. Cassidy <mail@danielcassidy.me.uk>
  * Dedicated to the Public Domain
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS 
- * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS
+ * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
  * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
@@ -38,7 +38,7 @@ class XPathHxXml extends XPathXml {
      * seperate nodes. Therefore, wrapping any [PCData] or [CData]
      * node which is part of a series will result in an [XPathHxXml]
      * representing the series as a whole. */
-    public static function wrapNode(hxXml:Xml) {
+    public static function wrapNode(hxXml:Xml):XPathHxXml {
         if (hxXml == null) {
             throw new XPathException("Can't wrap null for XPath");
         } else if (hxXml.nodeType == Xml.DocType) {
@@ -438,46 +438,7 @@ class XPathHxXml extends XPathXml {
     /** Gets an iterator over nodes preceding this node in document
      * order. */
 
-    override public function getPrecedingIterator() {
-#if flash8
-        if (hxXml == null) {
-            return new List<XPathXml>().iterator();
-        }
-        var flashToHxXml:Dynamic->Xml = untyped Xml.convert;
-        var flashXml:Dynamic = untyped hxXml.__x;
-        var nextNode:Xml = null;
-
-        var hasNext = function () {
-            return nextNode != null;
-        };
-        var next = function () :XPathXml {
-            var result = fastWrapNode(nextNode);
-            if (flashXml != null) {
-                if (flashXml.previousSibling == null) {
-                    flashXml = flashXml.parentNode;
-                } else {
-                    flashXml = flashXml.previousSibling;
-                    if (flashXml.nodeType == 3 /*TEXT_NODE*/) {
-                        while (flashXml.previousSibling.nodeType == 3) {
-                            flashXml = flashXml.previousSibling;
-                        }
-                    } else {
-                        while (flashXml.lastChild != null) {
-                            flashXml = flashXml.lastChild;
-                        }
-                    }
-                }
-                if (flashXml == null) {
-                    nextNode = null;
-                } else {
-                    nextNode = flashToHxXml(flashXml);
-                }
-            }
-            return result;
-        };
-        next();
-
-#else
+    override public function getPrecedingIterator():Iterator<XPathXml> {
         var stack = new List<XPathXml>();
         if (hxXml == null) {
             return stack.iterator();
@@ -517,7 +478,6 @@ class XPathHxXml extends XPathXml {
                 return null;
             }
         };
-#end
 
         return {
             hasNext: hasNext,
